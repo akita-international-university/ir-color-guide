@@ -45,3 +45,6 @@ Based on this YAML file, a Python script in this repository `./scripts/build.py`
 This set of a single settings YAML file and the automatically generated files for the respective tools ensures consistency between multiple tools used by the IR team. All revisions to the predefined color palettes should be made to the YAML file and not the individual files.
 
 ### How to use the palettes
+
+> [!IMPORTANT]
+> This section is empty for now. Instructions on how to use the generated color palettes in Tableau and R will be added in the future updates.
