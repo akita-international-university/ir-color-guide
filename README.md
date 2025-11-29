@@ -1,5 +1,8 @@
 # IR Data Visualization Color Guidelines
 
+> [!IMPORTANT]
+> This repository is a work in progress. The contents herein are NOT final and do NOT represent the official policies and practices of the Division of Institutional Research at Akita International University. Please do NOT cite or distribute the contents herein without explicit permission from the Division of Institutional Research.
+
 ## Purpose
 
 The purpose of this document is to ensure consistency, visibility, and accessibility for the output produced by the Division of Institutional Research (IR) in the Office of Academic Affairs at the Akita International University (AIU) by defining a clear set of policies and practices for the palettes, i.e., set of colors, that are used in data visualizations produced by the team.
