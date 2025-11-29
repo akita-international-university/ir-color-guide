@@ -25,7 +25,7 @@ Colorblind-friendly palettes of RColorBrewer can be retrieved by a simple comman
 # install.packages("RColorBrewer")
 # or
 # renv::install("RColorBrewer")
-# if you already haven't. 
+# if you already haven't.
 library(RColorBrewer)
 RColorBrewer::display.brewer.all(colorblindFriendly = TRUE)
 ```
