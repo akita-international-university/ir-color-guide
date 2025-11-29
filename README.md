@@ -9,7 +9,7 @@ The purpose of this document is to ensure consistency, visibility, and accessibi
 
 ## Scope
 
-All visualized data produced by the IR team, including, but are not limited to dashboards, reports, plots, and presentation materials.
+All visualized data produced by the IR team, including, but not limited to dashboards, reports, plots, and presentation materials.
 
 ## Policy
 
