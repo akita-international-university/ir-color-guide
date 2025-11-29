@@ -5,27 +5,33 @@
 
 version: 2
 updates:
-  - package-ecosystem: 'pip' # See documentation for possible values
-    directory: '/' # Location of package manifests
+  - package-ecosystem: "pip" # See documentation for possible values
+    directory: "/" # Location of package manifests
     schedule:
-      interval: 'monthly'
+      interval: "weekly"
+    cooldown:
+      default-days: 7
     assignees:
-      - 'ttsukagoshi'
-    target-branch: 'main'
+      - "ttsukagoshi"
+    target-branch: "main"
     open-pull-requests-limit: 10
-  - package-ecosystem: 'npm'
-    directory: '/'
+  - package-ecosystem: "npm"
+    directory: "/"
     schedule:
-      interval: 'monthly'
+      interval: "weekly"
+    cooldown:
+      default-days: 7
     assignees:
-      - 'ttsukagoshi'
-    target-branch: 'main'
+      - "ttsukagoshi"
+    target-branch: "main"
     open-pull-requests-limit: 10
-  - package-ecosystem: 'github-actions'
-    directory: '/'
+  - package-ecosystem: "github-actions"
+    directory: "/"
     schedule:
-      interval: 'monthly'
+      interval: "weekly"
+    cooldown:
+      default-days: 7
     assignees:
-      - 'ttsukagoshi'
-    target-branch: 'main'
+      - "ttsukagoshi"
+    target-branch: "main"
     open-pull-requests-limit: 10
