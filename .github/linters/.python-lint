@@ -1,0 +1,12 @@
+# Pylint configuration file for Super-linter in GitHub Actions.
+# Pylint configurations for local development should be specified in a separate file: ./pyproject.toml
+
+[MASTER]
+# Use multiple processes to speed up Pylint.
+jobs=0
+
+[messages control]
+# disable=raw-checker-failed,bad-inline-option,locally-disabled,file-ignored,suppressed-message,useless-suppression,deprecated-pragma,use-symbolic-message-instead,use-implicit-booleaness-not-comparison-to-string,use-implicit-booleaness-not-comparison-to-zero
+disable=
+  import-error,
+  too-many-locals,

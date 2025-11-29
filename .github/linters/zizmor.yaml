@@ -1,0 +1,8 @@
+rules:
+  unpinned-uses:
+    config:
+      policies:
+        actions/*: ref-pin # デフォルトの挙動
+        # 追加で、ref-pinを適用するアクションを指定する:
+        github/accessibility-alt-text-bot: ref-pin
+        super-linter/super-linter/slim: ref-pin

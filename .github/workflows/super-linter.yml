@@ -30,5 +30,9 @@ jobs:
       - name: Super-linter
         uses: super-linter/super-linter@v8.3.0 # x-release-please-version
         env:
+          LINTER_RULES_PATH: .github/linters
+          VALIDATE_BIOME_FORMAT: false # Disable Biome formatter to avoid conflict with Prettier
+          VALIDATE_NATURAL_LANGUAGE: false
+          VALIDATE_PYTHON_RUFF_FORMAT: false # Disable Ruff to avoid conflict with Black & isort
           # To report GitHub Actions status checks
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
