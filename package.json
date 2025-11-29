@@ -14,9 +14,8 @@
     "url": "git+https://github.com/akita-international-university/ir-color-guide.git"
   },
   "license": "MIT",
-  "author": "",
+  "author": "ttsukagoshi",
   "type": "module",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -3,7 +3,7 @@ name = "ir-color-guide"
 version = "0.0.1"
 description = "IR Data Visualization Color Guidelines"
 authors = [
-    {name = "ttsukagoshi",email = "ttsukagoshi@aiu.ac.jp"}
+    {name = "ttsukagoshi", email = "ttsukagoshi@aiu.ac.jp"}
 ]
 license = "MIT"
 readme = "README.md"
