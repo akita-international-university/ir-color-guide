@@ -1,0 +1,25 @@
+{
+  "name": "ir-color-guide",
+  "version": "0.0.1",
+  "description": "IR Data Visualization Color Guidelines",
+  "keywords": [
+    "IR"
+  ],
+  "homepage": "https://github.com/akita-international-university/ir-color-guide#readme",
+  "bugs": {
+    "url": "https://github.com/akita-international-university/ir-color-guide/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akita-international-university/ir-color-guide.git"
+  },
+  "license": "MIT",
+  "author": "ttsukagoshi",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "prettier": "^3.7.2"
+  }
+}

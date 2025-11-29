@@ -1,0 +1,40 @@
+[project]
+name = "ir-color-guide"
+version = "0.0.1"
+description = "IR Data Visualization Color Guidelines"
+authors = [
+    {name = "ttsukagoshi", email = "ttsukagoshi@aiu.ac.jp"}
+]
+license = "MIT"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+]
+
+[dependency-groups]
+dev = [
+    "black (>=25.9.0,<26.0.0)",
+    "isort (>=6.1.0,<7.0.0)",
+    "pylint (>=4.0.3,<5.0.0)",
+    "mypy (>=1.18.2,<2.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+package-mode = false
+
+[tool.isort]
+profile = "black"
+src_paths = ["scripts", "tests"]
+force_sort_within_sections = true
+
+[tool.mypy]
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[tool.pylint."MASTER"]
+jobs = 0
