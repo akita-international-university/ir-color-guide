@@ -13,7 +13,7 @@ All visualized data produced by the IR team, including, but not limited to dashb
 
 ## Policy
 
-Palettes should be set in adherence with AIU's web accessibility policy at [ウェブアクセシビリティ方針 | 公立大学法人 国際教養大学 | Akita International University](https://web.aiu.ac.jp/web-accessibility-policy/). In essence, AIU's web accessibility policies are set in line with the latest stable version of the Web Content Accessibility Guidelines (WCAG).
+Palettes should be set in adherence with AIU's web accessibility policy at [ウェブアクセシビリティ方針 | 公立大学法人 国際教養大学 | Akita International University](https://web.aiu.ac.jp/web-accessibility-policy/). Moreover, since AIU's web accessibility policies are set in line with the latest stable version of the Web Content Accessibility Guidelines (WCAG), the latter should be referenced for any aspects not explicitly covered by the former.
 
 Whenever applicable, palettes should be chosen from the colorblind-friendly palettes of the [`RColorBrewer` package](https://cran.r-project.org/web/packages/RColorBrewer/index.html) in R to ensure that materials produced by the IR team can be comprehensible regardless of the recipients' color blindness.
 
