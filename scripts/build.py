@@ -6,7 +6,7 @@ import os
 import subprocess
 from typing import Any, Dict, List
 
-import yaml  # type: ignore
+import yaml
 
 
 def load_palettes(yaml_path: str) -> List[Dict[str, Any]]:
