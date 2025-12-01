@@ -1,5 +1,7 @@
 # IR Data Visualization Color Guidelines
 
+[日本語版はこちら](./README-ja.md)
+
 > [!IMPORTANT]
 > This repository is a work in progress. The contents herein are NOT final and do NOT represent the official policies and practices of the Division of Institutional Research at Akita International University. Please do NOT cite or distribute the contents herein without explicit permission from the Division of Institutional Research.
 
