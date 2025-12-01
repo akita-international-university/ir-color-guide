@@ -24,6 +24,9 @@
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[r]": {
+    "editor.defaultFormatter": "Posit.air-vscode"
+  },
   "pylint.importStrategy": "fromEnvironment",
   "isort.importStrategy": "fromEnvironment",
   "isort.check": true,
