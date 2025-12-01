@@ -38,3 +38,7 @@ ignore_missing_imports = true
 
 [tool.pylint."MASTER"]
 jobs = 0
+
+[tool.poetry.scripts]
+formatter = "scripts.formatter:main"
+linter = "scripts.linter:main"
