@@ -18,9 +18,9 @@ def main():
         # Run mypy
         print(f"Linting {target} with mypy...")
         subprocess.run(["poetry", "run", "mypy", target], check=True)
-        print("Linting done.")
+        print("mypy linting done.")
         # Run pylint
         print(f"Linting {target} with pylint...")
         subprocess.run(["poetry", "run", "pylint", target], check=True)
-        print("Linting done.")
+        print("pylint linting done.")
     print("All linting complete.")
