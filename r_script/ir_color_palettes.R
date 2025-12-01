@@ -22,7 +22,7 @@ color_values_aiu_grades <- c(
     "AP" = "#4e79a7"
 )
 
-color_values_aiu_admission_types <- c(
+color_values_aiu_exam_types <- c(
     # Type: Categorical
     # Description: Colors for the exam types at AIU
     "A" = "#2a5783",

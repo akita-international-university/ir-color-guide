@@ -37,7 +37,7 @@ palettes:
         value: "#ffbeb2"
       - key: "AP"
         value: "#4e79a7"
-  - name: "AIU Admission Types"
+  - name: "AIU Exam Types"
     type: "categorical"
     description: "Colors for the exam types at AIU"
     colors:

@@ -37,8 +37,8 @@
       <!-- AP -->
       <color>#4e79a7</color>
     </color-palette>
-    <color-palette name="AIU Admission Types" type="regular">
-      <!-- Colors for AIU admission types -->
+    <color-palette name="AIU Exam Types" type="regular">
+      <!-- Colors for the exam types at AIU -->
       <!-- A -->
       <color>#2a5783</color>
       <!-- B -->
