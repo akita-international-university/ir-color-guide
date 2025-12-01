@@ -37,18 +37,18 @@
       <!-- AP -->
       <color>#4e79a7</color>
     </color-palette>
+    <color-palette name="AIU Admission Types" type="regular">
+      <!-- Colors for AIU admission types -->
+      <!-- A -->
+      <color>#2a5783</color>
+      <!-- B -->
+      <color>#5b8cb8</color>
+      <!-- C -->
+      <color>#b9ddf1</color>
+      <!-- GS -->
+      <color>#24693d</color>
+      <!-- GW -->
+      <color>#b3e0a6</color>
+    </color-palette>
   </preferences>
-  <color-palette name="AIU Admission Types" type="regular">
-    <!-- Colors for AIU admission types -->
-    <!-- A -->
-    <color>#2a5783</color>
-    <!-- B -->
-    <color>#5b8cb8</color>
-    <!-- C -->
-    <color>#b9ddf1</color>
-    <!-- GS -->
-    <color>#24693d</color>
-    <!-- GW -->
-    <color>#b3e0a6</color>
-  </color-palette>
 </workbook>
