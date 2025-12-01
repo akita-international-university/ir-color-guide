@@ -18,9 +18,22 @@ def load_palettes(yaml_path: str) -> List[Dict[str, Any]]:
 
     Returns:
         List of palette dictionaries
+
+    Raises:
+        FileNotFoundError: If the YAML file doesn't exist
+        yaml.YAMLError: If the YAML file is malformed
     """
-    with open(yaml_path, "r", encoding="utf-8") as file:
-        data = yaml.safe_load(file)
+    try:
+        with open(yaml_path, "r", encoding="utf-8") as file:
+            data = yaml.safe_load(file)
+    except FileNotFoundError as e:
+        raise FileNotFoundError(f"YAML file not found: {yaml_path}") from e
+    except yaml.YAMLError as e:
+        raise yaml.YAMLError(f"Error parsing YAML file: {yaml_path}") from e
+
+    if not data or "palettes" not in data:
+        raise ValueError("YAML file must contain 'palettes' key")
+
     return data.get("palettes", [])
 
 
@@ -172,16 +185,12 @@ def run_prettier(file_path: str):
 
     Args:
         file_path: Path to the file to format
+
+    Raises:
+        subprocess.CalledProcessError: If Prettier fails to run
     """
     print(f"Running Prettier on {file_path}...")
-    if os.name == "nt":
-        # Running on Windows
-        subprocess.run(
-            ["npx", "prettier", file_path, "--write"], check=True, shell=True
-        )
-    else:
-        # Running on other OS
-        subprocess.run(["npx", "prettier", file_path, "--write"], check=True)
+    subprocess.run(["npx", "prettier", file_path, "--write"], check=True)
     print(f"Prettier formatting done for {file_path}.")
 
 
