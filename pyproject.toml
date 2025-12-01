@@ -9,6 +9,7 @@ license = "MIT"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "pyyaml>=6.0.0,<7.0.0"
 ]
 
 [dependency-groups]
@@ -33,6 +34,7 @@ packages = [
 [tool.poetry.scripts]
 formatter = "scripts.formatter:main"
 linter = "scripts.linter:main"
+build = "scripts.build:main"
 
 [tool.isort]
 profile = "black"
