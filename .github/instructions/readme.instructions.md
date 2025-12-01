@@ -1,7 +1,5 @@
 ---
-applyTo:
-  - "**/README.md"
-  - "**/README-ja.md"
+applyTo: '**/README.md,**/README-ja.md'
 ---
 
 # Code Review Instructions for README Files
