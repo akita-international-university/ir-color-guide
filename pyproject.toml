@@ -25,7 +25,14 @@ requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-package-mode = false
+package-mode = true
+packages = [
+    {include = "scripts"}
+]
+
+[tool.poetry.scripts]
+formatter = "scripts.formatter:main"
+linter = "scripts.linter:main"
 
 [tool.isort]
 profile = "black"
@@ -39,6 +46,3 @@ ignore_missing_imports = true
 [tool.pylint."MASTER"]
 jobs = 0
 
-[tool.poetry.scripts]
-formatter = "scripts.formatter:main"
-linter = "scripts.linter:main"
