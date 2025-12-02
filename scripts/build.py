@@ -190,7 +190,16 @@ def run_prettier(file_path: str):
         subprocess.CalledProcessError: If Prettier fails to run
     """
     print(f"Running Prettier on {file_path}...")
-    subprocess.run(["npx", "prettier", file_path, "--write"], check=True)
+    try:
+        result = subprocess.run(
+            ["npx", "prettier", file_path, "--write"],
+            check=True,
+            capture_output=True,
+            text=True
+        )
+    except subprocess.CalledProcessError as e:
+        print(f"Prettier failed for {file_path}.\nError output:\n{e.stderr}")
+        raise
     print(f"Prettier formatting done for {file_path}.")
 
 
