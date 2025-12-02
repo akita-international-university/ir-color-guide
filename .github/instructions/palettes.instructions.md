@@ -10,8 +10,8 @@ This file provides instructions for GitHub Copilot code review when reviewing ch
 
 When changes are made to `palettes.yml`, ensure that the following generated files are synchronized with the updates:
 
-- `./tableau/Preferences.tps` (Tableau color preferences)
-- `./r_script/ir_color_palettes.R` (R color palette definitions)
+- `tableau/Preferences.tps` (Tableau color preferences)
+- `r_script/ir_color_palettes.R` (R color palette definitions)
 
 ### Verification Requirements
 
