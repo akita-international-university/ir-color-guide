@@ -1,4 +1,4 @@
-<!-- markdownlint-disable-file -->
+<!-- markdownlint-disable MD040 -->
 
 # GitHub Copilot Custom Instructions for IR Color Guide
 
