@@ -183,19 +183,24 @@ def run_prettier(file_path: str):
     """
     Run Prettier on the specified file.
 
+    Note:
+        This function requires Node.js and npm to be installed and available in PATH.
+        Prettier is run via npx, which should be available with npm 5.2+.
+
     Args:
         file_path: Path to the file to format
 
     Raises:
         subprocess.CalledProcessError: If Prettier fails to run
+        FileNotFoundError: If npx/prettier is not installed
     """
     print(f"Running Prettier on {file_path}...")
     try:
-        result = subprocess.run(
+        subprocess.run(
             ["npx", "prettier", file_path, "--write"],
             check=True,
             capture_output=True,
-            text=True
+            text=True,
         )
     except subprocess.CalledProcessError as e:
         print(f"Prettier failed for {file_path}.\nError output:\n{e.stderr}")
@@ -218,6 +223,10 @@ def main():
     print(f"Loading palettes from {yaml_path}...")
     palettes = load_palettes(yaml_path)
     print(f"Loaded {len(palettes)} palette(s).")
+
+    # Ensure output directories exist
+    os.makedirs(os.path.dirname(tableau_path), exist_ok=True)
+    os.makedirs(os.path.dirname(r_script_path), exist_ok=True)
 
     # Generate Tableau Preferences file
     print(f"Generating Tableau Preferences file at {tableau_path}...")
