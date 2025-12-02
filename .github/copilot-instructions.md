@@ -1,3 +1,5 @@
+<!-- markdownlint-disable-file -->
+
 # GitHub Copilot Custom Instructions for IR Color Guide
 
 ## Overview
