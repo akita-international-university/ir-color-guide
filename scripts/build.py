@@ -102,7 +102,7 @@ def generate_tableau_preferences(palettes: List[Dict[str, Any]], output_path: st
     lines.extend(["  </preferences>", "</workbook>"])
 
     # Write to file
-    with open(output_path, "w", encoding="utf-8") as file:
+    with open(output_path, "w", encoding="utf-8", newline="\n") as file:
         file.write("\n".join(lines) + "\n")
 
 
@@ -175,7 +175,7 @@ def generate_r_script(palettes: List[Dict[str, Any]], output_path: str):
         lines.append("")  # Add blank line between palettes
 
     # Write to file
-    with open(output_path, "w", encoding="utf-8") as file:
+    with open(output_path, "w", encoding="utf-8", newline="\n") as file:
         file.write("\n".join(lines))
 
 
@@ -201,6 +201,7 @@ def run_prettier(file_path: str):
             check=True,
             capture_output=True,
             text=True,
+            shell=True,
         )
     except subprocess.CalledProcessError as e:
         print(f"Prettier failed for {file_path}.\nError output:\n{e.stderr}")
