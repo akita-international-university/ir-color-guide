@@ -195,13 +195,15 @@ def run_prettier(file_path: str):
         FileNotFoundError: If npx/prettier is not installed
     """
     print(f"Running Prettier on {file_path}...")
+    # Convert to absolute path for cross-platform compatibility
+    # This ensures the path is properly resolved on Windows
+    abs_file_path = os.path.abspath(file_path)
     try:
         subprocess.run(
-            ["npx", "prettier", file_path, "--write"],
+            ["npx", "prettier", abs_file_path, "--write"],
             check=True,
             capture_output=True,
             text=True,
-            shell=True,
         )
     except subprocess.CalledProcessError as e:
         print(f"Prettier failed for {file_path}.\nError output:\n{e.stderr}")
