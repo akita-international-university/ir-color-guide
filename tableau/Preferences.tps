@@ -37,8 +37,8 @@
       <!-- AP -->
       <color>#4e79a7</color>
     </color-palette>
-    <color-palette name="AIU Exam Types" type="regular">
-      <!-- Colors for the exam types at AIU -->
+    <color-palette name="AIU Abbreviated Exam Types" type="regular">
+      <!-- Colors for the abbreviated exam types at AIU -->
       <!-- A -->
       <color>#2a5783</color>
       <!-- B -->
@@ -49,6 +49,22 @@
       <color>#24693d</color>
       <!-- GW -->
       <color>#b3e0a6</color>
+      <!-- Sougou -->
+      <color>#9e3d22</color>
+      <!-- Recommendation -->
+      <color>#e36420</color>
+      <!-- International -->
+      <color>#f59c3c</color>
+      <!-- Gap -->
+      <color>#ffc685</color>
+      <!-- Other Undergrad Exams -->
+      <color>#9f3632</color>
+      <!-- Transfer (2nd yr) Sp. Non Degree -->
+      <color>#59504e</color>
+      <!-- Transfer (2nd yr) -->
+      <color>#948c88</color>
+      <!-- Transfer (Others) -->
+      <color>#dcd4d0</color>
     </color-palette>
     <color-palette name="AIU In-School Semesters" type="regular">
       <!-- Colors for the in-school semesters at AIU -->
@@ -111,7 +127,7 @@
       <color>#2a5783</color>
     </color-palette>
     <color-palette name="AIU Exchange Region" type="regular">
-      <!-- Colors for regions for inbound exchange student origin or  outbound student destination at AIU
+      <!-- Colors for regions for inbound exchange student origin or outbound student destination at AIU
  -->
       <!-- North America -->
       <color>#3599b8</color>
