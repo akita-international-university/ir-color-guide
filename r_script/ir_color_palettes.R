@@ -68,3 +68,67 @@ color_values_aiu_course_levels <- c(
     "100" = "#5b8cb8",
     "0" = "#2a5783"
 )
+
+color_values_aiu_exchange_region <- c(
+    # Type: Categorical
+    # Description: Colors for regions for inbound exchange student origin or  outbound student destination at AIU
+
+    "North America" = "#3599b8",
+    "South America" = "#8ad4eb",
+    "Europe" = "#01b8aa",
+    "Asia" = "#fe9666",
+    "Oceania" = "#dfbdbf",
+    "Africa" = "#a66999",
+    "※Other" = "#5f6b6d"
+)
+
+color_values_aiu_inbound_student_status <- c(
+    # Type: Categorical
+    # Description: Colors for inbound student status types at AIU
+    "New" = "#1abc9c",
+    "Continuing" = "#607d8b"
+)
+
+color_values_aiu_inbound_student_status_per_semester <- c(
+    # Type: Categorical
+    # Description: Colors for inbound student status types per semester at AIU
+    "New - Spring" = "#d1f2eb",
+    "New - Summer" = "#a3e4d7",
+    "New - Fall" = "#76d7c4",
+    "New - Winter" = "#48c9b0",
+    "Continuing - Spring" = "#cfd8dc",
+    "Continuing - Summer" = "#b0bec5",
+    "Continuing - Fall" = "#90a4ae",
+    "Continuing - Winter" = "#78909c"
+)
+
+color_values_aiu_inbound_student_length_of_stay <- c(
+    # Type: Categorical
+    # Description: Colors for inbound student length of stay category at AIU
+    "Intensive" = "#f5df4d",
+    "1 Semester" = "#fa7268",
+    "1 Year" = "#0f4c81",
+    "Multi Year" = "#5f4b8b"
+)
+
+color_values_aiu_outbound_study_abroad_program <- c(
+    # Type: Categorical
+    # Description: Colors for study abroad program category at AIU
+
+    "EX" = "#59a14f",
+    "EX (SP-B)" = "#4e79a7",
+    "EX-Opt" = "#a0cbe8",
+    "EX-V" = "#86bcb6",
+    "FP" = "#b07aa1",
+    "FP(SP-A)" = "#d4a6c8",
+    "※IS" = "#ff9d9a"
+)
+
+color_values_aiu_outbound_student_affiliation <- c(
+    # Type: Categorical
+    # Description: Colors for affiliations types for students going outbound at AIU
+
+    "GB" = "#4e79a7",
+    "GS" = "#f28e2b",
+    "GC" = "#e15759"
+)

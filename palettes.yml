@@ -117,3 +117,103 @@ palettes:
         value: '#5b8cb8'
       - key: '0'
         value: '#2a5783'
+  - name: 'AIU Exchange Region'
+    type: 'categorical'
+    description: >
+      Colors for regions for inbound exchange student origin or 
+      outbound student destination at AIU
+    credits: >
+      Derived from "PowerBI Default" Tableau palette by Ken Flerlage 
+      available at https://public.tableau.com/app/profile/ken.flerlage/viz/DatafamColors/
+    colors:
+      - key: 'North America'
+        value: '#3599b8'
+      - key: 'South America'
+        value: '#8ad4eb'
+      - key: 'Europe'
+        value: '#01b8aa'
+      - key: 'Asia'
+        value: '#fe9666'
+      - key: 'Oceania'
+        value: '#dfbdbf'
+      - key: 'Africa'
+        value: '#a66999'
+      - key: '※Other'
+        value: '#5f6b6d'
+  - name: 'AIU Inbound Student Status'
+    type: 'categorical'
+    description: 'Colors for inbound student status types at AIU'
+    colors:
+      - key: 'New'
+        value: '#1abc9c'
+      - key: 'Continuing'
+        value: '#607d8b'
+  - name: 'AIU Inbound Student Status per Semester'
+    type: 'categorical'
+    description: 'Colors for inbound student status types per semester at AIU'
+    colors:
+      - key: 'New - Spring'
+        value: '#d1f2eb'
+      - key: 'New - Summer'
+        value: '#a3e4d7'
+      - key: 'New - Fall'
+        value: '#76d7c4'
+      - key: 'New - Winter'
+        value: '#48c9b0'
+      - key: 'Continuing - Spring'
+        value: '#cfd8dc'
+      - key: 'Continuing - Summer'
+        value: '#b0bec5'
+      - key: 'Continuing - Fall'
+        value: '#90a4ae'
+      - key: 'Continuing - Winter'
+        value: '#78909c'
+  - name: 'AIU Inbound Student Length of Stay'
+    type: 'categorical'
+    description: 'Colors for inbound student length of stay category at AIU'
+    credit: >
+      Derived from "Pantone Color of the Year" Tableau palette by Rodrigo Calloni 
+      available at https://public.tableau.com/app/profile/ken.flerlage/viz/DatafamColors/
+    colors:
+      - key: 'Intensive'
+        value: '#f5df4d'
+      - key: '1 Semester'
+        value: '#fa7268'
+      - key: '1 Year'
+        value: '#0f4c81'
+      - key: 'Multi Year'
+        value: '#5f4b8b'
+  - name: 'AIU Outbound Study Abroad Program'
+    type: 'categorical'
+    description: >
+      Colors for study abroad program category at AIU
+    credit: >
+      Derived from built-in "Automatic" palette in Tableau
+    colors:
+      - key: 'EX'
+        value: '#59a14f'
+      - key: 'EX (SP-B)'
+        value: '#4e79a7'
+      - key: 'EX-Opt'
+        value: '#a0cbe8'
+      - key: 'EX-V'
+        value: '#86bcb6'
+      - key: 'FP'
+        value: '#b07aa1'
+      - key: 'FP(SP-A)'
+        value: '#d4a6c8'
+      - key: '※IS'
+        value: '#ff9d9a'
+  - name: 'AIU Outbound Student Affiliation'
+    type: 'categorical'
+    description: >
+      Colors for affiliations types for students going outbound at AIU
+    credit: >
+      Derived from built-in "Automatic" palette in Tableau
+    colors:
+      - key: 'GB'
+        value: '#4e79a7'
+      - key: 'GS'
+        value: '#f28e2b'
+      - key: 'GC'
+        value: '#e15759'
