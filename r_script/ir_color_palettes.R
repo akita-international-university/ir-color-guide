@@ -71,7 +71,7 @@ color_values_aiu_course_levels <- c(
 
 color_values_aiu_exchange_region <- c(
     # Type: Categorical
-    # Description: Colors for regions for inbound exchange student origin or  outbound student destination at AIU
+    # Description: Colors for regions for inbound exchange student origin or outbound student destination at AIU
 
     "North America" = "#3599b8",
     "South America" = "#8ad4eb",
