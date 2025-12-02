@@ -110,5 +110,91 @@
       <!-- 0 -->
       <color>#2a5783</color>
     </color-palette>
+    <color-palette name="AIU Exchange Region" type="regular">
+      <!-- Colors for regions for inbound exchange student origin or  outbound student destination at AIU
+ -->
+      <!-- North America -->
+      <color>#3599b8</color>
+      <!-- South America -->
+      <color>#8ad4eb</color>
+      <!-- Europe -->
+      <color>#01b8aa</color>
+      <!-- Asia -->
+      <color>#fe9666</color>
+      <!-- Oceania -->
+      <color>#dfbdbf</color>
+      <!-- Africa -->
+      <color>#a66999</color>
+      <!-- ※Other -->
+      <color>#5f6b6d</color>
+    </color-palette>
+    <color-palette name="AIU Inbound Student Status" type="regular">
+      <!-- Colors for inbound student status types at AIU -->
+      <!-- New -->
+      <color>#1abc9c</color>
+      <!-- Continuing -->
+      <color>#607d8b</color>
+    </color-palette>
+    <color-palette
+      name="AIU Inbound Student Status per Semester"
+      type="regular"
+    >
+      <!-- Colors for inbound student status types per semester at AIU -->
+      <!-- New - Spring -->
+      <color>#d1f2eb</color>
+      <!-- New - Summer -->
+      <color>#a3e4d7</color>
+      <!-- New - Fall -->
+      <color>#76d7c4</color>
+      <!-- New - Winter -->
+      <color>#48c9b0</color>
+      <!-- Continuing - Spring -->
+      <color>#cfd8dc</color>
+      <!-- Continuing - Summer -->
+      <color>#b0bec5</color>
+      <!-- Continuing - Fall -->
+      <color>#90a4ae</color>
+      <!-- Continuing - Winter -->
+      <color>#78909c</color>
+    </color-palette>
+    <color-palette name="AIU Inbound Student Length of Stay" type="regular">
+      <!-- Colors for inbound student length of stay category at AIU -->
+      <!-- Intensive -->
+      <color>#f5df4d</color>
+      <!-- 1 Semester -->
+      <color>#fa7268</color>
+      <!-- 1 Year -->
+      <color>#0f4c81</color>
+      <!-- Multi Year -->
+      <color>#5f4b8b</color>
+    </color-palette>
+    <color-palette name="AIU Outbound Study Abroad Program" type="regular">
+      <!-- Colors for study abroad program category at AIU
+ -->
+      <!-- EX -->
+      <color>#59a14f</color>
+      <!-- EX (SP-B) -->
+      <color>#4e79a7</color>
+      <!-- EX-Opt -->
+      <color>#a0cbe8</color>
+      <!-- EX-V -->
+      <color>#86bcb6</color>
+      <!-- FP -->
+      <color>#b07aa1</color>
+      <!-- FP(SP-A) -->
+      <color>#d4a6c8</color>
+      <!-- ※IS -->
+      <color>#ff9d9a</color>
+    </color-palette>
+    <color-palette name="AIU Outbound Student Affiliation" type="regular">
+      <!-- Colors for affiliations types for students going outbound at AIU
+ -->
+      <!-- GB -->
+      <color>#4e79a7</color>
+      <!-- GS -->
+      <color>#f28e2b</color>
+      <!-- GC -->
+      <color>#e15759</color>
+    </color-palette>
   </preferences>
 </workbook>
