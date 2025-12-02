@@ -128,6 +128,12 @@ palettes:
         value: '#hexcolor'
 ```
 
+**IMPORTANT:** When editing `palettes.yml`, the generated files **must** be synchronized. See `.github/instructions/palettes.instructions.md` for detailed guidelines including:
+
+- Verification that generated files are included in the PR
+- Ensuring generated files match the build output
+- Requirements for running `poetry run build`
+
 ### README File Synchronization
 
 **IMPORTANT:** The repository maintains bilingual documentation:
