@@ -102,7 +102,7 @@ def generate_tableau_preferences(palettes: List[Dict[str, Any]], output_path: st
     lines.extend(["  </preferences>", "</workbook>"])
 
     # Write to file
-    with open(output_path, "w", encoding="utf-8") as file:
+    with open(output_path, "w", encoding="utf-8", newline="\n") as file:
         file.write("\n".join(lines) + "\n")
 
 
@@ -175,7 +175,7 @@ def generate_r_script(palettes: List[Dict[str, Any]], output_path: str):
         lines.append("")  # Add blank line between palettes
 
     # Write to file
-    with open(output_path, "w", encoding="utf-8") as file:
+    with open(output_path, "w", encoding="utf-8", newline="\n") as file:
         file.write("\n".join(lines))
 
 
