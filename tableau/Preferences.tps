@@ -81,6 +81,16 @@
       <!-- Expelled -->
       <color>#49525e</color>
     </color-palette>
+    <color-palette name="AIU Program Affiliation" type="regular">
+      <!-- Colors for program affiliations for students, courses, and faculty members at AIU
+ -->
+      <!-- GB -->
+      <color>#4e79a7</color>
+      <!-- GS -->
+      <color>#f28e2b</color>
+      <!-- GC -->
+      <color>#e15759</color>
+    </color-palette>
     <color-palette name="AIU EAP Level at Enrollment" type="regular">
       <!-- Colors for the EAP level at enrollment for undergraduate students at AIU -->
       <!-- EAP I -->
@@ -229,16 +239,6 @@
       <color>#d4a6c8</color>
       <!-- ※IS -->
       <color>#ff9d9a</color>
-    </color-palette>
-    <color-palette name="AIU Outbound Student Affiliation" type="regular">
-      <!-- Colors for affiliations types for students going outbound at AIU
- -->
-      <!-- GB -->
-      <color>#4e79a7</color>
-      <!-- GS -->
-      <color>#f28e2b</color>
-      <!-- GC -->
-      <color>#e15759</color>
     </color-palette>
   </preferences>
 </workbook>

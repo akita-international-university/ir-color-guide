@@ -51,6 +51,15 @@ color_values_aiu_student_status <- c(
     "Expelled" = "#49525e"
 )
 
+color_values_aiu_program_affiliation <- c(
+    # Type: Categorical
+    # Description: Colors for program affiliations for students, courses, and faculty members at AIU
+
+    "GB" = "#4e79a7",
+    "GS" = "#f28e2b",
+    "GC" = "#e15759"
+)
+
 color_values_aiu_eap_level_at_enrollment <- c(
     # Type: Categorical
     # Description: Colors for the EAP level at enrollment for undergraduate students at AIU
@@ -151,13 +160,4 @@ color_values_aiu_outbound_study_abroad_program <- c(
     "FP" = "#b07aa1",
     "FP(SP-A)" = "#d4a6c8",
     "※IS" = "#ff9d9a"
-)
-
-color_values_aiu_outbound_student_affiliation <- c(
-    # Type: Categorical
-    # Description: Colors for affiliations types for students going outbound at AIU
-
-    "GB" = "#4e79a7",
-    "GS" = "#f28e2b",
-    "GC" = "#e15759"
 )
