@@ -83,6 +83,19 @@ palettes:
         value: '#9f3632'
       - key: 'Expelled' # 除籍
         value: '#49525e'
+  - name: 'AIU Outbound Student Affiliation'
+    type: 'categorical'
+    description: >
+      Colors for affiliations types for students going outbound at AIU
+    credit: >
+      Derived from built-in "Automatic" palette in Tableau
+    colors:
+      - key: 'GB'
+        value: '#4e79a7'
+      - key: 'GS'
+        value: '#f28e2b'
+      - key: 'GC'
+        value: '#e15759'
   - name: 'AIU EAP Level at Enrollment'
     type: 'categorical'
     description: 'Colors for the EAP level at enrollment for undergraduate students at AIU'
@@ -252,16 +265,3 @@ palettes:
         value: '#d4a6c8'
       - key: '※IS'
         value: '#ff9d9a'
-  - name: 'AIU Outbound Student Affiliation'
-    type: 'categorical'
-    description: >
-      Colors for affiliations types for students going outbound at AIU
-    credit: >
-      Derived from built-in "Automatic" palette in Tableau
-    colors:
-      - key: 'GB'
-        value: '#4e79a7'
-      - key: 'GS'
-        value: '#f28e2b'
-      - key: 'GC'
-        value: '#e15759'
