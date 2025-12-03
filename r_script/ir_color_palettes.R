@@ -51,9 +51,9 @@ color_values_aiu_student_status <- c(
     "Expelled" = "#49525e"
 )
 
-color_values_aiu_outbound_student_affiliation <- c(
+color_values_aiu_program_affiliation <- c(
     # Type: Categorical
-    # Description: Colors for affiliations types for students going outbound at AIU
+    # Description: Colors for program affiliations for students, courses, and faculty members at AIU
 
     "GB" = "#4e79a7",
     "GS" = "#f28e2b",

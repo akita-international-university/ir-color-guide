@@ -81,8 +81,8 @@
       <!-- Expelled -->
       <color>#49525e</color>
     </color-palette>
-    <color-palette name="AIU Outbound Student Affiliation" type="regular">
-      <!-- Colors for affiliations types for students going outbound at AIU
+    <color-palette name="AIU Program Affiliation" type="regular">
+      <!-- Colors for program affiliations for students, courses, and faculty members at AIU
  -->
       <!-- GB -->
       <color>#4e79a7</color>

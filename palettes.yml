@@ -83,10 +83,10 @@ palettes:
         value: '#9f3632'
       - key: 'Expelled' # 除籍
         value: '#49525e'
-  - name: 'AIU Outbound Student Affiliation'
+  - name: 'AIU Program Affiliation'
     type: 'categorical'
     description: >
-      Colors for affiliations types for students going outbound at AIU
+      Colors for program affiliations for students, courses, and faculty members at AIU
     credit: >
       Derived from built-in "Automatic" palette in Tableau
     colors:
