@@ -67,11 +67,43 @@ palettes:
         value: '#948c88'
       - key: 'Transfer (Others)' # 編入学 (その他)
         value: '#dcd4d0'
+  - name: 'AIU Student Status'
+    type: 'categorical'
+    description: 'Colors for the student status (現況区分) at AIU'
+    colors:
+      - key: 'In School' # 通常
+        value: '#4e7fac'
+      - key: 'On leave' # 休学
+        value: '#ffc685'
+      - key: 'Graduated' # 卒業
+        value: '#24693d'
+      - key: 'Completed' # 修了
+        value: '#59a253'
+      - key: 'Withdrawn' # 退学
+        value: '#9f3632'
+      - key: 'Expelled' # 除籍
+        value: '#49525e'
+  - name: 'AIU EAP Level at Enrollment'
+    type: 'categorical'
+    description: 'Colors for the EAP level at enrollment for undergraduate students at AIU'
+    credit: >
+      Derived primarily from the built-in "Green-Gold" palette in Tableau
+    colors:
+      - key: 'EAP I'
+        value: '#f4d166'
+      - key: 'EAP II'
+        value: '#a7bf5a'
+      - key: 'EAP III'
+        value: '#60a656'
+      - key: 'EAP Bridge'
+        value: '#39894c'
+      - key: 'NA'
+        value: '#49525e'
   - name: 'AIU In-School Semesters'
     type: 'categorical'
     description: 'Colors for the in-school semesters at AIU'
     credit: >
-      Derived primarily from built-in "Hue Circle" palette in Tableau
+      Derived primarily from the built-in "Hue Circle" palette in Tableau
     colors:
       - key: '0'
         value: '#1ba3c6'

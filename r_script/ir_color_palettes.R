@@ -40,6 +40,27 @@ color_values_aiu_abbreviated_exam_types <- c(
     "Transfer (Others)" = "#dcd4d0"
 )
 
+color_values_aiu_student_status <- c(
+    # Type: Categorical
+    # Description: Colors for the student status (現況区分) at AIU
+    "In School" = "#4e7fac",
+    "On leave" = "#ffc685",
+    "Graduated" = "#24693d",
+    "Completed" = "#59a253",
+    "Withdrawn" = "#9f3632",
+    "Expelled" = "#49525e"
+)
+
+color_values_aiu_eap_level_at_enrollment <- c(
+    # Type: Categorical
+    # Description: Colors for the EAP level at enrollment for undergraduate students at AIU
+    "EAP I" = "#f4d166",
+    "EAP II" = "#a7bf5a",
+    "EAP III" = "#60a656",
+    "EAP Bridge" = "#39894c",
+    "NA" = "#49525e"
+)
+
 color_values_aiu_inschool_semesters <- c(
     # Type: Categorical
     # Description: Colors for the in-school semesters at AIU

@@ -66,6 +66,34 @@
       <!-- Transfer (Others) -->
       <color>#dcd4d0</color>
     </color-palette>
+    <color-palette name="AIU Student Status" type="regular">
+      <!-- Colors for the student status (現況区分) at AIU -->
+      <!-- In School -->
+      <color>#4e7fac</color>
+      <!-- On leave -->
+      <color>#ffc685</color>
+      <!-- Graduated -->
+      <color>#24693d</color>
+      <!-- Completed -->
+      <color>#59a253</color>
+      <!-- Withdrawn -->
+      <color>#9f3632</color>
+      <!-- Expelled -->
+      <color>#49525e</color>
+    </color-palette>
+    <color-palette name="AIU EAP Level at Enrollment" type="regular">
+      <!-- Colors for the EAP level at enrollment for undergraduate students at AIU -->
+      <!-- EAP I -->
+      <color>#f4d166</color>
+      <!-- EAP II -->
+      <color>#a7bf5a</color>
+      <!-- EAP III -->
+      <color>#60a656</color>
+      <!-- EAP Bridge -->
+      <color>#39894c</color>
+      <!-- NA -->
+      <color>#49525e</color>
+    </color-palette>
     <color-palette name="AIU In-School Semesters" type="regular">
       <!-- Colors for the in-school semesters at AIU -->
       <!-- 0 -->
