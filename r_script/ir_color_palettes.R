@@ -22,14 +22,22 @@ color_values_aiu_grades <- c(
     "AP" = "#4e79a7"
 )
 
-color_values_aiu_exam_types <- c(
+color_values_aiu_abbreviated_exam_types <- c(
     # Type: Categorical
-    # Description: Colors for the exam types at AIU
+    # Description: Colors for the abbreviated exam types at AIU
     "A" = "#2a5783",
     "B" = "#5b8cb8",
     "C" = "#b9ddf1",
     "GS" = "#24693d",
-    "GW" = "#b3e0a6"
+    "GW" = "#b3e0a6",
+    "Sougou" = "#9e3d22",
+    "Recommendation" = "#e36420",
+    "International" = "#f59c3c",
+    "Gap" = "#ffc685",
+    "Other Undergrad Exams" = "#9f3632",
+    "Transfer (2nd yr) Sp. Non Degree" = "#59504e",
+    "Transfer (2nd yr)" = "#948c88",
+    "Transfer (Others)" = "#dcd4d0"
 )
 
 color_values_aiu_inschool_semesters <- c(

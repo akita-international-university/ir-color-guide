@@ -37,9 +37,9 @@ palettes:
         value: '#ffbeb2'
       - key: 'AP'
         value: '#4e79a7'
-  - name: 'AIU Exam Types'
+  - name: 'AIU Abbreviated Exam Types'
     type: 'categorical'
-    description: 'Colors for the exam types at AIU'
+    description: 'Colors for the abbreviated exam types at AIU'
     colors:
       - key: 'A'
         value: '#2a5783'
@@ -47,10 +47,26 @@ palettes:
         value: '#5b8cb8'
       - key: 'C'
         value: '#b9ddf1'
-      - key: 'GS'
+      - key: 'GS' # グローバル・セミナー入試
         value: '#24693d'
-      - key: 'GW'
+      - key: 'GW' # グローバル・ワークショップ入試
         value: '#b3e0a6'
+      - key: 'Sougou' # 総合選抜型入試
+        value: '#9e3d22'
+      - key: 'Recommendation' # 学校推薦型入試
+        value: '#e36420'
+      - key: 'International' # 外国人留学生入試
+        value: '#f59c3c'
+      - key: 'Gap' # ギャップイヤー入試
+        value: '#ffc685'
+      - key: 'Other Undergrad Exams' # その他の学部入試 e.g., 社会人入試、帰国生入試
+        value: '#9f3632'
+      - key: 'Transfer (2nd yr) Sp. Non Degree' # 編入学 (2年次特科)
+        value: '#59504e'
+      - key: 'Transfer (2nd yr)' # 編入学 (2年次)
+        value: '#948c88'
+      - key: 'Transfer (Others)' # 編入学 (その他)
+        value: '#dcd4d0'
   - name: 'AIU In-School Semesters'
     type: 'categorical'
     description: 'Colors for the in-school semesters at AIU'
@@ -120,9 +136,9 @@ palettes:
   - name: 'AIU Exchange Region'
     type: 'categorical'
     description: >
-      Colors for regions for inbound exchange student origin or 
+      Colors for regions for inbound exchange student origin or
       outbound student destination at AIU
-    credits: >
+    credit: >
       Derived from "PowerBI Default" Tableau palette by Ken Flerlage 
       available at https://public.tableau.com/app/profile/ken.flerlage/viz/DatafamColors/
     colors:
