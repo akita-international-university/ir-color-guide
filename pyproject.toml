@@ -36,6 +36,9 @@ packages = [
 formatter = "scripts.formatter:main"
 linter = "scripts.linter:main"
 build = "scripts.build:main"
+version_major = "scripts.version:major"
+version_minor = "scripts.version:minor"
+version_patch = "scripts.version:patch"
 
 [tool.isort]
 profile = "black"
