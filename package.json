@@ -20,6 +20,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "prettier": "^3.7.2"
+    "prettier": "^3.7.3"
   }
 }
