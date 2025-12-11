@@ -7,17 +7,20 @@
 
 ## Purpose
 
-The purpose of this document is to ensure consistency, visibility, and accessibility for the output produced by the Division of Institutional Research (IR) in the Office of Academic Affairs at the Akita International University (AIU) by defining a clear set of policies and practices for the palettes, i.e., set of colors, that are used in data visualizations produced by the team.
+The purpose of this document is to ensure consistency, visibility, and accessibility for the output produced by the Division of Institutional Research (IR Team) in the Office of Academic Affairs at the Akita International University (AIU) by defining a clear set of policies and practices for the palettes, i.e., set of colors, that are used in data visualizations produced by the team.
 
 ## Scope
 
-All visualized data produced by the IR team, including, but not limited to dashboards, reports, plots, and presentation materials.
+All visualized data produced by the IR Team, including, but not limited to dashboards, reports, plots, and presentation materials.
 
 ## Policy
 
 Palettes should be set in adherence with AIU's web accessibility policy at [AIUウェブアクセシビリティ方針](https://web.aiu.ac.jp/web-accessibility-policy/). Moreover, since AIU's web accessibility policies are set in line with the latest stable version of the Web Content Accessibility Guidelines (WCAG), the latter should be referenced for any aspects not explicitly covered by the former.
 
-Whenever applicable, palettes should be chosen from the colorblind-friendly palettes of the [`RColorBrewer` package](https://cran.r-project.org/web/packages/RColorBrewer/index.html) in R to ensure that materials produced by the IR team can be comprehensible regardless of the recipients' color blindness.
+Whenever applicable, all new palettes should be chosen from the colorblind-friendly palettes of the [`RColorBrewer` package](https://cran.r-project.org/web/packages/RColorBrewer/index.html) in R to ensure that materials produced by the IR Team can be comprehensible regardless of the recipients' color blindness.
+
+> [!NOTE]
+> While we strive to ensure that all visualizations produced by the IR Team are accessible to people with color vision deficiencies, we acknowledge that under our current resources available, it was only practical to migrate the majority of our color palettes from existing vizualizations that are not fully colorblind-friendly. We will continue to work towards improving the accessibility of our visualizations over time. Any suggestions and feedbacks, particularly those that help us automate the process of ensuring colorblind-friendliness, are highly appreciated.
 
 ## Technical Note
 
