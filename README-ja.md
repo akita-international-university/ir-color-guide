@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD040 -->
+
 # IRデータ可視化配色ガイドライン
 
 [Click here for the English version](./README.md)

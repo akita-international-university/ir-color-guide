@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD040 -->
+
 # IR Data Visualization Color Guidelines
 
 [日本語版はこちら](./README-ja.md)
