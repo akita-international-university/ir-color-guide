@@ -22,7 +22,7 @@ Palettes should be set in adherence with AIU's web accessibility policy at [AIUã
 Whenever applicable, all new palettes should be chosen from the colorblind-friendly palettes of the [`RColorBrewer` package](https://cran.r-project.org/web/packages/RColorBrewer/index.html) in R to ensure that materials produced by the IR Team can be comprehensible regardless of the recipients' color blindness.
 
 > [!NOTE]
-> While we strive to ensure that all visualizations produced by the IR Team are accessible to people with color vision deficiencies, we acknowledge that under our current resources available, it was only practical to migrate the majority of our color palettes from existing vizualizations that are not fully colorblind-friendly. We will continue to work towards improving the accessibility of our visualizations over time. Any suggestions and feedbacks, particularly those that help us automate the process of ensuring colorblind-friendliness, are highly appreciated.
+> While we strive to ensure that all visualizations produced by the IR Team are accessible to people with color vision deficiencies, we acknowledge that under our current resources available, it was only practical to migrate the majority of our color palettes from existing visualizations that are not fully colorblind-friendly. We will continue to work towards improving the accessibility of our visualizations over time. Any suggestions and feedbacks, particularly those that help us automate the process of ensuring colorblind-friendliness, are highly appreciated.
 
 ## Technical Note
 
