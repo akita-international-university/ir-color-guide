@@ -1,4 +1,4 @@
-<!-- markdownlint-disable MD040 -->
+<!-- markdownlint-disable MD013 -->
 
 # IRデータ可視化配色ガイドライン
 
