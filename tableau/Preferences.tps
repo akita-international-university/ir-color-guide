@@ -4,6 +4,17 @@
     <!-- Color palettes based on the IR Data Visualization Color Guidelines -->
     <!-- This file is created automatically. Do NOT edit manually. -->
     <!-- See: https://github.com/akita-international-university/ir-color-guide -->
+    <color-palette name="4-Scale Likert" type="ordered-diverging">
+      <!-- 4-Scale Likert color palette from Strongly Agree to Strongly Disagree -->
+      <!-- Strongly Agree -->
+      <color>#386325</color>
+      <!-- Agree -->
+      <color>#8DBB54</color>
+      <!-- Disagree -->
+      <color>#D17DAC</color>
+      <!-- Strongly Disagree -->
+      <color>#821851</color>
+    </color-palette>
     <color-palette name="AIU Grades" type="regular">
       <!-- Colors for AIU letter grades -->
       <!-- A+ -->

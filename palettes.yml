@@ -3,8 +3,22 @@ organization:
   name_ja: '国際教養大学教務課教学IRチーム'
   email: 'ir.div@aiu.ac.jp'
 palettes:
+  - name: '4-Scale Likert'
+    type: 'diverging' # categorical, sequential, diverging
+    description: '4-Scale Likert color palette from Strongly Agree to Strongly Disagree'
+    credit: >
+      Adapted from the "PiYG" diverging palette in RColorBrewer
+    colors:
+      - key: 'Strongly Agree'
+        value: '#386325'
+      - key: 'Agree'
+        value: '#8DBB54'
+      - key: 'Disagree'
+        value: '#D17DAC'
+      - key: 'Strongly Disagree'
+        value: '#821851'
   - name: 'AIU Grades'
-    type: 'categorical' # categorical, sequential, diverging
+    type: 'categorical'
     description: 'Colors for AIU letter grades'
     colors:
       - key: 'A+'

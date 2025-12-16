@@ -2,6 +2,15 @@
 # This file is created automatically. Do NOT edit manually.
 # See: https://github.com/akita-international-university/ir-color-guide
 
+color_values_4scale_likert <- c(
+    # Type: Diverging
+    # Description: 4-Scale Likert color palette from Strongly Agree to Strongly Disagree
+    "Strongly Agree" = "#386325",
+    "Agree" = "#8DBB54",
+    "Disagree" = "#D17DAC",
+    "Strongly Disagree" = "#821851"
+)
+
 color_values_aiu_grades <- c(
     # Type: Categorical
     # Description: Colors for AIU letter grades
