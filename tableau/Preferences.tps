@@ -9,9 +9,9 @@
       <!-- Strongly Agree -->
       <color>#386325</color>
       <!-- Agree -->
-      <color>#8DBB54</color>
+      <color>#8dbb54</color>
       <!-- Disagree -->
-      <color>#D17DAC</color>
+      <color>#d17dac</color>
       <!-- Strongly Disagree -->
       <color>#821851</color>
     </color-palette>
