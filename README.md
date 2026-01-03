@@ -24,6 +24,19 @@ Whenever applicable, all new palettes should be chosen from the colorblind-frien
 > [!NOTE]
 > While we strive to ensure that all visualizations produced by the IR Team are accessible to people with color vision deficiencies, we acknowledge that under our current resources available, it was only practical to migrate the majority of our color palettes from existing visualizations that are not fully colorblind-friendly. We will continue to work towards improving the accessibility of our visualizations over time. Any suggestions and feedback, particularly those that help us automate the process of ensuring colorblind-friendliness, are highly appreciated.
 
+## Basic Color Palette Definitions
+
+Basic color palettes typically used in many visualizations are preset in a settings file at the root of this repository: `./palettes.yml`
+
+Based on this YAML file, a Python script in this repository `./scripts/build.py` will generate a Tableau preference file `./tableau/Preferences.tps` and an R script `./r_script/ir_color_palettes.R` that can be used for the respective tools to color the visualizations.
+
+This set of a single settings YAML file and the automatically generated files for the respective tools ensures consistency between multiple tools used by the IR team. All revisions to the predefined color palettes should be made to the YAML file and not the individual files.
+
+### How to use the palettes
+
+> [!IMPORTANT]
+> This section is empty for now. Instructions on how to use the generated color palettes in Tableau and R will be added in the future updates.
+
 ## Technical Note
 
 > [!NOTE]
@@ -42,16 +55,3 @@ RColorBrewer::display.brewer.all(colorblindFriendly = TRUE)
 
 > [!TIP]
 > You do not need to explicitly load `RColorBrewer` if you are using the [`tidyverse` packages](https://tidyverse.org/). Simply load `tidyverse` via `library(tidyverse)` to make `RColorBrewer` available within that session.
-
-## Basic Color Palette Definitions
-
-Basic color palettes typically used in many visualizations are preset in a settings file at the root of this repository: `./palettes.yml`
-
-Based on this YAML file, a Python script in this repository `./scripts/build.py` will generate a Tableau preference file `./tableau/Preferences.tps` and an R script `./r_script/ir_color_palettes.R` that can be used for the respective tools to color the visualizations.
-
-This set of a single settings YAML file and the automatically generated files for the respective tools ensures consistency between multiple tools used by the IR team. All revisions to the predefined color palettes should be made to the YAML file and not the individual files.
-
-### How to use the palettes
-
-> [!IMPORTANT]
-> This section is empty for now. Instructions on how to use the generated color palettes in Tableau and R will be added in the future updates.
