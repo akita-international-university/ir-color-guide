@@ -35,7 +35,7 @@ This set of a single settings YAML file and the automatically generated files fo
 ### How to use the palettes
 
 > [!NOTE]
-> Installing [R, the free and open-sourced software environment for statistical computing and graphics](https://www.r-project.org/), is a prerequisite from this section and below.
+> Installing [R, the free and open-sourced software environment for statistical computing and graphics](https://www.r-project.org/), is a prerequisite for this section and below.
 
 #### R
 
