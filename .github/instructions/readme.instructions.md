@@ -27,6 +27,7 @@ When a revision is made to either `README.md` or `README-ja.md`, verify that the
 
 - Ensure translations for the same words and phrases are kept consistent between sections and paragraphs within the Japanese document
 - Technical terms and proper nouns should be translated consistently throughout the entire document
+- The word `repository` should be translated as `リポジトリ` in Japanese. Any other translations for this term, especially `レポジトリ`, should be flagged.
 
 ## Tone and Formality
 
