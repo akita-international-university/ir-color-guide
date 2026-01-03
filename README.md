@@ -70,7 +70,7 @@ source("https://raw.githubusercontent.com/akita-international-university/ir-colo
 
 #### Tableau
 
-Custom color palettes in Tableau Desktop can be defined by modifying the `Preferences.tps` file created locally during the installation of the software. This section demonstrates how to use the generated `Preferences.tps` file from this repository to set up custom color palettes in Tableau Destop on your Windows PC.
+Custom color palettes in Tableau Desktop can be defined by modifying the `Preferences.tps` file created locally during the installation of the software. This section demonstrates how to use the generated `Preferences.tps` file from this repository to set up custom color palettes in Tableau Desktop on your Windows PC.
 
 > [!IMPORTANT]
 > The method below overwrites the existing `Preferences.tps` file in your Tableau repository. If you have any existing custom color palettes defined in your current `Preferences.tps`, please back up the file before proceeding.
