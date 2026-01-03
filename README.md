@@ -45,7 +45,7 @@ The simplest way to use the color palettes defined in this repository in R is to
 # In the file you are working on, e.g., analysis.R or report.qmd
 source("path/to/this/repository/r_script/ir_color_palettes.R")
 
-# Example usage:
+# ggplot2 usage example:
 df |>
   ggplot(aes(x = year, y = value, fill = category)) +
   geom_col() +
