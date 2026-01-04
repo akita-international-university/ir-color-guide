@@ -2,25 +2,26 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in the `IR Data Visualization Color Guidelines` project, please report it responsibly. 
+If you discover a security vulnerability in this project, please report it responsibly.
 
-- **Email**: [ir.div@aiu.ac.jp](mailto:ir.div@aiu.ac.jp)  
-- **PGP key for encrypted disclosure**: PGP key information to be updated (if applicable)
+- **Email**: [ir.div@aiu.ac.jp](mailto:ir.div@aiu.ac.jp)
 
-Please do not use GitHub issues or discussions to report security vulnerabilities.
+> [!IMPORTANT]
+> Please do not use GitHub issues or discussions to report security vulnerabilities.
 
 ### What to Include in Your Report
+
 To help us understand and mitigate the issue quickly, please include the following in your initial report:
+
 - A description of the vulnerability, including its impact
 - The steps required to reproduce the vulnerability, if possible
 - Any relevant proof-of-concept code, exploit tools, or configurations
+- Your contact information for follow-up questions
+- Your public profile or website, if you would like to be credited
 
 ## Supported Versions
 
-| Version         | Supported          |
-|-----------------|--------------------|
-| Latest release  | ✅                 |
-| Older versions  | ❌                 |
+We actively maintain and provide security updates for only the latest version of this project.
 
 ## Response Time
 
@@ -33,7 +34,8 @@ We appreciate clear instructions when submitting reports on disclosure timelines
 ## Rules for Testing
 
 When testing vulnerabilities, please adhere to the following guidelines:
+
 - Do NOT test in production environments
 - Avoid any actions that compromise data integrity, privacy, or availability for users
 
-Thank you for helping improve the security of the `IR Data Visualization Color Guidelines` project. The security of our users and contributors is extremely important!
+Thank you for helping improve the security of this project. The security of our users and contributors is extremely important!
