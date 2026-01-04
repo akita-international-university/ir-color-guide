@@ -97,7 +97,19 @@ Both linters must pass with no errors.
 
 ### Testing
 
-**Current status:** No test suite exists (package.json shows `"test": "echo \"Error: no test specified\" && exit 1"`).
+**Run tests with:**
+
+```bash
+poetry run test
+```
+
+This command:
+
+1. Runs the formatter (Prettier, isort, black)
+2. Runs the linter (mypy, pylint)
+3. Executes pytest with coverage reporting
+
+**IMPORTANT:** Always run `poetry run test` after making changes to Python scripts to ensure all tests pass before committing.
 
 ## File Modification Guidelines
 
@@ -162,6 +174,7 @@ All Python code is in the `scripts/` directory and must:
 - Include type hints for all function parameters and return values
 - Pass mypy and pylint without errors
 - Be formatted with black and isort
+- Pass all pytest tests
 
 ### Markdown, YAML, JSON, HTML
 
@@ -192,7 +205,7 @@ Runs on every push and PR. Configuration:
   - Natural language validation
   - Ruff formatter (conflicts with Black & isort)
 
-**Before committing:** Always run `poetry run linter` locally to catch issues early.
+**Before committing:** Always run `poetry run test` locally to catch issues early and ensure all tests pass.
 
 ### Accessibility Bot
 
@@ -240,8 +253,8 @@ Weekly updates assigned to @ttsukagoshi.
 ### Modifying Python Scripts
 
 1. Edit Python files in `scripts/` directory
-2. Run `poetry run linter` (includes formatter)
-3. Fix any mypy or pylint errors
+2. Run `poetry run test` to verify changes (includes formatter, linter, and pytest)
+3. Fix any formatting, linting, or test errors
 4. Commit changes
 
 ## Common Pitfalls and Solutions
