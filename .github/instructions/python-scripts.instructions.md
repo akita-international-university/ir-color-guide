@@ -58,3 +58,4 @@ When modifying existing functions or adding new functionality:
 - Test files are located in `tests/` directory
 - Test naming convention: `test_<module_name>.py`
 - Each script in `scripts/` should have a corresponding test file
+- If a Python script file in `scripts/` does not have a corresponding test file, define a suite of unit tests for it before committing changes to that script
