@@ -8,3 +8,8 @@ node_modules/
 .venv/
 __pycache__/
 .mypy_cache/
+
+# pytest
+.pytest_cache/
+coverage/
+.coverage

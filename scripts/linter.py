@@ -5,7 +5,7 @@ Script to run linters after running formatters defined in scripts.formatter.py.
 import subprocess
 
 # Directories to lint
-LINT_TARGET = ["./scripts"]  # , "./tests"]
+LINT_TARGET = ["./scripts", "./tests"]
 
 
 def main():
