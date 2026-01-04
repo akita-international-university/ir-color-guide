@@ -7,7 +7,7 @@ If you discover a security vulnerability in this project, please report it respo
 - **Email**: [ir.div@aiu.ac.jp](mailto:ir.div@aiu.ac.jp)
 
 > [!IMPORTANT]
-> Please do not use GitHub issues or discussions to report security vulnerabilities.
+> Please do NOT use GitHub issues or discussions to report security vulnerabilities.
 
 ### What to Include in Your Report
 
