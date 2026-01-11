@@ -242,7 +242,3 @@ def main():
     print("R script file generated.")
 
     print("All files generated successfully.")
-
-
-if __name__ == "__main__":
-    main()
