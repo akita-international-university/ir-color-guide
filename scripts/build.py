@@ -93,8 +93,7 @@ def generate_tableau_preferences(palettes: List[Dict[str, Any]], output_path: st
         for color in colors:
             key = color.get("key", "")
             value = color.get("value", "")
-            if key:
-                lines.append(f"      <!-- {key} -->")
+            lines.append(f"      <!-- {key} -->")
             lines.append(f"      <color>{value}</color>")
 
         lines.append("    </color-palette>")
