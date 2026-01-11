@@ -3,7 +3,6 @@ Unit tests for ./scripts/build.py
 """
 
 import os
-import subprocess
 import tempfile
 from typing import Any, Dict, List
 from unittest.mock import mock_open
@@ -393,48 +392,6 @@ class TestGenerateRScript:
                 os.remove(tmp_path)
 
 
-class TestRunPrettier:
-    """Tests for run_prettier() function."""
-
-    def test_run_prettier_success(self, mocker):
-        """Test successful execution of Prettier."""
-        # Arrange
-        mock_subprocess = mocker.patch("subprocess.run")
-        mock_print = mocker.patch("builtins.print")
-
-        # Act
-        build.run_prettier("test.tps")
-
-        # Assert
-        mock_subprocess.assert_called_once_with(
-            ["npx", "prettier", "test.tps", "--write"],
-            check=True,
-            capture_output=True,
-            text=True,
-            shell=True,
-        )
-        mock_print.assert_any_call("Running Prettier on test.tps...")
-        mock_print.assert_any_call("Prettier formatting done for test.tps.")
-
-    def test_run_prettier_failure(self, mocker):
-        """Test handling of Prettier failure."""
-        # Arrange
-        mock_error = subprocess.CalledProcessError(1, "npx")
-        mock_error.stderr = "Prettier error message"
-        mock_subprocess = mocker.patch("subprocess.run", side_effect=mock_error)
-        mock_print = mocker.patch("builtins.print")
-
-        # Act & Assert
-        with pytest.raises(subprocess.CalledProcessError):
-            build.run_prettier("test.tps")
-
-        mock_subprocess.assert_called_once()
-        mock_print.assert_any_call("Running Prettier on test.tps...")
-        mock_print.assert_any_call(
-            "Prettier failed for test.tps.\nError output:\nPrettier error message"
-        )
-
-
 class TestMain:
     """Tests for main() function."""
 
@@ -450,7 +407,7 @@ class TestMain:
             "scripts.build.generate_tableau_preferences"
         )
         mock_generate_r = mocker.patch("scripts.build.generate_r_script")
-        mock_run_prettier = mocker.patch("scripts.build.run_prettier")
+        mock_subprocess = mocker.patch("subprocess.run")
         mock_makedirs = mocker.patch("os.makedirs")
         mock_print = mocker.patch("builtins.print")
 
@@ -465,10 +422,12 @@ class TestMain:
         mock_load_palettes.assert_called_once()
         mock_generate_tableau.assert_called_once()
         mock_generate_r.assert_called_once()
-        mock_run_prettier.assert_called_once()
-        assert (
+        mock_subprocess.assert_has_calls(
+            [mocker.call(["poetry", "run", "formatter"], check=True)], any_order=False
+        )
+        assert (  # For both tableau and r_script directories
             mock_makedirs.call_count == 2
-        )  # For both tableau and r_script directories
+        )
 
         # Verify print statements
         expected_prints = [
@@ -496,7 +455,7 @@ class TestMain:
         )
         mocker.patch("scripts.build.generate_tableau_preferences")
         mocker.patch("scripts.build.generate_r_script")
-        mocker.patch("scripts.build.run_prettier")
+        mocker.patch("subprocess.run")
         mock_makedirs = mocker.patch("os.makedirs")
         mocker.patch("builtins.print")
 

@@ -178,36 +178,6 @@ def generate_r_script(palettes: List[Dict[str, Any]], output_path: str):
         file.write("\n".join(lines))
 
 
-def run_prettier(file_path: str):
-    """
-    Run Prettier on the specified file.
-
-    Note:
-        This function requires Node.js and npm to be installed and available in PATH.
-        Prettier is run via npx, which should be available with npm 5.2+.
-
-    Args:
-        file_path: Path to the file to format
-
-    Raises:
-        subprocess.CalledProcessError: If Prettier fails to run
-        FileNotFoundError: If npx/prettier is not installed
-    """
-    print(f"Running Prettier on {file_path}...")
-    try:
-        subprocess.run(
-            ["npx", "prettier", file_path, "--write"],
-            check=True,
-            capture_output=True,
-            text=True,
-            shell=True,
-        )
-    except subprocess.CalledProcessError as e:
-        print(f"Prettier failed for {file_path}.\nError output:\n{e.stderr}")
-        raise
-    print(f"Prettier formatting done for {file_path}.")
-
-
 def main():
     """
     Main function to convert palettes.yml to Tableau and R files.
@@ -233,12 +203,12 @@ def main():
     generate_tableau_preferences(palettes, tableau_path)
     print("Tableau Preferences file generated.")
 
-    # Run Prettier on Tableau file
-    run_prettier(tableau_path)
-
     # Generate R script file
     print(f"Generating R script file at {r_script_path}...")
     generate_r_script(palettes, r_script_path)
     print("R script file generated.")
+
+    # Run formatters
+    subprocess.run(["poetry", "run", "formatter"], check=True)
 
     print("All files generated successfully.")
