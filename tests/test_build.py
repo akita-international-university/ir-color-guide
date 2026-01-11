@@ -37,6 +37,15 @@ def sample_palettes() -> List[Dict[str, Any]]:
                 {"key": "Dark", "value": "#202020"},
             ],
         },
+        {
+            "name": "Empty Description Palette",
+            "type": "sequential",
+            "description": "",
+            "colors": [
+                {"key": "Start", "value": "#ffffff"},
+                {"key": "End", "value": "#000000"},
+            ],
+        },
     ]
 
 
