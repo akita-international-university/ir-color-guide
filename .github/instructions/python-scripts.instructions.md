@@ -1,3 +1,7 @@
+---
+applyTo: '**/scripts/**/*.py'
+---
+
 # Code Review Instructions for Python Scripts
 
 This file provides instructions for GitHub Copilot code review when reviewing changes to Python script files in the `scripts/` directory.
