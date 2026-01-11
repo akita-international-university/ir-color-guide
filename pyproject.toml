@@ -1,6 +1,6 @@
 [project]
 name = "ir-color-guide"
-version = "0.2.0"
+version = "0.3.0"
 description = "IR Data Visualization Color Guidelines"
 authors = [
     {name = "ttsukagoshi", email = "ttsukagoshi@aiu.ac.jp"}
