@@ -20,5 +20,6 @@ def test_main(mocker):
         [
             mocker.call(["poetry", "run", "linter"], check=True),
             mocker.call(["poetry", "run", "pytest"], check=True),
-        ]
+        ],
+        any_order=False,
     )

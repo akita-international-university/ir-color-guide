@@ -24,7 +24,8 @@ def test_main_on_windows(mocker):
             mocker.call(["npx", "prettier", "--write", "."], check=True, shell=True),
             mocker.call(["isort", "."], check=True),
             mocker.call(["black", "."], check=True),
-        ]
+        ],
+        any_order=False,
     )
     mock_print.assert_has_calls(
         [
@@ -35,7 +36,8 @@ def test_main_on_windows(mocker):
             mocker.call("Formatting with black..."),
             mocker.call("Formatting done (black)."),
             mocker.call("All formatting complete."),
-        ]
+        ],
+        any_order=False,
     )
 
 
@@ -58,7 +60,8 @@ def test_main_on_macos(mocker):
             mocker.call(["npx", "prettier", "--write", "."], check=True),
             mocker.call(["isort", "."], check=True),
             mocker.call(["black", "."], check=True),
-        ]
+        ],
+        any_order=False,
     )
     mock_print.assert_has_calls(
         [
@@ -69,5 +72,6 @@ def test_main_on_macos(mocker):
             mocker.call("Formatting with black..."),
             mocker.call("Formatting done (black)."),
             mocker.call("All formatting complete."),
-        ]
+        ],
+        any_order=False,
     )

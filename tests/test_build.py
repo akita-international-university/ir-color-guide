@@ -484,7 +484,7 @@ class TestMain:
             mocker.call("R script file generated."),
             mocker.call("All files generated successfully."),
         ]
-        mock_print.assert_has_calls(expected_prints)
+        mock_print.assert_has_calls(expected_prints, any_order=False)
 
     def test_main_creates_directories(
         self, mocker, sample_yaml_data

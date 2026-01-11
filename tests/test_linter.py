@@ -24,7 +24,8 @@ def test_main(mocker):
             mocker.call(["poetry", "run", "pylint", "./scripts"], check=True),
             mocker.call(["poetry", "run", "mypy", "./tests"], check=True),
             mocker.call(["poetry", "run", "pylint", "./tests"], check=True),
-        ]
+        ],
+        any_order=False,
     )
     mock_print.assert_has_calls(
         [
@@ -37,5 +38,6 @@ def test_main(mocker):
             mocker.call("Linting ./tests with pylint..."),
             mocker.call("pylint linting done."),
             mocker.call("All linting complete."),
-        ]
+        ],
+        any_order=False,
     )
