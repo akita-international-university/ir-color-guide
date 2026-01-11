@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "description": "IR Data Visualization Color Guidelines",
   "keywords": [
-    "IR"
+    "a11y",
+    "tableau",
+    "IR",
+    "institutional research"
   ],
   "homepage": "https://github.com/akita-international-university/ir-color-guide#readme",
   "bugs": {
