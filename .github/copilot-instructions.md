@@ -15,14 +15,28 @@ This repository contains the IR Data Visualization Color Guidelines for Akita In
 │   ├── linters/               # Linter configurations (zizmor.yaml)
 │   └── workflows/             # GitHub Actions workflows
 ├── scripts/                   # Python scripts for building and maintenance
+│   ├── __init__.py           # Package initialization
 │   ├── build.py              # Generates Tableau/R files from palettes.yml
 │   ├── formatter.py          # Runs all formatters (Prettier, isort, black)
-│   └── linter.py             # Runs all linters (mypy, pylint)
+│   ├── linter.py             # Runs all linters (mypy, pylint)
+│   ├── test.py               # Runs tests with pytest
+│   └── version.py            # Version information
+├── tests/                     # Pytest test files
+│   ├── __init__.py           # Test package initialization
+│   ├── test_build.py         # Tests for build.py
+│   ├── test_formatter.py     # Tests for formatter.py
+│   ├── test_linter.py        # Tests for linter.py
+│   ├── test_test.py          # Tests for test.py
+│   └── test_version.py       # Tests for version.py
 ├── r_script/                 # Generated R color palette scripts
 │   └── ir_color_palettes.R   # AUTO-GENERATED - DO NOT EDIT
 ├── tableau/                  # Generated Tableau preference files
 │   └── Preferences.tps       # AUTO-GENERATED - DO NOT EDIT
+├── .coveragerc               # pytest coverage configuration
+├── .prettierrc               # Prettier formatter configuration
+├── .prettierignore           # Prettier ignore patterns
 ├── palettes.yml              # SOURCE OF TRUTH for all color palettes
+├── poetry.toml               # Poetry configuration (in-project venv)
 ├── pyproject.toml            # Python project config with Poetry
 ├── package.json              # Node.js dependencies (Prettier)
 ├── README.md                 # English documentation
