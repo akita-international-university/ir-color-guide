@@ -138,11 +138,8 @@ class TestCheckBranch:
         mocker.patch("scripts.version.get_branch", return_value="main")
         mocker.patch("scripts.version.is_clean_main_branch", return_value=True)
 
-        # Act
-        version.check_branch()
-
-        # Assert
-        assert True
+        # Act & Assert
+        version.check_branch()  # No exception should be raised; the test should pass
 
     def test_check_branch_not_main_branch(self, mocker):
         """
