@@ -45,6 +45,16 @@ def sample_palettes() -> List[Dict[str, Any]]:
                 {"key": "End", "value": "#000000"},
             ],
         },
+        {
+            "name": "Palette with Credit",
+            "type": "categorical",
+            "description": "A palette with credit",
+            "credit": "Derived from the ColorBrewer palette",
+            "colors": [
+                {"key": "First", "value": "#aaaaaa"},
+                {"key": "Second", "value": "#bbbbbb"},
+            ],
+        },
     ]
 
 
@@ -242,6 +252,65 @@ class TestGenerateTableauPreferences:
             if os.path.exists(tmp_path):
                 os.remove(tmp_path)
 
+    def test_generate_tableau_preferences_with_credit(
+        self, sample_palettes
+    ):  # pylint: disable=redefined-outer-name
+        """Test that credit attribute is included in Tableau preferences output."""
+        # Arrange
+        with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".tps") as tmp:
+            tmp_path = tmp.name
+
+        try:
+            # Act
+            build.generate_tableau_preferences(sample_palettes, tmp_path)
+
+            # Assert
+            with open(tmp_path, "r", encoding="utf-8") as f:
+                content = f.read()
+
+            # Check that credit comment is present for palette with credit
+            assert "<!-- Credit: Derived from the ColorBrewer palette -->" in content
+
+        finally:
+            # Cleanup
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
+
+    def test_generate_tableau_preferences_without_credit(self):
+        """Test that palettes without credit attribute work correctly."""
+        # Arrange
+        palettes_without_credit = [
+            {
+                "name": "No Credit Palette",
+                "type": "categorical",
+                "description": "A palette without credit",
+                "colors": [
+                    {"key": "Color A", "value": "#111111"},
+                    {"key": "Color B", "value": "#222222"},
+                ],
+            }
+        ]
+        with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".tps") as tmp:
+            tmp_path = tmp.name
+
+        try:
+            # Act
+            build.generate_tableau_preferences(palettes_without_credit, tmp_path)
+
+            # Assert
+            with open(tmp_path, "r", encoding="utf-8") as f:
+                content = f.read()
+
+            # Check that no credit comment is present
+            assert "<!-- Credit:" not in content
+            # But description should still be present
+            assert "<!-- A palette without credit -->" in content
+
+        finally:
+            # Cleanup
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
+
 
 class TestSanitizeVariableName:
     """Tests for sanitize_variable_name() function."""
@@ -385,6 +454,65 @@ class TestGenerateRScript:
             assert (
                 "# This file is created automatically. Do NOT edit manually." in content
             )
+
+        finally:
+            # Cleanup
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
+
+    def test_generate_r_script_with_credit(
+        self, sample_palettes
+    ):  # pylint: disable=redefined-outer-name
+        """Test that credit attribute is included in R script output."""
+        # Arrange
+        with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".R") as tmp:
+            tmp_path = tmp.name
+
+        try:
+            # Act
+            build.generate_r_script(sample_palettes, tmp_path)
+
+            # Assert
+            with open(tmp_path, "r", encoding="utf-8") as f:
+                content = f.read()
+
+            # Check that credit comment is present for palette with credit
+            assert "# Credit: Derived from the ColorBrewer palette" in content
+
+        finally:
+            # Cleanup
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
+
+    def test_generate_r_script_without_credit(self):
+        """Test that palettes without credit attribute work correctly."""
+        # Arrange
+        palettes_without_credit = [
+            {
+                "name": "No Credit Palette",
+                "type": "categorical",
+                "description": "A palette without credit",
+                "colors": [
+                    {"key": "Color A", "value": "#111111"},
+                    {"key": "Color B", "value": "#222222"},
+                ],
+            }
+        ]
+        with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".R") as tmp:
+            tmp_path = tmp.name
+
+        try:
+            # Act
+            build.generate_r_script(palettes_without_credit, tmp_path)
+
+            # Assert
+            with open(tmp_path, "r", encoding="utf-8") as f:
+                content = f.read()
+
+            # Check that no credit comment is present
+            assert "# Credit:" not in content
+            # But description should still be present
+            assert "# Description: A palette without credit" in content
 
         finally:
             # Cleanup

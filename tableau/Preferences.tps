@@ -6,6 +6,8 @@
     <!-- See: https://github.com/akita-international-university/ir-color-guide -->
     <color-palette name="4-Scale Likert" type="ordered-diverging">
       <!-- 4-Scale Likert color palette from Strongly Agree to Strongly Disagree -->
+      <!-- Credit: Adapted from the "PiYG" diverging palette in RColorBrewer
+ -->
       <!-- Strongly Agree -->
       <color>#386325</color>
       <!-- Agree -->
@@ -95,6 +97,8 @@
     <color-palette name="AIU Program Affiliation" type="regular">
       <!-- Colors for program affiliations for students, courses, and faculty members at AIU
  -->
+      <!-- Credit: Derived from built-in "Automatic" palette in Tableau
+ -->
       <!-- GB -->
       <color>#4e79a7</color>
       <!-- GS -->
@@ -104,6 +108,8 @@
     </color-palette>
     <color-palette name="AIU EAP Level at Enrollment" type="regular">
       <!-- Colors for the EAP level at enrollment for undergraduate students at AIU -->
+      <!-- Credit: Derived primarily from the built-in "Green-Gold" palette in Tableau
+ -->
       <!-- EAP I -->
       <color>#f4d166</color>
       <!-- EAP II -->
@@ -117,6 +123,8 @@
     </color-palette>
     <color-palette name="AIU In-School Semesters" type="regular">
       <!-- Colors for the in-school semesters at AIU -->
+      <!-- Credit: Derived primarily from the built-in "Hue Circle" palette in Tableau
+ -->
       <!-- 0 -->
       <color>#1ba3c6</color>
       <!-- 1 -->
@@ -158,6 +166,8 @@
     </color-palette>
     <color-palette name="AIU Course Levels" type="regular">
       <!-- Colors for the course levels at AIU -->
+      <!-- Credit: Derived primarily from built-in "Summer" palette in Tableau
+ -->
       <!-- 700 -->
       <color>#b9ca5d</color>
       <!-- 600 -->
@@ -177,6 +187,8 @@
     </color-palette>
     <color-palette name="AIU Exchange Region" type="regular">
       <!-- Colors for regions for inbound exchange student origin or outbound student destination at AIU
+ -->
+      <!-- Credit: Derived from "PowerBI Default" Tableau palette by Ken Flerlage  available at https://public.tableau.com/app/profile/ken.flerlage/viz/DatafamColors/
  -->
       <!-- North America -->
       <color>#3599b8</color>
@@ -224,6 +236,8 @@
     </color-palette>
     <color-palette name="AIU Inbound Student Length of Stay" type="regular">
       <!-- Colors for inbound student length of stay category at AIU -->
+      <!-- Credit: Derived from "Pantone Color of the Year" Tableau palette by Rodrigo Calloni  available at https://public.tableau.com/app/profile/ken.flerlage/viz/DatafamColors/
+ -->
       <!-- Intensive -->
       <color>#f5df4d</color>
       <!-- 1 Semester -->
@@ -235,6 +249,8 @@
     </color-palette>
     <color-palette name="AIU Outbound Study Abroad Program" type="regular">
       <!-- Colors for study abroad program category at AIU
+ -->
+      <!-- Credit: Derived from built-in "Automatic" palette in Tableau
  -->
       <!-- EX -->
       <color>#59a14f</color>
