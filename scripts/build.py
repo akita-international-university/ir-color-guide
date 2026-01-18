@@ -140,7 +140,9 @@ def format_r_type(palette_type: str) -> str:
     return palette_type.capitalize()
 
 
-def generate_r_script(palettes: List[Dict[str, Any]], output_path: str):
+def generate_r_script(  # pylint: disable=too-many-locals
+    palettes: List[Dict[str, Any]], output_path: str
+):
     """
     Generate R script file from palettes.
 
