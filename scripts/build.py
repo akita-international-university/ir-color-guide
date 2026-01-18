@@ -78,6 +78,7 @@ def generate_tableau_preferences(palettes: List[Dict[str, Any]], output_path: st
         name = palette.get("name", "")
         palette_type = palette.get("type", "categorical")
         description = palette.get("description", "")
+        credit = palette.get("credit", "")
         colors = palette.get("colors", [])
 
         tableau_type = get_tableau_type(palette_type)
@@ -88,6 +89,10 @@ def generate_tableau_preferences(palettes: List[Dict[str, Any]], output_path: st
         # Add description as comment
         if description:
             lines.append(f"      <!-- {description} -->")
+
+        # Add credit as comment
+        if credit:
+            lines.append(f"      <!-- Credit: {credit} -->")
 
         # Add colors with keys as comments
         for color in colors:
@@ -135,7 +140,9 @@ def format_r_type(palette_type: str) -> str:
     return palette_type.capitalize()
 
 
-def generate_r_script(palettes: List[Dict[str, Any]], output_path: str):
+def generate_r_script(  # pylint: disable=too-many-locals
+    palettes: List[Dict[str, Any]], output_path: str
+):
     """
     Generate R script file from palettes.
 
@@ -154,6 +161,7 @@ def generate_r_script(palettes: List[Dict[str, Any]], output_path: str):
         name = palette.get("name", "")
         palette_type = palette.get("type", "categorical")
         description = palette.get("description", "")
+        credit = palette.get("credit", "")
         colors = palette.get("colors", [])
 
         variable_name = f"color_values_{sanitize_variable_name(name)}"
@@ -161,6 +169,8 @@ def generate_r_script(palettes: List[Dict[str, Any]], output_path: str):
         lines.append(f"{variable_name} <- c(")
         lines.append(f"    # Type: {format_r_type(palette_type)}")
         lines.append(f"    # Description: {description}")
+        if credit:
+            lines.append(f"    # Credit: {credit}")
 
         # Add color entries
         for i, color in enumerate(colors):

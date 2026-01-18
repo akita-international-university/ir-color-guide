@@ -5,6 +5,8 @@
 color_values_4scale_likert <- c(
     # Type: Diverging
     # Description: 4-Scale Likert color palette from Strongly Agree to Strongly Disagree
+    # Credit: Adapted from the "PiYG" diverging palette in RColorBrewer
+
     "Strongly Agree" = "#386325",
     "Agree" = "#8dbb54",
     "Disagree" = "#d17dac",
@@ -64,6 +66,8 @@ color_values_aiu_program_affiliation <- c(
     # Type: Categorical
     # Description: Colors for program affiliations for students, courses, and faculty members at AIU
 
+    # Credit: Derived from built-in "Automatic" palette in Tableau
+
     "GB" = "#4e79a7",
     "GS" = "#f28e2b",
     "GC" = "#e15759"
@@ -72,6 +76,8 @@ color_values_aiu_program_affiliation <- c(
 color_values_aiu_eap_level_at_enrollment <- c(
     # Type: Categorical
     # Description: Colors for the EAP level at enrollment for undergraduate students at AIU
+    # Credit: Derived primarily from the built-in "Green-Gold" palette in Tableau
+
     "EAP I" = "#f4d166",
     "EAP II" = "#a7bf5a",
     "EAP III" = "#60a656",
@@ -82,6 +88,8 @@ color_values_aiu_eap_level_at_enrollment <- c(
 color_values_aiu_inschool_semesters <- c(
     # Type: Categorical
     # Description: Colors for the in-school semesters at AIU
+    # Credit: Derived primarily from the built-in "Hue Circle" palette in Tableau
+
     "0" = "#1ba3c6",
     "1" = "#2db7c0",
     "2" = "#2fbaa9",
@@ -106,6 +114,8 @@ color_values_aiu_inschool_semesters <- c(
 color_values_aiu_course_levels <- c(
     # Type: Categorical
     # Description: Colors for the course levels at AIU
+    # Credit: Derived primarily from built-in "Summer" palette in Tableau
+
     "700" = "#b9ca5d",
     "600" = "#f1788d",
     "500" = "#8fb202",
@@ -119,6 +129,8 @@ color_values_aiu_course_levels <- c(
 color_values_aiu_exchange_region <- c(
     # Type: Categorical
     # Description: Colors for regions for inbound exchange student origin or outbound student destination at AIU
+
+    # Credit: Derived from "PowerBI Default" Tableau palette by Ken Flerlage  available at https://public.tableau.com/app/profile/ken.flerlage/viz/DatafamColors/
 
     "North America" = "#3599b8",
     "South America" = "#8ad4eb",
@@ -152,6 +164,8 @@ color_values_aiu_inbound_student_status_per_semester <- c(
 color_values_aiu_inbound_student_length_of_stay <- c(
     # Type: Categorical
     # Description: Colors for inbound student length of stay category at AIU
+    # Credit: Derived from "Pantone Color of the Year" Tableau palette by Rodrigo Calloni  available at https://public.tableau.com/app/profile/ken.flerlage/viz/DatafamColors/
+
     "Intensive" = "#f5df4d",
     "1 Semester" = "#fa7268",
     "1 Year" = "#0f4c81",
@@ -161,6 +175,8 @@ color_values_aiu_inbound_student_length_of_stay <- c(
 color_values_aiu_outbound_study_abroad_program <- c(
     # Type: Categorical
     # Description: Colors for study abroad program category at AIU
+
+    # Credit: Derived from built-in "Automatic" palette in Tableau
 
     "EX" = "#59a14f",
     "EX (SP-B)" = "#4e79a7",
