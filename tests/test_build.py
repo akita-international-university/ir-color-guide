@@ -55,6 +55,16 @@ def sample_palettes() -> List[Dict[str, Any]]:
                 {"key": "Second", "value": "#bbbbbb"},
             ],
         },
+        {
+            "name": "Palette with Trailing Newlines",
+            "type": "categorical",
+            "description": "A palette with trailing newlines\n",
+            "credit": "Credit with trailing newline\n",
+            "colors": [
+                {"key": "Color A", "value": "#cccccc"},
+                {"key": "Color B", "value": "#dddddd"},
+            ],
+        },
     ]
 
 
@@ -311,6 +321,39 @@ class TestGenerateTableauPreferences:
             if os.path.exists(tmp_path):
                 os.remove(tmp_path)
 
+    def test_generate_tableau_preferences_normalizes_trailing_newlines(
+        self, sample_palettes
+    ):  # pylint: disable=redefined-outer-name
+        """Test that trailing newlines in description/credit are stripped."""
+        # Arrange
+        with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".tps") as tmp:
+            tmp_path = tmp.name
+
+        try:
+            # Act
+            build.generate_tableau_preferences(sample_palettes, tmp_path)
+
+            # Assert
+            with open(tmp_path, "r", encoding="utf-8") as f:
+                content = f.read()
+
+            # Check that description and credit are on single lines without split
+            assert "<!-- A palette with trailing newlines -->" in content
+            assert "<!-- Credit: Credit with trailing newline -->" in content
+
+            # Verify comments are not split across multiple lines
+            # (no standalone " -->" on next line)
+            lines = content.split("\n")
+            for line in lines:
+                # If we find the credit comment, verify it's complete on one line
+                if "Credit with trailing newline" in line:
+                    assert line.strip().endswith("-->")
+
+        finally:
+            # Cleanup
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
+
 
 class TestSanitizeVariableName:
     """Tests for sanitize_variable_name() function."""
@@ -513,6 +556,41 @@ class TestGenerateRScript:
             assert "# Credit:" not in content
             # But description should still be present
             assert "# Description: A palette without credit" in content
+
+        finally:
+            # Cleanup
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
+
+    def test_generate_r_script_normalizes_trailing_newlines(
+        self, sample_palettes
+    ):  # pylint: disable=redefined-outer-name
+        """Test that trailing newlines in description/credit are stripped."""
+        # Arrange
+        with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".R") as tmp:
+            tmp_path = tmp.name
+
+        try:
+            # Act
+            build.generate_r_script(sample_palettes, tmp_path)
+
+            # Assert
+            with open(tmp_path, "r", encoding="utf-8") as f:
+                content = f.read()
+
+            # Check that description and credit are on single lines without extra newlines
+            assert "# Description: A palette with trailing newlines" in content
+            assert "# Credit: Credit with trailing newline" in content
+
+            # Verify no extra blank lines in the palette block
+            # The pattern should be: description, credit, then color entries
+            lines = content.split("\n")
+            for i, line in enumerate(lines):
+                if "A palette with trailing newlines" in line:
+                    # Next line should be credit comment
+                    assert "Credit with trailing newline" in lines[i + 1]
+                    # Then should come color entries, not blank lines
+                    assert lines[i + 2].strip() != ""
 
         finally:
             # Cleanup

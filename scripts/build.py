@@ -77,8 +77,8 @@ def generate_tableau_preferences(palettes: List[Dict[str, Any]], output_path: st
     for palette in palettes:
         name = palette.get("name", "")
         palette_type = palette.get("type", "categorical")
-        description = palette.get("description", "")
-        credit = palette.get("credit", "")
+        description = palette.get("description", "").strip()
+        credit = palette.get("credit", "").strip()
         colors = palette.get("colors", [])
 
         tableau_type = get_tableau_type(palette_type)
@@ -160,8 +160,8 @@ def generate_r_script(  # pylint: disable=too-many-locals
     for palette in palettes:
         name = palette.get("name", "")
         palette_type = palette.get("type", "categorical")
-        description = palette.get("description", "")
-        credit = palette.get("credit", "")
+        description = palette.get("description", "").strip()
+        credit = palette.get("credit", "").strip()
         colors = palette.get("colors", [])
 
         variable_name = f"color_values_{sanitize_variable_name(name)}"
