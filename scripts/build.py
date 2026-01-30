@@ -140,9 +140,7 @@ def format_r_type(palette_type: str) -> str:
     return palette_type.capitalize()
 
 
-def generate_r_script(  # pylint: disable=too-many-locals
-    palettes: List[Dict[str, Any]], output_path: str
-):
+def generate_r_script(palettes: List[Dict[str, Any]], output_path: str):
     """
     Generate R script file from palettes.
 
@@ -158,13 +156,14 @@ def generate_r_script(  # pylint: disable=too-many-locals
     ]
 
     for palette in palettes:
-        name = palette.get("name", "")
         palette_type = palette.get("type", "categorical")
         description = palette.get("description", "")
         credit = palette.get("credit", "")
         colors = palette.get("colors", [])
 
-        variable_name = f"color_values_{sanitize_variable_name(name)}"
+        variable_name = (
+            f"color_values_{sanitize_variable_name(palette.get("name", ""))}"
+        )
 
         lines.append(f"{variable_name} <- c(")
         lines.append(f"    # Type: {format_r_type(palette_type)}")
