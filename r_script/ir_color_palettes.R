@@ -2,7 +2,7 @@
 # This file is created automatically. Do NOT edit manually.
 # See: https://github.com/akita-international-university/ir-color-guide
 
-color_values_4scale_likert <- c(
+color_values_4_scale_likert <- c(
     # Type: Diverging
     # Description: 4-Scale Likert color palette from Strongly Agree to Strongly Disagree
     # Credit: Adapted from the "PiYG" diverging palette in RColorBrewer
@@ -10,6 +10,17 @@ color_values_4scale_likert <- c(
     "Agree" = "#8dbb54",
     "Disagree" = "#d17dac",
     "Strongly Disagree" = "#821851"
+)
+
+color_values_4_scale_likert_ja <- c(
+    # Type: Diverging
+    # Description: 4-Scale Likert color palette from Strongly Agree to Strongly Disagree
+    # Credit: Adapted from the "PiYG" diverging palette in RColorBrewer
+    # Alias of color_values_4_scale_likert
+    "とても思う" = "#386325",
+    "思う" = "#8dbb54",
+    "思わない" = "#d17dac",
+    "全く思わない" = "#821851"
 )
 
 color_values_aiu_grades <- c(
@@ -50,6 +61,25 @@ color_values_aiu_abbreviated_exam_types <- c(
     "Transfer (Others)" = "#dcd4d0"
 )
 
+color_values_aiu_abbreviated_exam_types_ja_full <- c(
+    # Type: Categorical
+    # Description: Colors for the abbreviated exam types at AIU
+    # Alias of color_values_aiu_abbreviated_exam_types
+    "A" = "#2a5783",
+    "B" = "#5b8cb8",
+    "C" = "#b9ddf1",
+    "グローバル・セミナー" = "#24693d",
+    "グローバル・ワークショップ" = "#b3e0a6",
+    "総合選抜型" = "#9e3d22",
+    "学校推薦型" = "#e36420",
+    "外国人留学生" = "#f59c3c",
+    "ギャップイヤー" = "#ffc685",
+    "その他の学部入試" = "#9f3632",
+    "編入学 (2年次特科)" = "#59504e",
+    "編入学 (2年次)" = "#948c88",
+    "編入学 (その他)" = "#dcd4d0"
+)
+
 color_values_aiu_student_status <- c(
     # Type: Categorical
     # Description: Colors for the student status (現況区分) at AIU
@@ -59,6 +89,18 @@ color_values_aiu_student_status <- c(
     "Completed" = "#59a253",
     "Withdrawn" = "#9f3632",
     "Expelled" = "#49525e"
+)
+
+color_values_aiu_student_status_ja <- c(
+    # Type: Categorical
+    # Description: Colors for the student status (現況区分) at AIU
+    # Alias of color_values_aiu_student_status
+    "通常" = "#4e7fac",
+    "休学" = "#ffc685",
+    "卒業" = "#24693d",
+    "修了" = "#59a253",
+    "退学" = "#9f3632",
+    "除籍" = "#49525e"
 )
 
 color_values_aiu_program_affiliation <- c(
@@ -81,7 +123,7 @@ color_values_aiu_eap_level_at_enrollment <- c(
     "NA" = "#49525e"
 )
 
-color_values_aiu_inschool_semesters <- c(
+color_values_aiu_in_school_semesters <- c(
     # Type: Categorical
     # Description: Colors for the in-school semesters at AIU
     # Credit: Derived primarily from the built-in "Hue Circle" palette in Tableau

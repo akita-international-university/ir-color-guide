@@ -364,7 +364,12 @@ class TestSanitizeVariableName:
 
     def test_sanitize_variable_name_with_special_chars(self):
         """Test removal of special characters."""
-        assert build.sanitize_variable_name("Test-Palette!@#$") == "testpalette"
+        assert build.sanitize_variable_name("Test-Palette!@#$") == "test_palette"
+
+    def test_sanitize_variable_name_with_hyphens(self):
+        """Test that hyphens are converted to underscores."""
+        assert build.sanitize_variable_name("ja-short") == "ja_short"
+        assert build.sanitize_variable_name("ja-full") == "ja_full"
 
     def test_sanitize_variable_name_multiple_spaces(self):
         """Test multiple spaces converted to underscores."""
@@ -404,6 +409,80 @@ class TestFormatRType:
     def test_format_r_type_lowercase(self):
         """Test that lowercase input is capitalized."""
         assert build.format_r_type("lowercase") == "Lowercase"
+
+
+class TestGenerateRPaletteDefinition:
+    """Tests for generate_r_palette_definition() function."""
+
+    def test_generate_r_palette_definition_basic(self):
+        """Test basic palette definition generation."""
+        # Arrange
+        variable_name = "color_values_test"
+        palette_type = "categorical"
+        description = "Test palette"
+        credit = ""
+        keys = ["Red", "Green", "Blue"]
+        values = ["#ff0000", "#00ff00", "#0000ff"]
+
+        # Act
+        result = build.generate_r_palette_definition(
+            variable_name, palette_type, description, credit, keys, values
+        )
+
+        # Assert
+        assert "color_values_test <- c(" in result
+        assert "    # Type: Categorical" in result
+        assert "    # Description: Test palette" in result
+        assert '    "Red" = "#ff0000",' in result
+        assert '    "Green" = "#00ff00",' in result
+        assert '    "Blue" = "#0000ff"' in result  # No comma on last item
+        assert ")" in result
+
+    def test_generate_r_palette_definition_with_credit(self):
+        """Test palette definition with credit."""
+        # Arrange
+        variable_name = "color_values_test"
+        palette_type = "sequential"
+        description = "Test palette"
+        credit = "Test credit"
+        keys = ["A", "B"]
+        values = ["#111111", "#222222"]
+
+        # Act
+        result = build.generate_r_palette_definition(
+            variable_name, palette_type, description, credit, keys, values
+        )
+
+        # Assert
+        assert "    # Credit: Test credit" in result
+
+    def test_generate_r_palette_definition_with_alias(self):
+        """Test palette definition as an alias."""
+        # Arrange
+        variable_name = "color_values_test_ja"
+        palette_type = "categorical"
+        description = "Test palette"
+        credit = ""
+        keys = ["赤", "緑", "青"]
+        values = ["#ff0000", "#00ff00", "#0000ff"]
+        alias_of = "color_values_test"
+
+        # Act
+        result = build.generate_r_palette_definition(
+            variable_name,
+            palette_type,
+            description,
+            credit,
+            keys,
+            values,
+            alias_of=alias_of,
+        )
+
+        # Assert
+        assert "    # Alias of color_values_test" in result
+        assert '    "赤" = "#ff0000",' in result
+        assert '    "緑" = "#00ff00",' in result
+        assert '    "青" = "#0000ff"' in result
 
 
 class TestGenerateRScript:
@@ -591,6 +670,99 @@ class TestGenerateRScript:
                     assert "Credit with trailing newline" in lines[i + 1]
                     # Then should come color entries, not blank lines
                     assert lines[i + 2].strip() != ""
+
+        finally:
+            # Cleanup
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
+
+    def test_generate_r_script_with_aliases(self):
+        """Test generation of R script with alias palettes."""
+        # Arrange
+        palettes_with_aliases = [
+            {
+                "name": "Test Palette",
+                "type": "categorical",
+                "description": "A test palette",
+                "colors": [
+                    {"key": "A", "value": "#ff0000"},
+                    {"key": "B", "value": "#00ff00"},
+                    {"key": "C", "value": "#0000ff"},
+                ],
+                "aliases": [
+                    {"name": "ja", "keys": ["A日程", "B日程", "C日程"]},
+                    {"name": "ja-short", "keys": ["あ", "い", "う"]},
+                ],
+            }
+        ]
+        with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".R") as tmp:
+            tmp_path = tmp.name
+
+        try:
+            # Act
+            build.generate_r_script(palettes_with_aliases, tmp_path)
+
+            # Assert
+            with open(tmp_path, "r", encoding="utf-8") as f:
+                content = f.read()
+
+            # Check main palette
+            assert "color_values_test_palette <- c(" in content
+            assert '"A" = "#ff0000",' in content
+            assert '"B" = "#00ff00",' in content
+            assert '"C" = "#0000ff"' in content
+
+            # Check first alias (ja)
+            assert "color_values_test_palette_ja <- c(" in content
+            assert "# Alias of color_values_test_palette" in content
+            assert '"A日程" = "#ff0000",' in content
+            assert '"B日程" = "#00ff00",' in content
+            assert '"C日程" = "#0000ff"' in content
+
+            # Check second alias (ja-short with hyphen converted to underscore)
+            assert "color_values_test_palette_ja_short <- c(" in content
+            assert '"あ" = "#ff0000",' in content
+            assert '"い" = "#00ff00",' in content
+            assert '"う" = "#0000ff"' in content
+
+        finally:
+            # Cleanup
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
+
+    def test_generate_r_script_with_aliases_preserves_order(self):
+        """Test that aliases use the same color values in order."""
+        # Arrange
+        palettes_with_aliases = [
+            {
+                "name": "Order Test",
+                "type": "categorical",
+                "description": "Testing color order preservation",
+                "colors": [
+                    {"key": "First", "value": "#111111"},
+                    {"key": "Second", "value": "#222222"},
+                    {"key": "Third", "value": "#333333"},
+                ],
+                "aliases": [
+                    {"name": "alias1", "keys": ["1st", "2nd", "3rd"]},
+                ],
+            }
+        ]
+        with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".R") as tmp:
+            tmp_path = tmp.name
+
+        try:
+            # Act
+            build.generate_r_script(palettes_with_aliases, tmp_path)
+
+            # Assert
+            with open(tmp_path, "r", encoding="utf-8") as f:
+                content = f.read()
+
+            # Verify that the alias uses the same colors in the same order
+            assert '"1st" = "#111111",' in content
+            assert '"2nd" = "#222222",' in content
+            assert '"3rd" = "#333333"' in content
 
         finally:
             # Cleanup
