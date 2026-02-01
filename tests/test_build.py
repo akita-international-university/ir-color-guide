@@ -362,8 +362,8 @@ class TestSanitizeVariableName:
         """Test basic conversion to snake_case."""
         assert build.sanitize_variable_name("Test Palette") == "test_palette"
 
-    def test_sanitize_variable_name_with_special_chars(self):
-        """Test removal of special characters."""
+    def test_sanitize_variable_name_with_hyphens_and_special_chars(self):
+        """Test that hyphens are converted to underscores and special characters are removed."""
         assert build.sanitize_variable_name("Test-Palette!@#$") == "test_palette"
 
     def test_sanitize_variable_name_with_hyphens(self):
