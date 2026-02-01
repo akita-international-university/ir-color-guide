@@ -17,6 +17,9 @@ palettes:
         value: '#d17dac'
       - key: 'Strongly Disagree'
         value: '#821851'
+    aliases:
+      - name: 'ja'
+        keys: ['とても思う', '思う', '思わない', '全く思わない']
   - name: 'AIU Grades'
     type: 'categorical'
     description: 'Colors for AIU letter grades'
@@ -81,6 +84,24 @@ palettes:
         value: '#948c88'
       - key: 'Transfer (Others)' # 編入学 (その他)
         value: '#dcd4d0'
+    aliases:
+      - name: 'ja-full'
+        keys:
+          [
+            'A',
+            'B',
+            'C',
+            'グローバル・セミナー',
+            'グローバル・ワークショップ',
+            '総合選抜型',
+            '学校推薦型',
+            '外国人留学生',
+            'ギャップイヤー',
+            'その他の学部入試',
+            '編入学 (2年次特科)',
+            '編入学 (2年次)',
+            '編入学 (その他)',
+          ]
   - name: 'AIU Student Status'
     type: 'categorical'
     description: 'Colors for the student status (現況区分) at AIU'
@@ -97,6 +118,9 @@ palettes:
         value: '#9f3632'
       - key: 'Expelled' # 除籍
         value: '#49525e'
+    aliases:
+      - name: 'ja'
+        keys: ['通常', '休学', '卒業', '修了', '退学', '除籍']
   - name: 'AIU Program Affiliation'
     type: 'categorical'
     description: >
