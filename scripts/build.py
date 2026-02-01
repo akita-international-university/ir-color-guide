@@ -140,7 +140,7 @@ def format_r_type(palette_type: str) -> str:
     return palette_type.capitalize()
 
 
-def generate_r_palette_definition(
+def generate_r_palette_definition(  # pylint: disable=too-many-arguments,too-many-positional-arguments
     variable_name: str,
     palette_type: str,
     description: str,
