@@ -225,27 +225,26 @@ def generate_r_script(  # pylint: disable=too-many-locals
         # Process aliases if they exist
         aliases = palette.get("aliases", [])
         for alias in aliases:
-            alias_name = alias.get("name", "")
-            alias_keys = alias.get("keys", [])
+            alias_name = alias["name"]
+            alias_keys = alias["keys"]
 
-            if alias_name and alias_keys:
-                # Generate alias variable name by appending the alias name
-                alias_variable_name = (
-                    f"{variable_name}_{sanitize_variable_name(alias_name)}"
-                )
+            # Generate alias variable name by appending the alias name
+            alias_variable_name = (
+                f"{variable_name}_{sanitize_variable_name(alias_name)}"
+            )
 
-                # Generate the alias palette definition
-                lines.extend(
-                    generate_r_palette_definition(
-                        alias_variable_name,
-                        palette_type,
-                        description,
-                        credit,
-                        alias_keys,
-                        values,
-                        alias_of=variable_name,
-                    )
+            # Generate the alias palette definition
+            lines.extend(
+                generate_r_palette_definition(
+                    alias_variable_name,
+                    palette_type,
+                    description,
+                    credit,
+                    alias_keys,
+                    values,
+                    alias_of=variable_name,
                 )
+            )
 
     # Write to file
     with open(output_path, "w", encoding="utf-8", newline="\n") as file:
