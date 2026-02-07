@@ -120,8 +120,8 @@ def sanitize_variable_name(name: str) -> str:
     Returns:
         Sanitized variable name in snake_case
     """
-    # Convert to lowercase and replace spaces with underscores
-    sanitized = name.lower().replace(" ", "_")
+    # Convert to lowercase and replace spaces and hyphens with underscores
+    sanitized = name.lower().replace(" ", "_").replace("-", "_")
     # Remove any characters that aren't alphanumeric or underscore
     sanitized = "".join(c for c in sanitized if c.isalnum() or c == "_")
     return sanitized
@@ -138,6 +138,51 @@ def format_r_type(palette_type: str) -> str:
         Capitalized type string
     """
     return palette_type.capitalize()
+
+
+def generate_r_palette_definition(  # pylint: disable=too-many-arguments,too-many-positional-arguments
+    variable_name: str,
+    palette_type: str,
+    description: str,
+    credit: str,
+    keys: List[str],
+    values: List[str],
+    alias_of: str = "",
+) -> List[str]:
+    """
+    Generate R code lines for a single palette definition.
+
+    Args:
+        variable_name: R variable name for the palette
+        palette_type: Type of palette (categorical, sequential, diverging)
+        description: Description of the palette
+        credit: Credit information (optional)
+        keys: List of color keys
+        values: List of color values
+        alias_of: Variable name of the original palette if this is an alias
+
+    Returns:
+        List of code lines for the palette definition
+    """
+    lines = []
+    lines.append(f"{variable_name} <- c(")
+    lines.append(f"    # Type: {format_r_type(palette_type)}")
+    lines.append(f"    # Description: {description}")
+    if credit:
+        lines.append(f"    # Credit: {credit}")
+    if alias_of:
+        lines.append(f"    # Alias of {alias_of}")
+
+    # Add color entries
+    for i, (key, value) in enumerate(zip(keys, values)):
+        # Last item should not have a comma
+        comma = "," if i < len(keys) - 1 else ""
+        lines.append(f'    "{key}" = "{value}"{comma}')
+
+    lines.append(")")
+    lines.append("")  # Add blank line after palette
+
+    return lines
 
 
 def generate_r_script(  # pylint: disable=too-many-locals
@@ -166,22 +211,40 @@ def generate_r_script(  # pylint: disable=too-many-locals
 
         variable_name = f"color_values_{sanitize_variable_name(name)}"
 
-        lines.append(f"{variable_name} <- c(")
-        lines.append(f"    # Type: {format_r_type(palette_type)}")
-        lines.append(f"    # Description: {description}")
-        if credit:
-            lines.append(f"    # Credit: {credit}")
+        # Get color keys and values
+        keys = [color.get("key", "") for color in colors]
+        values = [color.get("value", "") for color in colors]
 
-        # Add color entries
-        for i, color in enumerate(colors):
-            key = color.get("key", "")
-            value = color.get("value", "")
-            # Last item should not have a comma
-            comma = "," if i < len(colors) - 1 else ""
-            lines.append(f'    "{key}" = "{value}"{comma}')
+        # Generate the main palette definition
+        lines.extend(
+            generate_r_palette_definition(
+                variable_name, palette_type, description, credit, keys, values
+            )
+        )
 
-        lines.append(")")
-        lines.append("")  # Add blank line between palettes
+        # Process aliases if they exist
+        aliases = palette.get("aliases", [])
+        for alias in aliases:
+            alias_name = alias["name"]
+            alias_keys = alias["keys"]
+
+            # Generate alias variable name by appending the alias name
+            alias_variable_name = (
+                f"{variable_name}_{sanitize_variable_name(alias_name)}"
+            )
+
+            # Generate the alias palette definition
+            lines.extend(
+                generate_r_palette_definition(
+                    alias_variable_name,
+                    palette_type,
+                    description,
+                    credit,
+                    alias_keys,
+                    values,
+                    alias_of=variable_name,
+                )
+            )
 
     # Write to file
     with open(output_path, "w", encoding="utf-8", newline="\n") as file:
