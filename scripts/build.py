@@ -3,6 +3,7 @@ Script to convert palettes.yml into Tableau Preferences.tps and R script files.
 """
 
 import os
+import re
 import subprocess
 from typing import Any, Dict, List
 
@@ -34,7 +35,165 @@ def load_palettes(yaml_path: str) -> List[Dict[str, Any]]:
     if not data or "palettes" not in data:
         raise ValueError("YAML file must contain 'palettes' key")
 
-    return data.get("palettes", [])
+    palettes = data.get("palettes", [])
+    validate_palettes(palettes)
+    return palettes
+
+
+def validate_string_field(
+    field_value: str, field_name: str, allow_empty: bool = False
+) -> None:
+    """
+    Validate a string field for disallowed characters.
+
+    Args:
+        field_value: The string value to validate
+        field_name: Name of the field for error messages
+        allow_empty: Whether to allow empty strings
+
+    Raises:
+        ValueError: If the field contains disallowed characters or is empty when not allowed
+    """
+    if not allow_empty and (field_value is None or field_value == ""):
+        raise ValueError(f"{field_name} must not be empty")
+
+    if field_value:
+        # Check for double quotes
+        if '"' in field_value:
+            raise ValueError(
+                f'{field_name} contains disallowed character: " (double quote)'
+            )
+
+        # Check for < and >
+        if "<" in field_value or ">" in field_value:
+            raise ValueError(f"{field_name} contains disallowed characters: < or >")
+
+
+def validate_color_value(color_value: str, palette_name: str, color_key: str) -> None:
+    """
+    Validate a color value matches the required hex format.
+
+    Args:
+        color_value: The color value to validate
+        palette_name: Name of the palette for error messages
+        color_key: Key of the color for error messages
+
+    Raises:
+        ValueError: If the color value doesn't match the required format
+    """
+    if not color_value:
+        raise ValueError(
+            f"Color value for key '{color_key}' in palette '{palette_name}' must not be empty"
+        )
+
+    # Color value must match: ^#[a-f0-9]{6}$
+    color_pattern = re.compile(r"^#[a-f0-9]{6}$")
+    if not color_pattern.match(color_value):
+        raise ValueError(
+            f"Color value '{color_value}' for key '{color_key}' in palette '{palette_name}' "
+            f"must be a hex color code (e.g., #ff00aa) with lowercase letters"
+        )
+
+
+def validate_palettes(  # pylint: disable=too-many-locals,too-many-branches
+    palettes: List[Dict[str, Any]],
+) -> None:
+    """
+    Validate all palettes for security and correctness.
+
+    Args:
+        palettes: List of palette dictionaries
+
+    Raises:
+        ValueError: If any validation fails
+    """
+    palette_names = []
+
+    for palette in palettes:
+        # Validate palette name
+        name = palette.get("name", "")
+        validate_string_field(name, "Palette name", allow_empty=False)
+
+        # Check for duplicate palette names
+        if name in palette_names:
+            raise ValueError(f"Duplicate palette name: '{name}'")
+        palette_names.append(name)
+
+        # Validate description
+        description = palette.get("description", "")
+        if description:
+            validate_string_field(description, f"Description in palette '{name}'")
+
+        # Validate credit
+        credit = palette.get("credit", "")
+        if credit:
+            validate_string_field(credit, f"Credit in palette '{name}'")
+
+        # Validate colors
+        colors = palette.get("colors", [])
+        if not colors:
+            raise ValueError(f"Palette '{name}' must have at least one color")
+
+        color_keys = []
+        for color in colors:
+            # Validate color key
+            key = color.get("key", "")
+            validate_string_field(
+                key, f"Color key in palette '{name}'", allow_empty=False
+            )
+
+            # Check for duplicate keys within palette
+            if key in color_keys:
+                raise ValueError(f"Duplicate color key '{key}' in palette '{name}'")
+            color_keys.append(key)
+
+            # Validate color value
+            value = color.get("value", "")
+            validate_color_value(value, name, key)
+
+        # Validate aliases if present
+        aliases = palette.get("aliases", [])
+        alias_names = []
+        for alias in aliases:
+            # Validate alias name
+            alias_name = alias.get("name", "")
+            validate_string_field(
+                alias_name, f"Alias name in palette '{name}'", allow_empty=False
+            )
+
+            # Check for duplicate alias names within palette
+            if alias_name in alias_names:
+                raise ValueError(
+                    f"Duplicate alias name '{alias_name}' in palette '{name}'"
+                )
+            alias_names.append(alias_name)
+
+            # Validate alias keys
+            alias_keys = alias.get("keys", [])
+            if not alias_keys:
+                raise ValueError(
+                    f"Alias '{alias_name}' in palette '{name}' must have a non-empty 'keys' list"
+                )
+
+            # Check that alias keys length matches colors length
+            if len(alias_keys) != len(colors):
+                raise ValueError(
+                    f"Alias '{alias_name}' in palette '{name}' has {len(alias_keys)} keys "
+                    f"but palette has {len(colors)} colors"
+                )
+
+            # Validate each alias key string
+            for i, alias_key in enumerate(alias_keys):
+                if not alias_key:
+                    raise ValueError(
+                        f"Alias key at index {i} in alias '{alias_name}' "
+                        f"of palette '{name}' must not be empty"
+                    )
+                validate_string_field(
+                    alias_key,
+                    f"Alias key '{alias_key}' in alias '{alias_name}' "
+                    f"of palette '{name}'",
+                )
 
 
 def get_tableau_type(palette_type: str) -> str:
