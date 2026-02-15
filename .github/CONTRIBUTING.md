@@ -36,7 +36,7 @@ To submit an issue:
    - Screenshots or examples (if applicable)
 
 > [!IMPORTANT]
-> If you notice any security vulnerabilities, please do NOT report them through GitHub issues. Instead, follow the instructions in our [Security Policy](./.github/SECURITY.md) to report them responsibly.
+> If you notice any security vulnerabilities, please do NOT report them through GitHub issues. Instead, follow the instructions in our [Security Policy](https://github.com/akita-international-university/ir-color-guide/blob/main/.github/SECURITY.md) to report them responsibly.
 
 ### Development Environment Setup
 
