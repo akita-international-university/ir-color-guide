@@ -104,4 +104,4 @@ RColorBrewer::display.brewer.all(colorblindFriendly = TRUE)
 
 ## Contributing
 
-このレポジトリへの貢献を考えてくださっている方は、まずは[Contributing Guidelines](./.github/CONTRIBUTING.md)をご覧ください。
+このリポジトリへの貢献を考えてくださっている方は、まずは[Contributing Guidelines](./.github/CONTRIBUTING.md)をご覧ください。
