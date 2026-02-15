@@ -41,7 +41,7 @@ def load_palettes(yaml_path: str) -> List[Dict[str, Any]]:
 
 
 def validate_string_field(
-    field_value: str, field_name: str, allow_empty: bool = False
+    field_value: str | None, field_name: str, allow_empty: bool = False
 ) -> None:
     """
     Validate a string field for disallowed characters.
@@ -69,7 +69,9 @@ def validate_string_field(
             raise ValueError(f"{field_name} contains disallowed characters: < or >")
 
 
-def validate_color_value(color_value: str, palette_name: str, color_key: str) -> None:
+def validate_color_value(
+    color_value: str | None, palette_name: str, color_key: str
+) -> None:
     """
     Validate a color value matches the required hex format.
 
