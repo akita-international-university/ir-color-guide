@@ -40,7 +40,7 @@ To submit an issue:
 
 ### Development Environment Setup
 
-For detailed information on setting up the development environment, running build commands, and understanding the repository structure, please refer to our [GitHub Copilot Custom Instructions](./copilot-instructions.md).
+For detailed information on setting up the development environment, running build commands, and understanding the repository structure, please refer to our [GitHub Copilot Custom Instructions](https://github.com/akita-international-university/ir-color-guide/blob/main/.github/copilot-instructions.md).
 
 Key points to remember:
 
@@ -166,18 +166,18 @@ When proposing changes to `palettes.yml`:
 
 ## Code of Conduct
 
-Please note that this project has a [Code of Conduct](./CODE_OF_CONDUCT.md). By participating in this project, you agree to abide by its terms.
+Please note that this project has a [Code of Conduct](https://github.com/akita-international-university/ir-color-guide/blob/main/.github/CODE_OF_CONDUCT.md). By participating in this project, you agree to abide by its terms.
 
 ## Questions?
 
 If you have any questions about contributing, please:
 
-- Open a [GitHub issue](../../issues/new) for technical questions or suggestions
+- Open a [GitHub issue](https://github.com/akita-international-university/ir-color-guide/issues/new) for technical questions or suggestions
 - Contact the Division of Institutional Research at [ir.div@aiu.ac.jp](mailto:ir.div@aiu.ac.jp) for general inquiries
 
 ## License
 
-By contributing to this repository, you agree that your contributions will be licensed under the same license as the project. See the [LICENSE](../LICENSE) file for details.
+By contributing to this repository, you agree that your contributions will be licensed under the same license as the project. See the [LICENSE](https://github.com/akita-international-university/ir-color-guide/blob/main/LICENSE) file for details.
 
 ---
 
