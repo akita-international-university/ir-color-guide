@@ -2,17 +2,16 @@
 
 Thank you for your interest in the IR Data Visualization Color Guidelines repository!
 
-## Important Notice
-
-**This repository is maintained by the Division of Institutional Research at Akita International University (AIU) as an internal guideline for the AIU community.** While we warmly welcome suggestions, questions, and comments via GitHub issues, we do not expect or solicit pull requests from members outside the AIU community.
-
-This repository is disclosed publicly to:
-
-- Provide transparency in our data visualization practices
-- Serve as an example of enhancing inclusiveness within the university's community
-- Share our approach to standardizing color palettes for accessibility
-
-The repository maintainers will be responsible for reviewing and deciding whether to implement any suggestions made through GitHub issues.
+> [!IMPORTANT]
+> **This repository is maintained by the Division of Institutional Research at Akita International University (AIU) as an internal guideline for the AIU community.** While we warmly welcome suggestions, questions, and comments via GitHub issues, we do not expect or solicit pull requests from members outside the AIU community.
+>
+> This repository is disclosed publicly to:
+>
+> - Provide transparency in our data visualization practices
+> - Serve as an example of enhancing inclusiveness within the university's community
+> - Share our approach to standardizing color palettes for accessibility
+>
+> The repository maintainers will be responsible for reviewing and deciding whether to implement any suggestions made through GitHub issues.
 
 ## How to Contribute (AIU Community Members)
 
@@ -35,6 +34,9 @@ To submit an issue:
    - What actually happened
    - Steps to reproduce (if applicable)
    - Screenshots or examples (if applicable)
+
+> [!IMPORTANT]
+> If you notice any security vulnerabilities, please do NOT report them through GitHub issues. Instead, follow the instructions in our [Security Policy](./SECURITY.md) to report them responsibly.
 
 ### Development Environment Setup
 
