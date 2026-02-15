@@ -27,8 +27,8 @@ We encourage all community members to:
 
 To submit an issue:
 
-1. Check [existing issues](../../issues) to see if your concern has already been raised
-2. If not, [create a new issue](../../issues/new) with a clear and descriptive title
+1. Check [existing issues](https://github.com/akita-international-university/ir-color-guide/issues) to see if your concern has already been raised
+2. If not, [create a new issue](https://github.com/akita-international-university/ir-color-guide/issues/new) with a clear and descriptive title
 3. Provide as much relevant information as possible:
    - What you expected to happen
    - What actually happened
@@ -36,7 +36,7 @@ To submit an issue:
    - Screenshots or examples (if applicable)
 
 > [!IMPORTANT]
-> If you notice any security vulnerabilities, please do NOT report them through GitHub issues. Instead, follow the instructions in our [Security Policy](./SECURITY.md) to report them responsibly.
+> If you notice any security vulnerabilities, please do NOT report them through GitHub issues. Instead, follow the instructions in our [Security Policy](./.github/SECURITY.md) to report them responsibly.
 
 ### Development Environment Setup
 
