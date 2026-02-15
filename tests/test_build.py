@@ -2,6 +2,8 @@
 Unit tests for ./scripts/build.py
 """
 
+# pylint: disable=too-many-lines
+
 import os
 import tempfile
 from typing import Any, Dict, List
@@ -149,6 +151,451 @@ class TestLoadPalettes:
         # Act & Assert
         with pytest.raises(ValueError, match="YAML file must contain 'palettes' key"):
             build.load_palettes("empty.yml")
+
+
+class TestValidateStringField:
+    """Tests for validate_string_field() function."""
+
+    def test_validate_string_field_valid(self):
+        """Test validation of valid strings."""
+        # Should not raise any exception
+        build.validate_string_field("Valid name", "Field")
+        build.validate_string_field("Name with spaces", "Field")
+        build.validate_string_field("Name-with-hyphens", "Field")
+        build.validate_string_field("Name_with_underscores", "Field")
+        build.validate_string_field("Name123", "Field")
+
+    def test_validate_string_field_empty_not_allowed(self):
+        """Test validation fails for empty string when not allowed."""
+        with pytest.raises(ValueError, match="Field must not be empty"):
+            build.validate_string_field("", "Field", allow_empty=False)
+
+        with pytest.raises(ValueError, match="Field must not be empty"):
+            build.validate_string_field(None, "Field", allow_empty=False)
+
+    def test_validate_string_field_empty_allowed(self):
+        """Test validation passes for empty string when allowed."""
+        # Should not raise any exception
+        build.validate_string_field("", "Field", allow_empty=True)
+        build.validate_string_field(None, "Field", allow_empty=True)
+
+    def test_validate_string_field_double_quote(self):
+        """Test validation fails for double quotes."""
+        with pytest.raises(
+            ValueError,
+            match='Field contains disallowed character: " \\(double quote\\)',
+        ):
+            build.validate_string_field('Name with "quotes"', "Field")
+
+    def test_validate_string_field_angle_brackets(self):
+        """Test validation fails for angle brackets."""
+        with pytest.raises(
+            ValueError, match="Field contains disallowed characters: < or >"
+        ):
+            build.validate_string_field("Name with <tag>", "Field")
+
+        with pytest.raises(
+            ValueError, match="Field contains disallowed characters: < or >"
+        ):
+            build.validate_string_field("Name with <", "Field")
+
+        with pytest.raises(
+            ValueError, match="Field contains disallowed characters: < or >"
+        ):
+            build.validate_string_field("Name with >", "Field")
+
+
+class TestValidateColorValue:
+    """Tests for validate_color_value() function."""
+
+    def test_validate_color_value_valid(self):
+        """Test validation of valid hex color codes."""
+        # Should not raise any exception
+        build.validate_color_value("#ff0000", "Test Palette", "Red")
+        build.validate_color_value("#00ff00", "Test Palette", "Green")
+        build.validate_color_value("#0000ff", "Test Palette", "Blue")
+        build.validate_color_value("#abc123", "Test Palette", "Custom")
+        build.validate_color_value("#000000", "Test Palette", "Black")
+        build.validate_color_value("#ffffff", "Test Palette", "White")
+
+    def test_validate_color_value_empty(self):
+        """Test validation fails for empty color value."""
+        with pytest.raises(
+            ValueError,
+            match="Color value for key 'Red' in palette 'Test' must not be empty",
+        ):
+            build.validate_color_value("", "Test", "Red")
+
+        with pytest.raises(
+            ValueError,
+            match="Color value for key 'Red' in palette 'Test' must not be empty",
+        ):
+            build.validate_color_value(None, "Test", "Red")
+
+    def test_validate_color_value_invalid_format(self):
+        """Test validation fails for invalid hex color format."""
+        # Missing #
+        with pytest.raises(
+            ValueError,
+            match="Color value 'ff0000' for key 'Red' in palette 'Test' must be a hex color code",
+        ):
+            build.validate_color_value("ff0000", "Test", "Red")
+
+        # Wrong length
+        with pytest.raises(
+            ValueError,
+            match="Color value '#ff00' for key 'Red' in palette 'Test' must be a hex color code",
+        ):
+            build.validate_color_value("#ff00", "Test", "Red")
+
+        with pytest.raises(
+            ValueError,
+            match="Color value '#ff000011' for key 'Red' in palette 'Test' "
+            "must be a hex color code",
+        ):
+            build.validate_color_value("#ff000011", "Test", "Red")
+
+        # Uppercase letters
+        with pytest.raises(
+            ValueError,
+            match="Color value '#FF0000' for key 'Red' in palette 'Test' must be a hex color code",
+        ):
+            build.validate_color_value("#FF0000", "Test", "Red")
+
+        # Invalid characters
+        with pytest.raises(
+            ValueError,
+            match="Color value '#gggggg' for key 'Red' in palette 'Test' must be a hex color code",
+        ):
+            build.validate_color_value("#gggggg", "Test", "Red")
+
+
+class TestValidatePalettes:
+    """Tests for validate_palettes() function."""
+
+    def test_validate_palettes_valid(self):
+        """Test validation of valid palettes."""
+        palettes = [
+            {
+                "name": "Test Palette",
+                "type": "categorical",
+                "description": "A test palette",
+                "colors": [
+                    {"key": "Color One", "value": "#ff0000"},
+                    {"key": "Color Two", "value": "#00ff00"},
+                ],
+            }
+        ]
+        # Should not raise any exception
+        build.validate_palettes(palettes)
+
+    def test_validate_palettes_with_aliases(self):
+        """Test validation of palettes with valid aliases."""
+        palettes = [
+            {
+                "name": "Test Palette",
+                "type": "categorical",
+                "description": "A test palette",
+                "colors": [
+                    {"key": "Color One", "value": "#ff0000"},
+                    {"key": "Color Two", "value": "#00ff00"},
+                ],
+                "aliases": [
+                    {"name": "alias1", "keys": ["Alt One", "Alt Two"]},
+                    {"name": "alias2", "keys": ["Other One", "Other Two"]},
+                ],
+            }
+        ]
+        # Should not raise any exception
+        build.validate_palettes(palettes)
+
+    def test_validate_palettes_empty_name(self):
+        """Test validation fails for empty palette name."""
+        palettes = [
+            {
+                "name": "",
+                "type": "categorical",
+                "colors": [{"key": "Color", "value": "#ff0000"}],
+            }
+        ]
+        with pytest.raises(ValueError, match="Palette name must not be empty"):
+            build.validate_palettes(palettes)
+
+    def test_validate_palettes_duplicate_names(self):
+        """Test validation fails for duplicate palette names."""
+        palettes = [
+            {
+                "name": "Same Name",
+                "type": "categorical",
+                "colors": [{"key": "Color", "value": "#ff0000"}],
+            },
+            {
+                "name": "Same Name",
+                "type": "sequential",
+                "colors": [{"key": "Color", "value": "#00ff00"}],
+            },
+        ]
+        with pytest.raises(ValueError, match="Duplicate palette name: 'Same Name'"):
+            build.validate_palettes(palettes)
+
+    def test_validate_palettes_invalid_name_characters(self):
+        """Test validation fails for invalid characters in palette name."""
+        # Double quote
+        palettes = [
+            {
+                "name": 'Name with "quote"',
+                "type": "categorical",
+                "colors": [{"key": "Color", "value": "#ff0000"}],
+            }
+        ]
+        with pytest.raises(
+            ValueError, match="Palette name contains disallowed character"
+        ):
+            build.validate_palettes(palettes)
+
+        # Angle brackets
+        palettes = [
+            {
+                "name": "Name with <tag>",
+                "type": "categorical",
+                "colors": [{"key": "Color", "value": "#ff0000"}],
+            }
+        ]
+        with pytest.raises(
+            ValueError, match="Palette name contains disallowed characters"
+        ):
+            build.validate_palettes(palettes)
+
+    def test_validate_palettes_invalid_description(self):
+        """Test validation fails for invalid characters in description."""
+        palettes = [
+            {
+                "name": "Test",
+                "type": "categorical",
+                "description": 'Description with "quote"',
+                "colors": [{"key": "Color", "value": "#ff0000"}],
+            }
+        ]
+        with pytest.raises(
+            ValueError,
+            match="Description in palette 'Test' contains disallowed character",
+        ):
+            build.validate_palettes(palettes)
+
+    def test_validate_palettes_invalid_credit(self):
+        """Test validation fails for invalid characters in credit."""
+        palettes = [
+            {
+                "name": "Test",
+                "type": "categorical",
+                "credit": "Credit with <tag>",
+                "colors": [{"key": "Color", "value": "#ff0000"}],
+            }
+        ]
+        with pytest.raises(
+            ValueError, match="Credit in palette 'Test' contains disallowed characters"
+        ):
+            build.validate_palettes(palettes)
+
+    def test_validate_palettes_no_colors(self):
+        """Test validation fails for palette without colors."""
+        palettes = [
+            {
+                "name": "Test",
+                "type": "categorical",
+                "colors": [],
+            }
+        ]
+        with pytest.raises(
+            ValueError, match="Palette 'Test' must have at least one color"
+        ):
+            build.validate_palettes(palettes)
+
+    def test_validate_palettes_empty_color_key(self):
+        """Test validation fails for empty color key."""
+        palettes = [
+            {
+                "name": "Test",
+                "type": "categorical",
+                "colors": [{"key": "", "value": "#ff0000"}],
+            }
+        ]
+        with pytest.raises(
+            ValueError, match="Color key in palette 'Test' must not be empty"
+        ):
+            build.validate_palettes(palettes)
+
+    def test_validate_palettes_duplicate_color_keys(self):
+        """Test validation fails for duplicate color keys within a palette."""
+        palettes = [
+            {
+                "name": "Test",
+                "type": "categorical",
+                "colors": [
+                    {"key": "Same Key", "value": "#ff0000"},
+                    {"key": "Same Key", "value": "#00ff00"},
+                ],
+            }
+        ]
+        with pytest.raises(
+            ValueError, match="Duplicate color key 'Same Key' in palette 'Test'"
+        ):
+            build.validate_palettes(palettes)
+
+    def test_validate_palettes_invalid_color_key_characters(self):
+        """Test validation fails for invalid characters in color key."""
+        palettes = [
+            {
+                "name": "Test",
+                "type": "categorical",
+                "colors": [{"key": 'Key with "quote"', "value": "#ff0000"}],
+            }
+        ]
+        with pytest.raises(
+            ValueError,
+            match="Color key in palette 'Test' contains disallowed character",
+        ):
+            build.validate_palettes(palettes)
+
+    def test_validate_palettes_empty_color_value(self):
+        """Test validation fails for empty color value."""
+        palettes = [
+            {
+                "name": "Test",
+                "type": "categorical",
+                "colors": [{"key": "Red", "value": ""}],
+            }
+        ]
+        with pytest.raises(
+            ValueError,
+            match="Color value for key 'Red' in palette 'Test' must not be empty",
+        ):
+            build.validate_palettes(palettes)
+
+    def test_validate_palettes_invalid_color_value(self):
+        """Test validation fails for invalid color value format."""
+        palettes = [
+            {
+                "name": "Test",
+                "type": "categorical",
+                "colors": [{"key": "Red", "value": "#FF0000"}],  # Uppercase
+            }
+        ]
+        with pytest.raises(
+            ValueError,
+            match="Color value '#FF0000' for key 'Red' in palette 'Test' must be a hex color code",
+        ):
+            build.validate_palettes(palettes)
+
+    def test_validate_palettes_empty_alias_name(self):
+        """Test validation fails for empty alias name."""
+        palettes = [
+            {
+                "name": "Test",
+                "type": "categorical",
+                "colors": [{"key": "Color", "value": "#ff0000"}],
+                "aliases": [{"name": "", "keys": ["Alt"]}],
+            }
+        ]
+        with pytest.raises(
+            ValueError, match="Alias name in palette 'Test' must not be empty"
+        ):
+            build.validate_palettes(palettes)
+
+    def test_validate_palettes_duplicate_alias_names(self):
+        """Test validation fails for duplicate alias names within a palette."""
+        palettes = [
+            {
+                "name": "Test",
+                "type": "categorical",
+                "colors": [{"key": "Color", "value": "#ff0000"}],
+                "aliases": [
+                    {"name": "same", "keys": ["Alt"]},
+                    {"name": "same", "keys": ["Other"]},
+                ],
+            }
+        ]
+        with pytest.raises(
+            ValueError, match="Duplicate alias name 'same' in palette 'Test'"
+        ):
+            build.validate_palettes(palettes)
+
+    def test_validate_palettes_empty_alias_keys(self):
+        """Test validation fails for empty alias keys list."""
+        palettes = [
+            {
+                "name": "Test",
+                "type": "categorical",
+                "colors": [{"key": "Color", "value": "#ff0000"}],
+                "aliases": [{"name": "alias1", "keys": []}],
+            }
+        ]
+        with pytest.raises(
+            ValueError,
+            match="Alias 'alias1' in palette 'Test' must have a non-empty 'keys' list",
+        ):
+            build.validate_palettes(palettes)
+
+    def test_validate_palettes_alias_keys_length_mismatch(self):
+        """Test validation fails when alias keys length doesn't match colors length."""
+        palettes = [
+            {
+                "name": "Test",
+                "type": "categorical",
+                "colors": [
+                    {"key": "Color One", "value": "#ff0000"},
+                    {"key": "Color Two", "value": "#00ff00"},
+                ],
+                "aliases": [
+                    {"name": "alias1", "keys": ["Only One"]},  # Should have 2 keys
+                ],
+            }
+        ]
+        with pytest.raises(
+            ValueError,
+            match="Alias 'alias1' in palette 'Test' has 1 keys but palette has 2 colors",
+        ):
+            build.validate_palettes(palettes)
+
+    def test_validate_palettes_empty_alias_key_string(self):
+        """Test validation fails for empty string in alias keys."""
+        palettes = [
+            {
+                "name": "Test",
+                "type": "categorical",
+                "colors": [
+                    {"key": "Color One", "value": "#ff0000"},
+                    {"key": "Color Two", "value": "#00ff00"},
+                ],
+                "aliases": [
+                    {"name": "alias1", "keys": ["Valid", ""]},
+                ],
+            }
+        ]
+        with pytest.raises(
+            ValueError,
+            match="Alias key at index 1 in alias 'alias1' of palette 'Test' must not be empty",
+        ):
+            build.validate_palettes(palettes)
+
+    def test_validate_palettes_invalid_alias_key_characters(self):
+        """Test validation fails for invalid characters in alias keys."""
+        palettes = [
+            {
+                "name": "Test",
+                "type": "categorical",
+                "colors": [{"key": "Color", "value": "#ff0000"}],
+                "aliases": [
+                    {"name": "alias1", "keys": ['Key with "quote"']},
+                ],
+            }
+        ]
+        with pytest.raises(
+            ValueError,
+            match="Alias key 'Key with \"quote\"' in alias 'alias1' "
+            "of palette 'Test' contains disallowed character",
+        ):
+            build.validate_palettes(palettes)
 
 
 class TestGetTableauType:

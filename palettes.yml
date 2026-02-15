@@ -7,7 +7,7 @@ palettes:
     type: 'diverging' # categorical, sequential, diverging
     description: '4-Scale Likert color palette from Strongly Agree to Strongly Disagree'
     credit: >
-      Adapted from the "PiYG" diverging palette in RColorBrewer
+      Adapted from the 'PiYG' diverging palette in RColorBrewer
     colors:
       - key: 'Strongly Agree'
         value: '#386325'
@@ -126,7 +126,7 @@ palettes:
     description: >
       Colors for program affiliations for students, courses, and faculty members at AIU
     credit: >
-      Derived from built-in "Automatic" palette in Tableau
+      Derived from built-in 'Automatic' palette in Tableau
     colors:
       - key: 'GB'
         value: '#4e79a7'
@@ -138,7 +138,7 @@ palettes:
     type: 'categorical'
     description: 'Colors for the EAP level at enrollment for undergraduate students at AIU'
     credit: >
-      Derived primarily from the built-in "Green-Gold" palette in Tableau
+      Derived primarily from the built-in 'Green-Gold' palette in Tableau
     colors:
       - key: 'EAP I'
         value: '#f4d166'
@@ -154,7 +154,7 @@ palettes:
     type: 'categorical'
     description: 'Colors for the in-school semesters at AIU'
     credit: >
-      Derived primarily from the built-in "Hue Circle" palette in Tableau
+      Derived primarily from the built-in 'Hue Circle' palette in Tableau
     colors:
       - key: '0'
         value: '#1ba3c6'
@@ -198,7 +198,7 @@ palettes:
     type: 'categorical'
     description: 'Colors for the course levels at AIU'
     credit: >
-      Derived primarily from built-in "Summer" palette in Tableau
+      Derived primarily from built-in 'Summer' palette in Tableau
     colors:
       - key: '700'
         value: '#b9ca5d'
@@ -222,7 +222,7 @@ palettes:
       Colors for regions for inbound exchange student origin or
       outbound student destination at AIU
     credit: >
-      Derived from "PowerBI Default" Tableau palette by Ken Flerlage 
+      Derived from 'PowerBI Default' Tableau palette by Ken Flerlage 
       available at https://public.tableau.com/app/profile/ken.flerlage/viz/DatafamColors/
     colors:
       - key: 'North America'
@@ -271,7 +271,7 @@ palettes:
     type: 'categorical'
     description: 'Colors for inbound student length of stay category at AIU'
     credit: >
-      Derived from "Pantone Color of the Year" Tableau palette by Rodrigo Calloni 
+      Derived from 'Pantone Color of the Year' Tableau palette by Rodrigo Calloni 
       available at https://public.tableau.com/app/profile/ken.flerlage/viz/DatafamColors/
     colors:
       - key: 'Intensive'
@@ -287,7 +287,7 @@ palettes:
     description: >
       Colors for study abroad program category at AIU
     credit: >
-      Derived from built-in "Automatic" palette in Tableau
+      Derived from built-in 'Automatic' palette in Tableau
     colors:
       - key: 'EX'
         value: '#59a14f'
