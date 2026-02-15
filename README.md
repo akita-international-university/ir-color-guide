@@ -101,3 +101,7 @@ RColorBrewer::display.brewer.all(colorblindFriendly = TRUE)
 
 > [!TIP]
 > You do not need to explicitly load `RColorBrewer` if you are using the [`tidyverse` packages](https://tidyverse.org/). Simply load `tidyverse` via `library(tidyverse)` to make `RColorBrewer` available within that session.
+
+## Contributing
+
+Please refer to the [Contributing Guidelines](./.github/CONTRIBUTING.md) if you are interested in contributing to this repository.

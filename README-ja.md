@@ -101,3 +101,7 @@ RColorBrewer::display.brewer.all(colorblindFriendly = TRUE)
 
 > [!TIP]
 > [`tidyverse`パッケージ](https://tidyverse.org/)を使用している場合は、`RColorBrewer`を明示的に読み込む必要はありません。`library(tidyverse)`でtidyverseを読み込むだけで、そのセッション内で`RColorBrewer`が利用可能になります。
+
+## Contributing
+
+このレポジトリへの貢献を考えてくださっている方は、まずは[Contributing Guidelines](./.github/CONTRIBUTING.md)をご覧ください。
