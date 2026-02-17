@@ -1266,11 +1266,13 @@ class TestMain:
             ),
             mocker.call("Loaded 1 palette(s)."),
             mocker.call(
-                f"Generating Tableau Preferences file at {os.path.join(os.sep, 'fake', 'path', 'tableau', 'Preferences.tps')}..."
+                "Generating Tableau Preferences file at"
+                + f" {os.path.join(os.sep, 'fake', 'path', 'tableau', 'Preferences.tps')}..."
             ),
             mocker.call("Tableau Preferences file generated."),
             mocker.call(
-                f"Generating R script file at {os.path.join(os.sep, 'fake', 'path', 'r_script', 'ir_color_palettes.R')}..."
+                "Generating R script file at"
+                + f" {os.path.join(os.sep, 'fake', 'path', 'r_script', 'ir_color_palettes.R')}..."
             ),
             mocker.call("R script file generated."),
             mocker.call("All files generated successfully."),
