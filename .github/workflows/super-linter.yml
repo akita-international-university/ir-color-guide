@@ -34,5 +34,6 @@ jobs:
           VALIDATE_BIOME_FORMAT: false # Disable Biome formatter to avoid conflict with Prettier
           VALIDATE_NATURAL_LANGUAGE: false
           VALIDATE_PYTHON_RUFF_FORMAT: false # Disable Ruff to avoid conflict with Black & isort
+          VALIDATE_SPELL_CODESPELL: false # Disable codespell to avoid false positives in code
           # To report GitHub Actions status checks
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
