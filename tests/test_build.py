@@ -1237,12 +1237,10 @@ class TestMain:
         mock_print = mocker.patch("builtins.print")
 
         # Mock os.path functions
-        mocker.patch(
-            "os.path.dirname", return_value=os.path.join(os.sep, "fake", "path")
-        )
+        mocker.patch("os.path.dirname", return_value=os.path.join("fake", "path"))
         mocker.patch(
             "os.path.abspath",
-            return_value=os.path.join(os.sep, "fake", "path", "scripts", "build.py"),
+            return_value=os.path.join("fake", "path", "scripts", "build.py"),
         )
 
         # Act
@@ -1262,17 +1260,17 @@ class TestMain:
         # Verify print statements
         expected_prints = [
             mocker.call(
-                f"Loading palettes from {os.path.join(os.sep, 'fake', 'path', 'palettes.yml')}..."
+                f"Loading palettes from {os.path.join('fake', 'path', 'palettes.yml')}..."
             ),
             mocker.call("Loaded 1 palette(s)."),
             mocker.call(
                 "Generating Tableau Preferences file at"
-                + f" {os.path.join(os.sep, 'fake', 'path', 'tableau', 'Preferences.tps')}..."
+                + f" {os.path.join('fake', 'path', 'tableau', 'Preferences.tps')}..."
             ),
             mocker.call("Tableau Preferences file generated."),
             mocker.call(
                 "Generating R script file at"
-                + f" {os.path.join(os.sep, 'fake', 'path', 'r_script', 'ir_color_palettes.R')}..."
+                + f" {os.path.join('fake', 'path', 'r_script', 'ir_color_palettes.R')}..."
             ),
             mocker.call("R script file generated."),
             mocker.call("All files generated successfully."),
@@ -1294,12 +1292,10 @@ class TestMain:
         mocker.patch("builtins.print")
 
         # Mock os.path functions
-        mocker.patch(
-            "os.path.dirname", return_value=os.path.join(os.sep, "fake", "path")
-        )
+        mocker.patch("os.path.dirname", return_value=os.path.join("fake", "path"))
         mocker.patch(
             "os.path.abspath",
-            return_value=os.path.join(os.sep, "fake", "path", "scripts", "build.py"),
+            return_value=os.path.join("fake", "path", "scripts", "build.py"),
         )
 
         # Act
@@ -1318,12 +1314,10 @@ class TestMain:
             "scripts.build.load_palettes",
             side_effect=FileNotFoundError("File not found"),
         )
-        mocker.patch(
-            "os.path.dirname", return_value=os.path.join(os.sep, "fake", "path")
-        )
+        mocker.patch("os.path.dirname", return_value=os.path.join("fake", "path"))
         mocker.patch(
             "os.path.abspath",
-            return_value=os.path.join(os.sep, "fake", "path", "scripts", "build.py"),
+            return_value=os.path.join("fake", "path", "scripts", "build.py"),
         )
         mocker.patch("builtins.print")
 
