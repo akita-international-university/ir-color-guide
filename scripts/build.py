@@ -1,5 +1,6 @@
 """
-Script to convert palettes.yml into Tableau Preferences.tps and R script files.
+Script to convert palettes.yml into Tableau Preferences.tps, R script files, and
+Exploratory palette JSON files.
 """
 
 import json
