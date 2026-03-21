@@ -1,13 +1,17 @@
 """
-Script to convert palettes.yml into Tableau Preferences.tps and R script files.
+Script to convert palettes.yml into Tableau Preferences.tps, R script files, and
+Exploratory palette JSON files.
 """
 
+import json
 import os
 import re
 import subprocess
 from typing import Any, Dict, List
 
 import yaml
+
+EXPLORATORY_PALETTE_ID_PREFIX = "aiu-ir-palette"
 
 
 def load_palettes(yaml_path: str) -> List[Dict[str, Any]]:
@@ -412,9 +416,78 @@ def generate_r_script(  # pylint: disable=too-many-locals
         file.write("\n".join(lines))
 
 
+def hex_to_rgba(hex_color: str) -> str:
+    """
+    Convert a hex color code to an rgba string.
+
+    Args:
+        hex_color: Hex color code (e.g., '#ff0000')
+
+    Returns:
+        RGBA string (e.g., 'rgba(255,0,0,1)')
+    """
+    hex_stripped = hex_color.lstrip("#")
+    r = int(hex_stripped[0:2], 16)
+    g = int(hex_stripped[2:4], 16)
+    b = int(hex_stripped[4:6], 16)
+    return f"rgba({r},{g},{b},1)"
+
+
+def generate_exploratory_palette(palette: Dict[str, Any], output_dir: str) -> None:
+    """
+    Generate an Exploratory JSON file for a single palette.
+
+    Args:
+        palette: Palette dictionary
+        output_dir: Path to the output directory
+    """
+    name = palette.get("name", "")
+    colors = palette.get("colors", [])
+
+    sanitized = sanitize_variable_name(name)
+    palette_id = f"{EXPLORATORY_PALETTE_ID_PREFIX}-{sanitized}"
+
+    palette_data = {
+        "displayName": name,
+        "colors": [hex_to_rgba(color.get("value", "")) for color in colors],
+        "textColors": [],
+        "id": palette_id,
+    }
+
+    output_path = os.path.join(output_dir, f"{palette_id}.json")
+    with open(output_path, "w", encoding="utf-8", newline="\n") as file:
+        json.dump(palette_data, file, ensure_ascii=False, indent=4)
+        file.write("\n")
+
+
+def generate_exploratory_palettes(
+    palettes: List[Dict[str, Any]], output_dir: str
+) -> None:
+    """
+    Generate Exploratory JSON files for all palettes.
+
+    Removes any existing '{EXPLORATORY_PALETTE_ID_PREFIX}-*.json' files in output_dir before
+    generating new ones, so stale files from renamed or removed palettes are
+    not left behind.
+
+    Args:
+        palettes: List of palette dictionaries
+        output_dir: Path to the output directory
+    """
+    # Remove stale generated files before regenerating
+    for existing_file in os.listdir(output_dir):
+        if existing_file.startswith(
+            EXPLORATORY_PALETTE_ID_PREFIX
+        ) and existing_file.endswith(".json"):
+            os.remove(os.path.join(output_dir, existing_file))
+
+    for palette in palettes:
+        generate_exploratory_palette(palette, output_dir)
+
+
 def main():
     """
-    Main function to convert palettes.yml to Tableau and R files.
+    Main function to convert palettes.yml to Tableau, R, and Exploratory files.
     """
     # Define file paths
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -422,6 +495,7 @@ def main():
     yaml_path = os.path.join(repo_root, "palettes.yml")
     tableau_path = os.path.join(repo_root, "tableau", "Preferences.tps")
     r_script_path = os.path.join(repo_root, "r_script", "ir_color_palettes.R")
+    exploratory_dir = os.path.join(repo_root, "exploratory")
 
     # Load palettes
     print(f"Loading palettes from {yaml_path}...")
@@ -431,6 +505,7 @@ def main():
     # Ensure output directories exist
     os.makedirs(os.path.dirname(tableau_path), exist_ok=True)
     os.makedirs(os.path.dirname(r_script_path), exist_ok=True)
+    os.makedirs(exploratory_dir, exist_ok=True)
 
     # Generate Tableau Preferences file
     print(f"Generating Tableau Preferences file at {tableau_path}...")
@@ -441,6 +516,11 @@ def main():
     print(f"Generating R script file at {r_script_path}...")
     generate_r_script(palettes, r_script_path)
     print("R script file generated.")
+
+    # Generate Exploratory palette files
+    print(f"Generating Exploratory palette files in {exploratory_dir}...")
+    generate_exploratory_palettes(palettes, exploratory_dir)
+    print("Exploratory palette files generated.")
 
     # Run formatters
     subprocess.run(["poetry", "run", "formatter"], check=True)

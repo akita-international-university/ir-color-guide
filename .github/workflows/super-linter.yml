@@ -17,6 +17,7 @@ jobs:
       packages: read
       # To report GitHub Actions status checks
       statuses: write
+      pull-requests: write
 
     steps:
       - name: Checkout code

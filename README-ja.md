@@ -25,7 +25,7 @@
 
 多くの可視化で使用される基本的なカラーパレットは、本リポジトリのルートにある設定ファイル`./palettes.yml`に事前定義されています。
 
-このYAMLファイルに基づき、本リポジトリ内のPythonスクリプト`./scripts/build.py`が、Tableau設定ファイル`./tableau/Preferences.tps`およびRスクリプト`./r_script/ir_color_palettes.R`を生成します。これらのファイルは、それぞれのツールで可視化の配色に使用できます。
+このYAMLファイルに基づき、本リポジトリ内のPythonスクリプト`./scripts/build.py`が、Tableau設定ファイル`./tableau/Preferences.tps`、Rスクリプト`./r_script/ir_color_palettes.R`、およびExploratory Desktop用のパレットJSONファイル（`./exploratory/`以下）を生成します。これらのファイルは、それぞれのツールで可視化の配色に使用できます。
 
 単一の設定YAMLファイルと、各ツール用に自動生成されるファイルをセットで管理することにより、教学IRチームが使用する複数のツール間での一貫性を担保します。事前定義されたパレットへのすべての変更は、個別のファイルではなくYAMLファイルに対して行うこととします。
 
@@ -82,6 +82,20 @@ source("https://raw.githubusercontent.com/akita-international-university/ir-colo
 2. `My Tableau Repository`フォルダ内にある既存の`Preferences.tps`ファイルを見つけ、必要に応じてバックアップを作成してください。
 3. 本リポジトリで生成された[`./tableau/Preferences.tps`](./tableau/Preferences.tps)ファイルを`My Tableau Repository`フォルダにコピーし、既存のファイルを置き換えます。
 4. Tableau Desktopを起動中の場合は再起動してください。
+
+#### Exploratory Desktop
+
+[Exploratory Desktop](https://exploratory.io/)では、Exploratoryのローカルリポジトリ内の`palettes`ディレクトリにJSONファイルを配置することでカスタムカラーパレットを追加できます。本セクションでは、本リポジトリで生成されたJSONファイルを使用して、Windows PC上のExplorer DesktopでカスタムカラーパレットをExploratory Desktopに設定する方法を説明します。
+
+> [!TIP]
+> Exploratory Desktopにカスタムカラーパレットを設定する詳細な手順については、公式ドキュメント（[How to Create Custom Color Palette](https://exploratory.io/note/exploratory/How-to-Create-Custom-Color-Palette-rQl5ciH6)）をご参照ください。
+
+1. Exploratoryのローカルリポジトリの`palettes`ディレクトリを探します。デフォルトでは、以下の場所にあります：
+   ```
+   C:\Users\<YourUsername>\.exploratory\palettes
+   ```
+2. 本リポジトリの[`./exploratory/`](./exploratory/)にある生成済みのJSONファイルを、上記の`palettes`ディレクトリにコピーします。
+3. Exploratory Desktopを起動中の場合は再起動してください。
 
 ## 技術的な留意事項
 

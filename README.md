@@ -25,7 +25,7 @@ Whenever applicable, all new palettes should be chosen from the colorblind-frien
 
 Basic color palettes typically used in many visualizations are preset in a settings file at the root of this repository: `./palettes.yml`
 
-Based on this YAML file, a Python script in this repository `./scripts/build.py` will generate a Tableau preference file `./tableau/Preferences.tps` and an R script `./r_script/ir_color_palettes.R` that can be used for the respective tools to color the visualizations.
+Based on this YAML file, a Python script in this repository `./scripts/build.py` will generate a Tableau preference file `./tableau/Preferences.tps`, an R script `./r_script/ir_color_palettes.R`, and Exploratory Desktop palette JSON files under `./exploratory/` that can be used for the respective tools to color the visualizations.
 
 This set of a single settings YAML file and the automatically generated files for the respective tools ensures consistency between multiple tools used by the IR team. All revisions to the predefined color palettes should be made to the YAML file and not the individual files.
 
@@ -82,6 +82,20 @@ Custom color palettes in Tableau Desktop can be defined by modifying the `Prefer
 2. Inside the `My Tableau Repository` folder, find the existing `Preferences.tps` file. Make a backup copy of this file in case you need to restore it later.
 3. Copy the generated `Preferences.tps` file from this repository ([`./tableau/Preferences.tps`](./tableau/Preferences.tps)) to the `My Tableau Repository` folder, replacing the existing file.
 4. Restart Tableau Desktop if it is currently running.
+
+#### Exploratory Desktop
+
+Custom color palettes in [Exploratory Desktop](https://exploratory.io/) can be added by placing JSON files in the `palettes` directory of Exploratory Desktop's local repository. This section demonstrates how to use the generated JSON files from this repository to set up custom color palettes in Exploratory Desktop on your Windows PC.
+
+> [!TIP]
+> For more details on how to create custom color palettes in Exploratory Desktop, please refer to the official documentation: [How to Create Custom Color Palette](https://exploratory.io/note/exploratory/How-to-Create-Custom-Color-Palette-rQl5ciH6).
+
+1. Locate the `palettes` directory of your Exploratory Desktop local repository. By default, it is located at:
+   ```
+   C:\Users\<YourUsername>\.exploratory\palettes
+   ```
+2. Copy the generated JSON files from [`./exploratory/`](./exploratory/) in this repository into the `palettes` directory above.
+3. Restart Exploratory Desktop if it is currently running.
 
 ## Technical Note
 

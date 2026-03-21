@@ -1,0 +1,14 @@
+{
+  "displayName": "AIU Exchange Region",
+  "colors": [
+    "rgba(53,153,184,1)",
+    "rgba(138,212,235,1)",
+    "rgba(1,184,170,1)",
+    "rgba(254,150,102,1)",
+    "rgba(223,189,191,1)",
+    "rgba(166,105,153,1)",
+    "rgba(95,107,109,1)"
+  ],
+  "textColors": [],
+  "id": "aiu-ir-palette-aiu_exchange_region"
+}
