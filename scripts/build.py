@@ -11,6 +11,8 @@ from typing import Any, Dict, List
 
 import yaml
 
+EXPLORATORY_PALETTE_ID_PREFIX = "aiu-ir-palette"
+
 
 def load_palettes(yaml_path: str) -> List[Dict[str, Any]]:
     """
@@ -443,7 +445,7 @@ def generate_exploratory_palette(palette: Dict[str, Any], output_dir: str) -> No
     colors = palette.get("colors", [])
 
     sanitized = sanitize_variable_name(name)
-    palette_id = f"aiu-ir-palette-{sanitized}"
+    palette_id = f"{EXPLORATORY_PALETTE_ID_PREFIX}-{sanitized}"
 
     palette_data = {
         "displayName": name,
@@ -464,7 +466,7 @@ def generate_exploratory_palettes(
     """
     Generate Exploratory JSON files for all palettes.
 
-    Removes any existing 'aiu-ir-palette-*.json' files in output_dir before
+    Removes any existing '{EXPLORATORY_PALETTE_ID_PREFIX}-*.json' files in output_dir before
     generating new ones, so stale files from renamed or removed palettes are
     not left behind.
 
@@ -474,9 +476,9 @@ def generate_exploratory_palettes(
     """
     # Remove stale generated files before regenerating
     for existing_file in os.listdir(output_dir):
-        if existing_file.startswith("aiu-ir-palette-") and existing_file.endswith(
-            ".json"
-        ):
+        if existing_file.startswith(
+            EXPLORATORY_PALETTE_ID_PREFIX
+        ) and existing_file.endswith(".json"):
             os.remove(os.path.join(output_dir, existing_file))
 
     for palette in palettes:

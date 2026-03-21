@@ -1386,7 +1386,9 @@ class TestGenerateExploratoryPalette:
         }
         with tempfile.TemporaryDirectory() as tmp_dir:
             build.generate_exploratory_palette(palette, tmp_dir)
-            expected_file = os.path.join(tmp_dir, "aiu-ir-palette-test_palette.json")
+            expected_file = os.path.join(
+                tmp_dir, f"{build.EXPLORATORY_PALETTE_ID_PREFIX}-test_palette.json"
+            )
             assert os.path.exists(expected_file)
 
     def test_json_structure(self):
@@ -1402,14 +1404,16 @@ class TestGenerateExploratoryPalette:
         }
         with tempfile.TemporaryDirectory() as tmp_dir:
             build.generate_exploratory_palette(palette, tmp_dir)
-            file_path = os.path.join(tmp_dir, "aiu-ir-palette-test_palette.json")
+            file_path = os.path.join(
+                tmp_dir, f"{build.EXPLORATORY_PALETTE_ID_PREFIX}-test_palette.json"
+            )
             with open(file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
 
             assert data["displayName"] == "Test Palette"
             assert data["colors"] == ["rgba(255,0,0,1)", "rgba(0,255,0,1)"]
             assert data["textColors"] == []
-            assert data["id"] == "aiu-ir-palette-test_palette"
+            assert data["id"] == f"{build.EXPLORATORY_PALETTE_ID_PREFIX}-test_palette"
 
     def test_id_uses_sanitized_name(self):
         """Test that id uses the sanitized palette name."""
@@ -1421,11 +1425,15 @@ class TestGenerateExploratoryPalette:
         }
         with tempfile.TemporaryDirectory() as tmp_dir:
             build.generate_exploratory_palette(palette, tmp_dir)
-            file_path = os.path.join(tmp_dir, "aiu-ir-palette-my_test_palette.json")
+            file_path = os.path.join(
+                tmp_dir, f"{build.EXPLORATORY_PALETTE_ID_PREFIX}-my_test_palette.json"
+            )
             assert os.path.exists(file_path)
             with open(file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
-            assert data["id"] == "aiu-ir-palette-my_test_palette"
+            assert (
+                data["id"] == f"{build.EXPLORATORY_PALETTE_ID_PREFIX}-my_test_palette"
+            )
 
     def test_colors_converted_to_rgba(self):
         """Test that hex colors are converted to rgba strings."""
@@ -1440,7 +1448,9 @@ class TestGenerateExploratoryPalette:
         }
         with tempfile.TemporaryDirectory() as tmp_dir:
             build.generate_exploratory_palette(palette, tmp_dir)
-            file_path = os.path.join(tmp_dir, "aiu-ir-palette-rgba_test.json")
+            file_path = os.path.join(
+                tmp_dir, f"{build.EXPLORATORY_PALETTE_ID_PREFIX}-rgba_test.json"
+            )
             with open(file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
             assert "rgba(56,99,37,1)" in data["colors"]
@@ -1456,7 +1466,10 @@ class TestGenerateExploratoryPalette:
         }
         with tempfile.TemporaryDirectory() as tmp_dir:
             build.generate_exploratory_palette(palette, tmp_dir)
-            file_path = os.path.join(tmp_dir, "aiu-ir-palette-aiu_exchange_region.json")
+            file_path = os.path.join(
+                tmp_dir,
+                f"{build.EXPLORATORY_PALETTE_ID_PREFIX}-aiu_exchange_region.json",
+            )
             with open(file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
             assert data["displayName"] == "AIU Exchange Region"
@@ -1471,7 +1484,9 @@ class TestGenerateExploratoryPalette:
         }
         with tempfile.TemporaryDirectory() as tmp_dir:
             build.generate_exploratory_palette(palette, tmp_dir)
-            file_path = os.path.join(tmp_dir, "aiu-ir-palette-simple_palette.json")
+            file_path = os.path.join(
+                tmp_dir, f"{build.EXPLORATORY_PALETTE_ID_PREFIX}-simple_palette.json"
+            )
             with open(file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
             assert data["textColors"] == []
@@ -1486,7 +1501,9 @@ class TestGenerateExploratoryPalette:
         }
         with tempfile.TemporaryDirectory() as tmp_dir:
             build.generate_exploratory_palette(palette, tmp_dir)
-            file_path = os.path.join(tmp_dir, "aiu-ir-palette-newline_test.json")
+            file_path = os.path.join(
+                tmp_dir, f"{build.EXPLORATORY_PALETTE_ID_PREFIX}-newline_test.json"
+            )
             with open(file_path, "r", encoding="utf-8") as f:
                 content = f.read()
             assert content.endswith("\n")
@@ -1515,8 +1532,8 @@ class TestGenerateExploratoryPalettes:
             build.generate_exploratory_palettes(palettes, tmp_dir)
             files = os.listdir(tmp_dir)
             assert len(files) == 2
-            assert "aiu-ir-palette-palette_a.json" in files
-            assert "aiu-ir-palette-palette_b.json" in files
+            assert f"{build.EXPLORATORY_PALETTE_ID_PREFIX}-palette_a.json" in files
+            assert f"{build.EXPLORATORY_PALETTE_ID_PREFIX}-palette_b.json" in files
 
     def test_empty_palettes_list(self):
         """Test that no files are generated for an empty list."""
@@ -1539,19 +1556,26 @@ class TestGenerateExploratoryPalettes:
         ]
         with tempfile.TemporaryDirectory() as tmp_dir:
             build.generate_exploratory_palettes(palettes, tmp_dir)
-            file_path = os.path.join(tmp_dir, "aiu-ir-palette-color_set.json")
+            file_path = os.path.join(
+                tmp_dir, f"{build.EXPLORATORY_PALETTE_ID_PREFIX}-color_set.json"
+            )
             with open(file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
             assert data["displayName"] == "Color Set"
             assert data["colors"] == ["rgba(255,0,0,1)", "rgba(0,0,255,1)"]
             assert data["textColors"] == []
-            assert data["id"] == "aiu-ir-palette-color_set"
+            assert data["id"] == f"{build.EXPLORATORY_PALETTE_ID_PREFIX}-color_set"
 
     def test_removes_stale_generated_files(self):
-        """Test that stale aiu-ir-palette-*.json files are removed before regenerating."""
+        """
+        Test that stale {build.EXPLORATORY_PALETTE_ID_PREFIX}-*.json files
+        are removed before regenerating.
+        """
         with tempfile.TemporaryDirectory() as tmp_dir:
             # Create a stale file that would remain if not cleaned up
-            stale_path = os.path.join(tmp_dir, "aiu-ir-palette-old_palette.json")
+            stale_path = os.path.join(
+                tmp_dir, f"{build.EXPLORATORY_PALETTE_ID_PREFIX}-old_palette.json"
+            )
             with open(stale_path, "w", encoding="utf-8") as f:
                 f.write("{}")
 
@@ -1567,8 +1591,10 @@ class TestGenerateExploratoryPalettes:
             build.generate_exploratory_palettes(palettes, tmp_dir)
 
             files = os.listdir(tmp_dir)
-            assert "aiu-ir-palette-old_palette.json" not in files
-            assert "aiu-ir-palette-new_palette.json" in files
+            assert (
+                f"{build.EXPLORATORY_PALETTE_ID_PREFIX}-old_palette.json" not in files
+            )
+            assert f"{build.EXPLORATORY_PALETTE_ID_PREFIX}-new_palette.json" in files
 
     def test_preserves_non_generated_files(self):
         """Test that non-generated files in the directory are not removed."""
