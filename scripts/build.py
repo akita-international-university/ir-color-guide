@@ -464,10 +464,21 @@ def generate_exploratory_palettes(
     """
     Generate Exploratory JSON files for all palettes.
 
+    Removes any existing 'aiu-ir-palette-*.json' files in output_dir before
+    generating new ones, so stale files from renamed or removed palettes are
+    not left behind.
+
     Args:
         palettes: List of palette dictionaries
         output_dir: Path to the output directory
     """
+    # Remove stale generated files before regenerating
+    for existing_file in os.listdir(output_dir):
+        if existing_file.startswith("aiu-ir-palette-") and existing_file.endswith(
+            ".json"
+        ):
+            os.remove(os.path.join(output_dir, existing_file))
+
     for palette in palettes:
         generate_exploratory_palette(palette, output_dir)
 

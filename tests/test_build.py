@@ -1546,3 +1546,46 @@ class TestGenerateExploratoryPalettes:
             assert data["colors"] == ["rgba(255,0,0,1)", "rgba(0,0,255,1)"]
             assert data["textColors"] == []
             assert data["id"] == "aiu-ir-palette-color_set"
+
+    def test_removes_stale_generated_files(self):
+        """Test that stale aiu-ir-palette-*.json files are removed before regenerating."""
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            # Create a stale file that would remain if not cleaned up
+            stale_path = os.path.join(tmp_dir, "aiu-ir-palette-old_palette.json")
+            with open(stale_path, "w", encoding="utf-8") as f:
+                f.write("{}")
+
+            # Run with a different palette
+            palettes = [
+                {
+                    "name": "New Palette",
+                    "type": "categorical",
+                    "description": "",
+                    "colors": [{"key": "A", "value": "#aaaaaa"}],
+                }
+            ]
+            build.generate_exploratory_palettes(palettes, tmp_dir)
+
+            files = os.listdir(tmp_dir)
+            assert "aiu-ir-palette-old_palette.json" not in files
+            assert "aiu-ir-palette-new_palette.json" in files
+
+    def test_preserves_non_generated_files(self):
+        """Test that non-generated files in the directory are not removed."""
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            # Create a file that should not be removed
+            other_path = os.path.join(tmp_dir, "README.md")
+            with open(other_path, "w", encoding="utf-8") as f:
+                f.write("# README")
+
+            palettes = [
+                {
+                    "name": "My Palette",
+                    "type": "categorical",
+                    "description": "",
+                    "colors": [{"key": "A", "value": "#111111"}],
+                }
+            ]
+            build.generate_exploratory_palettes(palettes, tmp_dir)
+
+            assert os.path.exists(other_path)
