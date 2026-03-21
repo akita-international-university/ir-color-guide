@@ -1,0 +1,15 @@
+{
+  "displayName": "AIU Inbound Student Status per Semester",
+  "colors": [
+    "rgba(209,242,235,1)",
+    "rgba(163,228,215,1)",
+    "rgba(118,215,196,1)",
+    "rgba(72,201,176,1)",
+    "rgba(207,216,220,1)",
+    "rgba(176,190,197,1)",
+    "rgba(144,164,174,1)",
+    "rgba(120,144,156,1)"
+  ],
+  "textColors": [],
+  "id": "aiu-ir-palette-aiu_inbound_student_status_per_semester"
+}

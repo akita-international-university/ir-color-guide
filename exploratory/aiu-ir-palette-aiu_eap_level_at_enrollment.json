@@ -1,0 +1,12 @@
+{
+  "displayName": "AIU EAP Level at Enrollment",
+  "colors": [
+    "rgba(244,209,102,1)",
+    "rgba(167,191,90,1)",
+    "rgba(96,166,86,1)",
+    "rgba(57,137,76,1)",
+    "rgba(73,82,94,1)"
+  ],
+  "textColors": [],
+  "id": "aiu-ir-palette-aiu_eap_level_at_enrollment"
+}

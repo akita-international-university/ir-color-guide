@@ -4,6 +4,7 @@ Unit tests for ./scripts/build.py
 
 # pylint: disable=too-many-lines
 
+import json
 import os
 import tempfile
 from typing import Any, Dict, List
@@ -1232,6 +1233,9 @@ class TestMain:
             "scripts.build.generate_tableau_preferences"
         )
         mock_generate_r = mocker.patch("scripts.build.generate_r_script")
+        mock_generate_exploratory = mocker.patch(
+            "scripts.build.generate_exploratory_palettes"
+        )
         mock_subprocess = mocker.patch("subprocess.run")
         mock_makedirs = mocker.patch("os.makedirs")
         mock_print = mocker.patch("builtins.print")
@@ -1250,11 +1254,12 @@ class TestMain:
         mock_load_palettes.assert_called_once()
         mock_generate_tableau.assert_called_once()
         mock_generate_r.assert_called_once()
+        mock_generate_exploratory.assert_called_once()
         mock_subprocess.assert_has_calls(
             [mocker.call(["poetry", "run", "formatter"], check=True)], any_order=False
         )
-        assert (  # For both tableau and r_script directories
-            mock_makedirs.call_count == 2
+        assert (  # For tableau, r_script, and exploratory directories
+            mock_makedirs.call_count == 3
         )
 
         # Verify print statements
@@ -1273,6 +1278,11 @@ class TestMain:
                 + f" {os.path.join('fake', 'path', 'r_script', 'ir_color_palettes.R')}..."
             ),
             mocker.call("R script file generated."),
+            mocker.call(
+                "Generating Exploratory palette files in"
+                + f" {os.path.join('fake', 'path', 'exploratory')}..."
+            ),
+            mocker.call("Exploratory palette files generated."),
             mocker.call("All files generated successfully."),
         ]
         mock_print.assert_has_calls(expected_prints, any_order=False)
@@ -1287,6 +1297,7 @@ class TestMain:
         )
         mocker.patch("scripts.build.generate_tableau_preferences")
         mocker.patch("scripts.build.generate_r_script")
+        mocker.patch("scripts.build.generate_exploratory_palettes")
         mocker.patch("subprocess.run")
         mock_makedirs = mocker.patch("os.makedirs")
         mocker.patch("builtins.print")
@@ -1302,7 +1313,7 @@ class TestMain:
         build.main()
 
         # Assert
-        assert mock_makedirs.call_count == 2
+        assert mock_makedirs.call_count == 3
         # Check that makedirs was called with exist_ok=True
         for call in mock_makedirs.call_args_list:
             assert call[1]["exist_ok"] is True
@@ -1324,3 +1335,214 @@ class TestMain:
         # Act & Assert
         with pytest.raises(FileNotFoundError):
             build.main()
+
+
+class TestHexToRgba:
+    """Tests for hex_to_rgba() function."""
+
+    def test_hex_to_rgba_red(self):
+        """Test conversion of red hex color."""
+        assert build.hex_to_rgba("#ff0000") == "rgba(255,0,0,1)"
+
+    def test_hex_to_rgba_green(self):
+        """Test conversion of green hex color."""
+        assert build.hex_to_rgba("#00ff00") == "rgba(0,255,0,1)"
+
+    def test_hex_to_rgba_blue(self):
+        """Test conversion of blue hex color."""
+        assert build.hex_to_rgba("#0000ff") == "rgba(0,0,255,1)"
+
+    def test_hex_to_rgba_black(self):
+        """Test conversion of black hex color."""
+        assert build.hex_to_rgba("#000000") == "rgba(0,0,0,1)"
+
+    def test_hex_to_rgba_white(self):
+        """Test conversion of white hex color."""
+        assert build.hex_to_rgba("#ffffff") == "rgba(255,255,255,1)"
+
+    def test_hex_to_rgba_mixed(self):
+        """Test conversion of a mixed hex color."""
+        assert build.hex_to_rgba("#386325") == "rgba(56,99,37,1)"
+
+    def test_hex_to_rgba_alpha_always_one(self):
+        """Test that alpha value is always 1."""
+        result = build.hex_to_rgba("#aabbcc")
+        assert result.endswith(",1)")
+
+
+class TestGenerateExploratoryPalette:
+    """Tests for generate_exploratory_palette() function."""
+
+    def test_generates_json_file(self):
+        """Test that a JSON file is created for the palette."""
+        palette = {
+            "name": "Test Palette",
+            "type": "categorical",
+            "description": "A test palette",
+            "colors": [
+                {"key": "Color One", "value": "#ff0000"},
+                {"key": "Color Two", "value": "#00ff00"},
+            ],
+        }
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            build.generate_exploratory_palette(palette, tmp_dir)
+            expected_file = os.path.join(tmp_dir, "aiu-ir-palette-test_palette.json")
+            assert os.path.exists(expected_file)
+
+    def test_json_structure(self):
+        """Test that the generated JSON has the expected structure."""
+        palette = {
+            "name": "Test Palette",
+            "type": "categorical",
+            "description": "A test palette",
+            "colors": [
+                {"key": "Color One", "value": "#ff0000"},
+                {"key": "Color Two", "value": "#00ff00"},
+            ],
+        }
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            build.generate_exploratory_palette(palette, tmp_dir)
+            file_path = os.path.join(tmp_dir, "aiu-ir-palette-test_palette.json")
+            with open(file_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+
+            assert data["displayName"] == "Test Palette"
+            assert data["colors"] == ["rgba(255,0,0,1)", "rgba(0,255,0,1)"]
+            assert data["textColors"] == []
+            assert data["id"] == "aiu-ir-palette-test_palette"
+
+    def test_id_uses_sanitized_name(self):
+        """Test that id uses the sanitized palette name."""
+        palette = {
+            "name": "My Test-Palette",
+            "type": "categorical",
+            "description": "",
+            "colors": [{"key": "A", "value": "#aaaaaa"}],
+        }
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            build.generate_exploratory_palette(palette, tmp_dir)
+            file_path = os.path.join(tmp_dir, "aiu-ir-palette-my_test_palette.json")
+            assert os.path.exists(file_path)
+            with open(file_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            assert data["id"] == "aiu-ir-palette-my_test_palette"
+
+    def test_colors_converted_to_rgba(self):
+        """Test that hex colors are converted to rgba strings."""
+        palette = {
+            "name": "RGBA Test",
+            "type": "categorical",
+            "description": "",
+            "colors": [
+                {"key": "Dark Green", "value": "#386325"},
+                {"key": "Light Green", "value": "#8dbb54"},
+            ],
+        }
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            build.generate_exploratory_palette(palette, tmp_dir)
+            file_path = os.path.join(tmp_dir, "aiu-ir-palette-rgba_test.json")
+            with open(file_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            assert "rgba(56,99,37,1)" in data["colors"]
+            assert "rgba(141,187,84,1)" in data["colors"]
+
+    def test_display_name_is_original_palette_name(self):
+        """Test that displayName is the original (non-sanitized) palette name."""
+        palette = {
+            "name": "AIU Exchange Region",
+            "type": "categorical",
+            "description": "",
+            "colors": [{"key": "A", "value": "#aaaaaa"}],
+        }
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            build.generate_exploratory_palette(palette, tmp_dir)
+            file_path = os.path.join(tmp_dir, "aiu-ir-palette-aiu_exchange_region.json")
+            with open(file_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            assert data["displayName"] == "AIU Exchange Region"
+
+    def test_text_colors_is_empty_list(self):
+        """Test that textColors is always an empty list."""
+        palette = {
+            "name": "Simple Palette",
+            "type": "categorical",
+            "description": "",
+            "colors": [{"key": "A", "value": "#123456"}],
+        }
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            build.generate_exploratory_palette(palette, tmp_dir)
+            file_path = os.path.join(tmp_dir, "aiu-ir-palette-simple_palette.json")
+            with open(file_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            assert data["textColors"] == []
+
+    def test_json_file_ends_with_newline(self):
+        """Test that the generated JSON file ends with a newline."""
+        palette = {
+            "name": "Newline Test",
+            "type": "categorical",
+            "description": "",
+            "colors": [{"key": "A", "value": "#aabbcc"}],
+        }
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            build.generate_exploratory_palette(palette, tmp_dir)
+            file_path = os.path.join(tmp_dir, "aiu-ir-palette-newline_test.json")
+            with open(file_path, "r", encoding="utf-8") as f:
+                content = f.read()
+            assert content.endswith("\n")
+
+
+class TestGenerateExploratoryPalettes:
+    """Tests for generate_exploratory_palettes() function."""
+
+    def test_generates_one_file_per_palette(self):
+        """Test that one JSON file is created for each palette."""
+        palettes = [
+            {
+                "name": "Palette A",
+                "type": "categorical",
+                "description": "",
+                "colors": [{"key": "X", "value": "#111111"}],
+            },
+            {
+                "name": "Palette B",
+                "type": "sequential",
+                "description": "",
+                "colors": [{"key": "Y", "value": "#222222"}],
+            },
+        ]
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            build.generate_exploratory_palettes(palettes, tmp_dir)
+            files = os.listdir(tmp_dir)
+            assert len(files) == 2
+            assert "aiu-ir-palette-palette_a.json" in files
+            assert "aiu-ir-palette-palette_b.json" in files
+
+    def test_empty_palettes_list(self):
+        """Test that no files are generated for an empty list."""
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            build.generate_exploratory_palettes([], tmp_dir)
+            assert os.listdir(tmp_dir) == []
+
+    def test_each_file_has_correct_content(self):
+        """Test that each generated file has the correct content."""
+        palettes = [
+            {
+                "name": "Color Set",
+                "type": "categorical",
+                "description": "",
+                "colors": [
+                    {"key": "Red", "value": "#ff0000"},
+                    {"key": "Blue", "value": "#0000ff"},
+                ],
+            }
+        ]
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            build.generate_exploratory_palettes(palettes, tmp_dir)
+            file_path = os.path.join(tmp_dir, "aiu-ir-palette-color_set.json")
+            with open(file_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            assert data["displayName"] == "Color Set"
+            assert data["colors"] == ["rgba(255,0,0,1)", "rgba(0,0,255,1)"]
+            assert data["textColors"] == []
+            assert data["id"] == "aiu-ir-palette-color_set"

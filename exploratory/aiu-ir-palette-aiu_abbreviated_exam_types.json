@@ -1,0 +1,20 @@
+{
+  "displayName": "AIU Abbreviated Exam Types",
+  "colors": [
+    "rgba(42,87,131,1)",
+    "rgba(91,140,184,1)",
+    "rgba(185,221,241,1)",
+    "rgba(36,105,61,1)",
+    "rgba(179,224,166,1)",
+    "rgba(158,61,34,1)",
+    "rgba(227,100,32,1)",
+    "rgba(245,156,60,1)",
+    "rgba(255,198,133,1)",
+    "rgba(159,54,50,1)",
+    "rgba(89,80,78,1)",
+    "rgba(148,140,136,1)",
+    "rgba(220,212,208,1)"
+  ],
+  "textColors": [],
+  "id": "aiu-ir-palette-aiu_abbreviated_exam_types"
+}

@@ -1,0 +1,13 @@
+{
+  "displayName": "AIU Student Status",
+  "colors": [
+    "rgba(78,127,172,1)",
+    "rgba(255,198,133,1)",
+    "rgba(36,105,61,1)",
+    "rgba(89,162,83,1)",
+    "rgba(159,54,50,1)",
+    "rgba(73,82,94,1)"
+  ],
+  "textColors": [],
+  "id": "aiu-ir-palette-aiu_student_status"
+}

@@ -1,0 +1,11 @@
+{
+  "displayName": "AIU Inbound Student Length of Stay",
+  "colors": [
+    "rgba(245,223,77,1)",
+    "rgba(250,114,104,1)",
+    "rgba(15,76,129,1)",
+    "rgba(95,75,139,1)"
+  ],
+  "textColors": [],
+  "id": "aiu-ir-palette-aiu_inbound_student_length_of_stay"
+}
