@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD040 -->
+
 # Exploratory Desktop Color Palettes
 
 > [!CAUTION]
