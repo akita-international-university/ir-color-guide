@@ -45,7 +45,11 @@ def test_department_and_contact_references_are_updated():
         content = (REPO_ROOT / relative_path).read_text(encoding="utf-8")
 
         for expected in expected_terms:
-            assert expected in content
+            assert (
+                expected in content
+            ), f"Expected term {expected!r} not found in {relative_path}"
 
         for outdated in OUTDATED_TERMS:
-            assert outdated not in content
+            assert (
+                outdated not in content
+            ), f"Outdated term {outdated!r} still present in {relative_path}"
