@@ -4,7 +4,7 @@
 
 If you discover a security vulnerability in this project, please report it responsibly.
 
-- **Email**: [ir.div@aiu.ac.jp](mailto:ir.div@aiu.ac.jp)
+- **Email**: [strategic-planning@aiu.ac.jp](mailto:strategic-planning@aiu.ac.jp)
 
 > [!IMPORTANT]
 > Please do NOT use GitHub issues or discussions to report security vulnerabilities.
