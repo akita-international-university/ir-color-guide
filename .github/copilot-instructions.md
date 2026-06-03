@@ -4,7 +4,7 @@
 
 ## Overview
 
-This repository contains the IR Data Visualization Color Guidelines for Akita International University (AIU). It defines and manages color palettes for data visualization produced by the Division of Institutional Research (IR). The repository uses a single source of truth (`palettes.yml`) to generate platform-specific files for Tableau and R.
+This repository contains the IR Data Visualization Color Guidelines for Akita International University (AIU). It defines and manages color palettes for data visualization produced by the Office of Strategic Planning. The repository uses a single source of truth (`palettes.yml`) to generate platform-specific files for Tableau and R.
 
 ## Repository Structure
 
@@ -142,9 +142,9 @@ The `palettes.yml` file is the single source of truth. Structure:
 
 ```yaml
 organization:
-  name: 'Division of Institutional Research, Office of Academic Affairs, AIU'
-  name_ja: '国際教養大学教務課教学IRチーム'
-  email: 'ir.div@aiu.ac.jp'
+  name: 'Office of Strategic Planning, AIU'
+  name_ja: '国際教養大学企画戦略課'
+  email: 'strategic-planning@aiu.ac.jp'
 palettes:
   - name: 'Palette Name'
     type: 'categorical' # categorical, sequential, or diverging

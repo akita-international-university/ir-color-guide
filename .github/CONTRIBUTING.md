@@ -3,7 +3,7 @@
 Thank you for your interest in the IR Data Visualization Color Guidelines repository!
 
 > [!IMPORTANT]
-> **This repository is maintained by the Division of Institutional Research at Akita International University (AIU) as an internal guideline for the AIU community.** While we warmly welcome suggestions, questions, and comments via GitHub issues, we do not expect or solicit pull requests from members outside the AIU community.
+> **This repository is maintained by the Office of Strategic Planning at Akita International University (AIU) as an internal guideline for the AIU community.** While we warmly welcome suggestions, questions, and comments via GitHub issues, we do not expect or solicit pull requests from members outside the AIU community.
 >
 > This repository is disclosed publicly to:
 >
@@ -56,9 +56,9 @@ The `palettes.yml` file is the **single source of truth** for all color palettes
 
 ```yaml
 organization:
-  name: 'Division of Institutional Research, Office of Academic Affairs, AIU'
-  name_ja: '国際教養大学教務課教学IRチーム'
-  email: 'ir.div@aiu.ac.jp'
+  name: 'Office of Strategic Planning, AIU'
+  name_ja: '国際教養大学企画戦略課'
+  email: 'strategic-planning@aiu.ac.jp'
 palettes:
   - name: 'Palette Name'
     type: 'categorical' # categorical, sequential, or diverging
@@ -173,7 +173,7 @@ Please note that this project has a [Code of Conduct](https://github.com/akita-i
 If you have any questions about contributing, please:
 
 - Open a [GitHub issue](https://github.com/akita-international-university/ir-color-guide/issues/new) for technical questions or suggestions
-- Contact the Division of Institutional Research at [ir.div@aiu.ac.jp](mailto:ir.div@aiu.ac.jp) for general inquiries
+- Contact the Office of Strategic Planning at [strategic-planning@aiu.ac.jp](mailto:strategic-planning@aiu.ac.jp) for general inquiries
 
 ## License
 

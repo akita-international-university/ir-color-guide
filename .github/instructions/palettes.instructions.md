@@ -50,9 +50,9 @@ Verify that `palettes.yml` follows the correct structure:
 
 ```yaml
 organization:
-  name: 'Division of Institutional Research, Office of Academic Affairs, AIU'
-  name_ja: '国際教養大学教務課教学IRチーム'
-  email: 'ir.div@aiu.ac.jp'
+  name: 'Office of Strategic Planning, AIU'
+  name_ja: '国際教養大学企画戦略課'
+  email: 'strategic-planning@aiu.ac.jp'
 palettes:
   - name: 'Palette Name'
     type: 'categorical' # categorical, sequential, or diverging
