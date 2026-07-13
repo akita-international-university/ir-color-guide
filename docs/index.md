@@ -1,6 +1,6 @@
+---
+---
 # IR Data Visualization Color Guidelines
-
-[日本語]({{ '/ja/' | relative_url }})
 
 This is the initial GitHub Pages skeleton for issue #114.
 
