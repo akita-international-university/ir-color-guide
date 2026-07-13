@@ -1,6 +1,6 @@
+---
+---
 # IRデータ可視化配色ガイドライン
-
-[English]({{ '/' | relative_url }})
 
 これは issue #114 に向けた GitHub Pages の初期スケルトンです。
 
