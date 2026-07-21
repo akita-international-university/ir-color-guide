@@ -1,5 +1,6 @@
 ---
 ---
+
 # IR Data Visualization Color Guidelines
 
 This is the initial GitHub Pages skeleton for issue #114.
