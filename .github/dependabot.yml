@@ -8,30 +8,39 @@ updates:
   - package-ecosystem: 'pip' # See documentation for possible values
     directory: '/' # Location of package manifests
     schedule:
-      interval: 'weekly'
+      interval: 'monthly'
     cooldown:
       default-days: 7
     assignees:
       - 'ttsukagoshi'
     target-branch: 'main'
-    open-pull-requests-limit: 10
+    groups:
+      monthly-batch:
+        patterns:
+          - '*'
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
-      interval: 'weekly'
+      interval: 'monthly'
     cooldown:
       default-days: 7
     assignees:
       - 'ttsukagoshi'
     target-branch: 'main'
-    open-pull-requests-limit: 10
+    groups:
+      monthly-batch:
+        patterns:
+          - '*'
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
-      interval: 'weekly'
+      interval: 'monthly'
     cooldown:
       default-days: 7
     assignees:
       - 'ttsukagoshi'
     target-branch: 'main'
-    open-pull-requests-limit: 10
+    groups:
+      monthly-batch:
+        patterns:
+          - '*'
