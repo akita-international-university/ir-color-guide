@@ -15,10 +15,10 @@ dependencies = [
 [dependency-groups]
 dev = [
     "black (>=26.5.1)",
-    "isort (>=6.1.0)",
-    "pylint (>=4.0.8)",
+    "isort (>=9.0.2)",
+    "pylint (>=4.1.1)",
     "mypy (>=2.3.1)",
-    "types-pyyaml (>=6.0.12.20260815)",
+    "types-pyyaml (>=6.0.12.20260906)",
     "pytest (>=9.1.1)",
     "pytest-cov (>=7.0.0)",
     "pytest-mock (>=3.15.1)"
