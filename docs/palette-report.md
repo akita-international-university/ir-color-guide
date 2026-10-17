@@ -44,12 +44,12 @@ Results of checking each palette in [`palettes.yml`](../palettes.yml) against th
 
 ## AIU Grades
 
-| Check                     | Result | Details                                                                                                                                                  |
-| ------------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Contrast                  | WARN   | Below 3:1 (use labels or a data table): A- (`#b3e0a6`) 1.49:1, B- (`#bce4d8`) 1.38:1, C- (`#eec9e5`) 1.49:1, D (`#ffc685`) 1.54:1, F* (`#ffbeb2`) 1.58:1 |
-| Color vision deficiencies | PASS   | Adjacent minimum 15.9 at C+ (`#7c4d79`) / C (`#b27ba1`); all pairs minimum 1.1 (reference)                                                               |
-| Typical color vision      | PASS   | Adjacent minimum 16.2 at C+ (`#7c4d79`) / C (`#b27ba1`)                                                                                                  |
-| Number of colors          | WARN   | 15 colors; group the categories after the 8th into 'Other'                                                                                               |
+| Check                     | Result | Details                                                                                                                                                   |
+| ------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Contrast                  | WARN   | Below 3:1 (use labels or a data table): A- (`#b3e0a6`) 1.49:1, B- (`#bce4d8`) 1.38:1, C- (`#eec9e5`) 1.49:1, D (`#ffc685`) 1.54:1, F\* (`#ffbeb2`) 1.58:1 |
+| Color vision deficiencies | PASS   | Adjacent minimum 15.9 at C+ (`#7c4d79`) / C (`#b27ba1`); all pairs minimum 1.1 (reference)                                                                |
+| Typical color vision      | PASS   | Adjacent minimum 16.2 at C+ (`#7c4d79`) / C (`#b27ba1`)                                                                                                   |
+| Number of colors          | WARN   | 15 colors; group the categories after the 8th into 'Other'                                                                                                |
 
 | Key | Color     | Contrast against `#ffffff` | OKLCH L |
 | --- | --------- | -------------------------- | ------- |
@@ -66,7 +66,7 @@ Results of checking each palette in [`palettes.yml`](../palettes.yml) against th
 | D   | `#ffc685` | 1.54:1                     | 0.864   |
 | F   | `#d3293d` | 5.05:1                     | 0.565   |
 | P   | `#5b8cb8` | 3.57:1                     | 0.623   |
-| F*  | `#ffbeb2` | 1.58:1                     | 0.858   |
+| F\* | `#ffbeb2` | 1.58:1                     | 0.858   |
 | AP  | `#4e79a7` | 4.55:1                     | 0.564   |
 
 ## AIU Abbreviated Exam Types

@@ -515,8 +515,14 @@ def format_text_report(results: List[PaletteResult]) -> str:
 
 
 def _escape(text: str) -> str:
-    """Escape characters that break a Markdown table cell."""
-    return text.replace("|", "\\|")
+    """
+    Escape characters that break a Markdown table cell or start emphasis.
+
+    `*` is escaped because Prettier escapes it in versions up to 3.8 but not in
+    later versions, while the escaped form is kept as-is by both. `_` is left
+    unescaped for the same reason in reverse.
+    """
+    return text.replace("|", "\\|").replace("*", "\\*")
 
 
 def render_markdown_report(results: List[PaletteResult]) -> str:

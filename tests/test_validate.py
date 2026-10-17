@@ -289,11 +289,11 @@ class TestReports:
     def test_markdown_report(self):
         """The report has a summary row and a color row for each palette."""
         palette = make_palette(["#000000"])
-        palette["colors"][0]["key"] = "A|B"
+        palette["colors"][0]["key"] = "A|B*"
         report = validate.render_markdown_report(validate.check_palettes([palette]))
         assert report.startswith("<!-- markdownlint-disable MD013 -->")
         assert "| Test | categorical | not set | PASS |" in report
-        assert "| A\\|B | `#000000` | 21.00:1 | 0.000 |" in report
+        assert "| A\\|B\\* | `#000000` | 21.00:1 | 0.000 |" in report
 
     def test_committed_report_is_up_to_date(self):
         """docs/palette-report.md matches palettes.yml (run `poetry run build`)."""
