@@ -49,7 +49,13 @@ AIU Design Systemは、AIUのウェブアクセシビリティ方針（[ウェ�
 
 ### 自動チェック
 
-上記の基準を満たしているかどうかは、`poetry run test`で自動的に判定する予定です（[#137](https://github.com/akita-international-university/ir-color-guide/issues/137)）。パレットのアクセシビリティ向上に向けた提案やフィードバックは歓迎です。
+上記の基準を満たしているかどうかは、`poetry run validate`で自動的に判定します。このチェックは`poetry run build`および`poetry run test`の中でも実行されます（[#137](https://github.com/akita-international-university/ir-color-guide/issues/137)）。チェックの内容は以下のとおりです。
+
+- すべてのパレットについて、背景（`#ffffff`）とのコントラスト
+- カテゴリのパレットについて、通常の色覚と1型・2型色覚のシミュレーションにおける隣接色のOKLab距離、および色数
+- 連続的なパレット、両極のパレットの各側、および順序のある区分のパレットについて、明度の段階
+
+判定結果は[パレット検証レポート](./docs/palette-report.md)で公開しています。当面は、基準を満たさない場合も警告の表示にとどめます。基準を満たすよう改修し、適合済み（validated）として明示したパレット（[#138](https://github.com/akita-international-university/ir-color-guide/issues/138)）については、基準を満たさない場合にエラーとします。パレットのアクセシビリティ向上に向けた提案やフィードバックは歓迎です。
 
 ## 基本カラーパレットの定義
 

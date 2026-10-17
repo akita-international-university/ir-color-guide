@@ -487,7 +487,8 @@ def generate_exploratory_palettes(
 
 def main():
     """
-    Main function to convert palettes.yml to Tableau, R, and Exploratory files.
+    Main function to check palettes.yml and convert it to Tableau, R, and
+    Exploratory files.
     """
     # Define file paths
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -501,6 +502,9 @@ def main():
     print(f"Loading palettes from {yaml_path}...")
     palettes = load_palettes(yaml_path)
     print(f"Loaded {len(palettes)} palette(s).")
+
+    # Check palettes against the color criteria and write the validation report
+    subprocess.run(["poetry", "run", "validate"], check=True)
 
     # Ensure output directories exist
     os.makedirs(os.path.dirname(tableau_path), exist_ok=True)
