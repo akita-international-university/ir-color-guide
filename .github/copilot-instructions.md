@@ -98,7 +98,7 @@ This command (`scripts/validate.py`):
 
 1. Checks the contrast of every color against the white background (below 3:1 is a warning)
 2. For categorical palettes, checks the OKLab distance ×100 between adjacent colors under simulated protanopia and deuteranopia (Machado et al. 2009; 8 or more passes, 6 to 8 is a warning, below 6 fails) and under typical color vision (below 15 fails), and warns if there are more than 8 colors
-3. For sequential palettes, each side of diverging palettes, and categorical palettes with `scale: 'ordinal'`, checks that the lightness (OKLCH L) is monotone, that adjacent steps differ by at least 0.06, and that the lightest step has a contrast of at least 2:1
+3. For sequential palettes, each side of diverging palettes, and categorical palettes with `scale: 'ordinal'`, checks that the lightness (OKLCH L) is monotone, that adjacent steps differ by at least 0.06, and that the lightest step has a contrast of at least 2:1 (the last check is skipped for sequential and diverging palettes with `scale: 'continuous'`)
 4. Prints the results and writes the Markdown report `docs/palette-report.md`
 
 Failures are reported as warnings only, except for palettes marked `compliance: 'validated'`, for which the command exits with an error. The thresholds assume the Machado et al. (2009) simulation; revisit them if the simulation method is changed.

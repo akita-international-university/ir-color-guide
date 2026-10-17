@@ -69,6 +69,7 @@ organization:
 palettes:
   - name: 'Palette Name'
     type: 'categorical' # categorical, sequential, or diverging
+    scale: 'ordinal' # Optional: ordinal or continuous
     description: 'Description of the palette'
     credit: 'Optional credit/source information'
     colors:
@@ -99,6 +100,10 @@ Each palette in the `palettes` array must include:
   - `categorical`: For distinct categories with no inherent order (e.g., grades, regions)
   - `sequential`: For ordered data from low to high (e.g., levels, intensities)
   - `diverging`: For data with a meaningful midpoint (e.g., Likert scales)
+
+- **`scale`** (optional): How the palette is checked by `poetry run validate`, must be one of:
+  - `ordinal`: For categorical palettes whose categories have an order; they are checked for lightness steps instead of the distinguishability of adjacent colors
+  - `continuous`: For sequential and diverging palettes for continuous quantities (e.g., heat maps); the contrast of the lightest step is not checked, since it is meant to be close to the background
 
 - **`description`** (required): Clear description of what the palette represents and when to use it
 

@@ -316,7 +316,9 @@ def check_color_count(values: Sequence[str]) -> CheckResult:
     return CheckResult(name, Level.PASS, f"{len(values)} colors")
 
 
-def _check_steps(values: Sequence[str], require_darkening: bool) -> List[str]:
+def _check_steps(
+    values: Sequence[str], require_darkening: bool, check_light_end: bool = True
+) -> List[str]:
     """
     Return the problems found in a series of lightness steps.
 
@@ -324,6 +326,7 @@ def _check_steps(values: Sequence[str], require_darkening: bool) -> List[str]:
         values: Hex color codes in order
         require_darkening: Whether the steps must get darker in order;
             otherwise either direction is accepted
+        check_light_end: Whether to check the contrast of the lightest step
 
     Returns:
         List of problems (empty if none)
@@ -341,7 +344,7 @@ def _check_steps(values: Sequence[str], require_darkening: bool) -> List[str]:
             f"is below {ORDINAL_MIN_DELTA_L}"
         )
     lightest = values[lightness.index(max(lightness))]
-    if contrast(lightest) < ORDINAL_LIGHT_END:
+    if check_light_end and contrast(lightest) < ORDINAL_LIGHT_END:
         problems.append(
             f"lightest step `{lightest}` has a contrast of "
             f"{contrast(lightest):.2f}:1, below {ORDINAL_LIGHT_END:g}:1"
@@ -354,19 +357,28 @@ def _steps_summary(values: Sequence[str]) -> str:
     return " → ".join(f"{value:.3f}" for value in lightness)
 
 
-def check_lightness_steps(values: Sequence[str]) -> CheckResult:
+def _light_end_note(check_light_end: bool) -> str:
+    return "" if check_light_end else "; lightest step not checked (continuous scale)"
+
+
+def check_lightness_steps(
+    values: Sequence[str], check_light_end: bool = True
+) -> CheckResult:
     """
     Check that the colors of an ordered palette form lightness steps.
 
     Args:
         values: Hex color codes in order (light to dark or dark to light)
+        check_light_end: Whether to check the contrast of the lightest step;
+            False for palettes of continuous quantities, whose lightest step
+            is meant to be close to the background
 
     Returns:
         FAIL if the lightness is not monotone, if adjacent steps are too close,
         or if the lightest step is too light against the background
     """
-    problems = _check_steps(values, require_darkening=False)
-    detail = f"OKLCH L {_steps_summary(values)}"
+    problems = _check_steps(values, False, check_light_end)
+    detail = f"OKLCH L {_steps_summary(values)}{_light_end_note(check_light_end)}"
     if problems:
         return CheckResult(
             "Lightness steps", Level.FAIL, detail + "; " + "; ".join(problems)
@@ -391,12 +403,16 @@ def split_diverging(values: Sequence[str]) -> Tuple[List[str], List[str]]:
     return first, second
 
 
-def check_diverging_steps(values: Sequence[str]) -> CheckResult:
+def check_diverging_steps(
+    values: Sequence[str], check_light_end: bool = True
+) -> CheckResult:
     """
     Check that each side of a diverging palette gets darker from the center outward.
 
     Args:
         values: Hex color codes in palette order
+        check_light_end: Whether to check the contrast of the lightest step
+            on each side; False for palettes of continuous quantities
 
     Returns:
         FAIL if either side does not meet the lightness step criteria
@@ -409,9 +425,13 @@ def check_diverging_steps(values: Sequence[str]) -> CheckResult:
         details.append(f"{label} {_steps_summary(side)}")
         problems.extend(
             f"{label}: {problem}"
-            for problem in _check_steps(side, require_darkening=True)
+            for problem in _check_steps(side, True, check_light_end)
         )
-    detail = "OKLCH L from the center: " + "; ".join(details)
+    detail = (
+        "OKLCH L from the center: "
+        + "; ".join(details)
+        + _light_end_note(check_light_end)
+    )
     if problems:
         return CheckResult(
             "Lightness steps", Level.FAIL, detail + "; " + "; ".join(problems)
@@ -426,8 +446,10 @@ def check_palette(palette: Dict[str, Any]) -> PaletteResult:
     Categorical palettes are checked for adjacent color differences and the
     number of colors, unless they are marked `scale: ordinal`, in which case
     they are checked for lightness steps like sequential palettes. Diverging
-    palettes are checked for lightness steps on each side. All palettes are
-    checked for contrast against the background.
+    palettes are checked for lightness steps on each side. For sequential and
+    diverging palettes marked `scale: continuous`, which are meant for continuous
+    quantities, the contrast of the lightest step is not checked. All palettes
+    are checked for contrast against the background.
 
     Args:
         palette: Palette dictionary
@@ -440,10 +462,14 @@ def check_palette(palette: Dict[str, Any]) -> PaletteResult:
     keys = [str(color.get("key", "")) for color in colors]
     values = [str(color.get("value", "")) for color in colors]
 
+    check_light_end = palette.get("scale") != "continuous"
+
     checks = [check_contrast(keys, values)]
     if palette_type == "diverging":
-        checks.append(check_diverging_steps(values))
-    elif palette_type == "sequential" or palette.get("scale") == "ordinal":
+        checks.append(check_diverging_steps(values, check_light_end))
+    elif palette_type == "sequential":
+        checks.append(check_lightness_steps(values, check_light_end))
+    elif palette.get("scale") == "ordinal":
         checks.append(check_lightness_steps(values))
     else:
         checks.extend(
