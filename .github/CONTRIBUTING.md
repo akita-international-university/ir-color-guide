@@ -52,6 +52,13 @@ Key points to remember:
 
 The `palettes.yml` file is the **single source of truth** for all color palettes in this repository. All platform-specific files (Tableau, R) are automatically generated from this file.
 
+### Requirements for New Palettes
+
+A new palette can be added to `palettes.yml` only if it meets **all** of the [quantitative criteria](../README.md#quantitative-criteria) in the Policy section of the README, which are based on the color standards of the AIU Design System. In addition:
+
+- Follow the order of priority described in [How to choose a palette](../README.md#how-to-choose-a-palette). Before adding a new palette, check whether a domain-specific palette or a basic palette of the AIU Design System can be used instead.
+- Do not add new palettes that do not meet the criteria, even for compatibility with existing materials. Palettes kept for compatibility are limited to the existing ones marked as legacy (see [Existing palettes](../README.md#existing-palettes)).
+
 ### File Structure
 
 ```yaml
@@ -156,10 +163,7 @@ When proposing changes to `palettes.yml`:
 
 1. Ensure all color values follow the format `#[a-f0-9]{6}` (lowercase hex)
 2. Verify that palette names and color keys are unique
-3. Consider accessibility:
-   - Prefer colorblind-friendly palettes from RColorBrewer when possible
-   - Ensure sufficient contrast for readability
-   - Test colors with colorblind simulation tools if available
+3. Verify that new or modified palettes meet the [Requirements for New Palettes](#requirements-for-new-palettes), including the contrast and color vision deficiency simulation criteria
 4. Run `poetry run build` to generate the platform-specific files
 5. Run `poetry run test` to ensure all tests pass
 6. Submit your changes with a clear description of the rationale
