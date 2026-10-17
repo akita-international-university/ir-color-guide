@@ -14,12 +14,42 @@ All visualized data produced by the Office of Strategic Planning, including, but
 
 ## Policy
 
-Palettes should be set in adherence with AIU's web accessibility policy at [AIUウェブアクセシビリティ方針](https://web.aiu.ac.jp/web-accessibility-policy/). Moreover, since AIU's web accessibility policies are set in line with the latest stable version of the Web Content Accessibility Guidelines (WCAG), the latter should be referenced for any aspects not explicitly covered by the former.
+### Governing standard
 
-Whenever applicable, all new palettes should be chosen from the colorblind-friendly palettes of the [`RColorBrewer` package](https://cran.r-project.org/web/packages/RColorBrewer/index.html) in R to ensure that materials produced by the Office of Strategic Planning can be comprehensible regardless of the recipients' color blindness.
+Palettes follow the color standards of the AIU Design System, the university's design standard for documents, web pages, dashboards, and charts. This repository is the implementation of those standards for data visualization tools: it manages and generates the palette files that make the same colors available in Tableau, R, and Exploratory Desktop.
 
-> [!NOTE]
-> While we strive to ensure that all visualizations produced by the Office of Strategic Planning are accessible to people with color vision deficiencies, we acknowledge that under our current resources available, it was only practical to migrate the majority of our color palettes from existing visualizations that are not fully colorblind-friendly. We will continue to work towards improving the accessibility of our visualizations over time. Any suggestions and feedback, particularly those that help us automate the process of ensuring colorblind-friendliness, are highly appreciated.
+The AIU Design System is based on AIU's web accessibility policy ([AIUウェブアクセシビリティ方針](https://web.aiu.ac.jp/web-accessibility-policy/)) and adopts Level AA of the Web Content Accessibility Guidelines (WCAG) 2.2 as its baseline. Since the AIU Design System is an internal resource, the key criteria for palettes are summarized below. For any aspects not covered here, refer to the web accessibility policy and WCAG 2.2.
+
+### Quantitative criteria
+
+Every palette in this repository should meet the following criteria. In these criteria, "adjacent colors" are colors placed next to each other in the order of a palette, and the OKLab distance is the Euclidean distance between two colors in the OKLab color space, multiplied by 100.
+
+| Aspect                       | Criterion                                                                                                                                                                                                                                   |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Contrast with the background | Graphical elements in a chart should have a contrast ratio of at least 3:1 against the background (WCAG 2.2 SC 1.4.11). When using a color that does not meet this criterion, always provide direct labels or a data table alongside it.    |
+| Color vision deficiencies    | In the protanopia and deuteranopia simulations of Machado et al. (2009), the OKLab distance between adjacent colors should be at least 8. A distance between 6 and 8 is acceptable only with supplementary cues such as labels or patterns. |
+| Typical color vision         | The OKLab distance between adjacent colors should be at least 15.                                                                                                                                                                           |
+| Number of categorical colors | Up to 8 colors, assigned in a fixed order. Group the ninth and subsequent categories into "Other".                                                                                                                                          |
+| Ordered categories           | Use lightness steps of a single hue. The lightness difference (OKLCH L) between adjacent steps should be at least 0.06, and even the lightest step should have a contrast ratio of at least 2:1 against the background.                     |
+| Diverging (two-sided) data   | Use two hues with a neutral gray in the middle: green for the positive side and purple for the negative side.                                                                                                                               |
+| Categories implying good/bad | Do not rely on color alone; always add labels or icons.                                                                                                                                                                                     |
+| Text                         | Do not color value labels or legend text with palette colors; use a dark (near-black) text color.                                                                                                                                           |
+
+### How to choose a palette
+
+Choose a palette in the following order of priority:
+
+1. A domain-specific palette defined for the variable being visualized (e.g., grades, admission types).
+2. The basic palettes of the AIU Design System, which start with the school color `#339028` (to be added in [#132](https://github.com/akita-international-university/ir-color-guide/issues/132)).
+3. Only if neither of the above is available, a colorblind-friendly palette of the [`RColorBrewer` package](https://cran.r-project.org/web/packages/RColorBrewer/index.html) in R that meets the criteria above (see [Technical Note](#technical-note)).
+
+### Existing palettes
+
+Some palettes in this repository were migrated as-is from existing visualizations and do not fully meet the criteria above. Such palettes will be explicitly marked as "legacy" palettes, kept for compatibility with existing materials ([#138](https://github.com/akita-international-university/ir-color-guide/issues/138)). Legacy palettes should not be used in new materials. A migration guide from each legacy palette to its replacement will be provided ([#139](https://github.com/akita-international-university/ir-color-guide/issues/139)).
+
+### Automated checks
+
+Compliance with the criteria above will be checked automatically by `poetry run test` ([#137](https://github.com/akita-international-university/ir-color-guide/issues/137)). Any suggestions and feedback on improving the accessibility of our palettes are highly appreciated.
 
 ## Basic Color Palette Definitions
 
