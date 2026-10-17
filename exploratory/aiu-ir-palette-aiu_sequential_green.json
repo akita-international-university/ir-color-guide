@@ -1,0 +1,14 @@
+{
+  "displayName": "AIU Sequential Green",
+  "colors": [
+    "rgba(226,245,223,1)",
+    "rgba(181,227,175,1)",
+    "rgba(115,193,105,1)",
+    "rgba(82,170,71,1)",
+    "rgba(51,144,40,1)",
+    "rgba(36,105,28,1)",
+    "rgba(21,67,16,1)"
+  ],
+  "textColors": [],
+  "id": "aiu-ir-palette-aiu_sequential_green"
+}

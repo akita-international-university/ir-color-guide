@@ -1,0 +1,15 @@
+{
+  "displayName": "AIU Categorical",
+  "colors": [
+    "rgba(51,144,40,1)",
+    "rgba(40,99,171,1)",
+    "rgba(165,60,117,1)",
+    "rgba(170,130,30,1)",
+    "rgba(93,64,153,1)",
+    "rgba(203,102,32,1)",
+    "rgba(5,147,147,1)",
+    "rgba(150,55,43,1)"
+  ],
+  "textColors": [],
+  "id": "aiu-ir-palette-aiu_categorical"
+}
