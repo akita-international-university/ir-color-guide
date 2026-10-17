@@ -16,7 +16,7 @@
 
 ### 上位の基準
 
-パレットは、国際教養大学の資料・ウェブページ・ダッシュボード・グラフのデザイン基準であるAIU Design Systemの配色基準に従うこととします。本リポジトリは、この基準をデータ可視化ツールで実装するためのものであり、同じ配色をTableau、R、Exploratory Desktopで使用するためのパレットファイルを管理・生成します。
+パレットは、企画戦略課の資料・ウェブページ・ダッシュボード・グラフのデザイン基準であるAIU Design Systemの配色基準に従うこととします。本リポジトリは、この基準をデータ可視化ツールで実装するためのものであり、同じ配色をTableau、R、Exploratory Desktopで使用するためのパレットファイルを管理・生成します。
 
 AIU Design Systemは、AIUのウェブアクセシビリティ方針（[ウェブアクセシビリティ方針 | 公立大学法人 国際教養大学 | Akita International University](https://web.aiu.ac.jp/web-accessibility-policy/)）に基づき、Web Content Accessibility Guidelines（WCAG）2.2のレベルAAを基準としています。AIU Design Systemは学内向けの資料であるため、パレットに関する基準の要点を以下に記載します。ここに記載のない事項は、ウェブアクセシビリティ方針およびWCAG 2.2を参照することとします。
 

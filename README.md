@@ -6,17 +6,17 @@
 
 ## Purpose
 
-The purpose of this document is to ensure consistency, visibility, and accessibility for the output produced by the Office of Strategic Planning at Akita International University (AIU) by defining a clear set of policies and practices for the palettes, i.e., set of colors, that are used in data visualizations produced by the office.
+The purpose of this document is to ensure consistency, visibility, and accessibility for the output produced by the Office of Strategic Planning ("the Office") at Akita International University (AIU) by defining a clear set of policies and practices for the palettes, i.e., set of colors, that are used in data visualizations produced by the office.
 
 ## Scope
 
-All visualized data produced by the Office of Strategic Planning, including, but not limited to dashboards, reports, plots, and presentation materials.
+All visualized data produced by the Office, including, but not limited to dashboards, reports, plots, and presentation materials.
 
 ## Policy
 
 ### Governing standard
 
-Palettes follow the color standards of the AIU Design System, the university's design standard for documents, web pages, dashboards, and charts. This repository is the implementation of those standards for data visualization tools: it manages and generates the palette files that make the same colors available in Tableau, R, and Exploratory Desktop.
+Palettes follow the color standards of the AIU Design System, the Office's design standard for documents, web pages, dashboards, and charts. This repository is the implementation of those standards for data visualization tools: it manages and generates the palette files that make the same colors available in Tableau, R, and Exploratory Desktop.
 
 The AIU Design System is based on AIU's web accessibility policy ([AIUウェブアクセシビリティ方針](https://web.aiu.ac.jp/web-accessibility-policy/)) and adopts Level AA of the Web Content Accessibility Guidelines (WCAG) 2.2 as its baseline. Since the AIU Design System is an internal resource, the key criteria for palettes are summarized below. For any aspects not covered here, refer to the web accessibility policy and WCAG 2.2.
 
