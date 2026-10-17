@@ -49,7 +49,13 @@ Some palettes in this repository were migrated as-is from existing visualization
 
 ### Automated checks
 
-Compliance with the criteria above will be checked automatically by `poetry run test` ([#137](https://github.com/akita-international-university/ir-color-guide/issues/137)). Any suggestions and feedback on improving the accessibility of our palettes are highly appreciated.
+Compliance with the criteria above is checked automatically by `poetry run validate`, which also runs as part of `poetry run build` and `poetry run test` ([#137](https://github.com/akita-international-university/ir-color-guide/issues/137)). The checks cover:
+
+- Contrast against the background (`#ffffff`) for all palettes.
+- For categorical palettes, the OKLab distance between adjacent colors under typical color vision and simulated protanopia and deuteranopia, and the number of colors.
+- For sequential palettes, each side of diverging palettes, and categorical palettes with ordered categories, the lightness steps.
+
+The results are published in the [palette validation report](./docs/palette-report.md). For now, failures are reported as warnings only. Once a palette has been revised to meet the criteria and marked as validated ([#138](https://github.com/akita-international-university/ir-color-guide/issues/138)), any failure of that palette is treated as an error. Any suggestions and feedback on improving the accessibility of our palettes are highly appreciated.
 
 ## Basic Color Palette Definitions
 

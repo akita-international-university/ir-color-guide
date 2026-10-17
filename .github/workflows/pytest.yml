@@ -33,5 +33,9 @@ jobs:
           cache: 'poetry'
       - name: Install dependencies
         run: poetry install
+      # Run pytest before validate: validate overwrites docs/palette-report.md,
+      # so the freshness test must read the committed report first.
       - name: Test with pytest
         run: poetry run pytest
+      - name: Check palettes
+        run: poetry run validate

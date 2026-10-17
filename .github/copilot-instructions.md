@@ -20,6 +20,7 @@ This repository contains the IR Data Visualization Color Guidelines for Akita In
 │   ├── formatter.py          # Runs all formatters (Prettier, isort, black)
 │   ├── linter.py             # Runs all linters (mypy, pylint)
 │   ├── test.py               # Runs tests with pytest
+│   ├── validate.py           # Checks palettes against the color criteria
 │   └── version.py            # Version information
 ├── tests/                     # Pytest test files
 │   ├── __init__.py           # Test package initialization
@@ -27,7 +28,10 @@ This repository contains the IR Data Visualization Color Guidelines for Akita In
 │   ├── test_formatter.py     # Tests for formatter.py
 │   ├── test_linter.py        # Tests for linter.py
 │   ├── test_test.py          # Tests for test.py
+│   ├── test_validate.py      # Tests for validate.py
 │   └── test_version.py       # Tests for version.py
+├── docs/                     # GitHub Pages site
+│   └── palette-report.md     # AUTO-GENERATED - DO NOT EDIT (palette validation report)
 ├── r_script/                 # Generated R color palette scripts
 │   └── ir_color_palettes.R   # AUTO-GENERATED - DO NOT EDIT
 ├── tableau/                  # Generated Tableau preference files
@@ -74,11 +78,30 @@ poetry run build
 This command:
 
 1. Reads `palettes.yml`
-2. Generates `tableau/Preferences.tps` (Tableau color preferences)
-3. Generates `r_script/ir_color_palettes.R` (R color palette definitions)
-4. Runs Prettier on the generated files
+2. Checks the palettes against the color criteria with `poetry run validate` (see [Palette Checks](#palette-checks)) and writes `docs/palette-report.md`
+3. Generates `tableau/Preferences.tps` (Tableau color preferences)
+4. Generates `r_script/ir_color_palettes.R` (R color palette definitions)
+5. Generates the Exploratory Desktop palette JSON files in `exploratory/`
+6. Runs Prettier on the generated files
 
 **IMPORTANT:** Always run this after modifying `palettes.yml`.
+
+### Palette Checks
+
+**Check the palettes against the quantitative criteria in the README:**
+
+```bash
+poetry run validate
+```
+
+This command (`scripts/validate.py`):
+
+1. Checks the contrast of every color against the white background (below 3:1 is a warning)
+2. For categorical palettes, checks the OKLab distance ×100 between adjacent colors under simulated protanopia and deuteranopia (Machado et al. 2009; 8 or more passes, 6 to 8 is a warning, below 6 fails) and under typical color vision (below 15 fails), and warns if there are more than 8 colors
+3. For sequential palettes, each side of diverging palettes, and categorical palettes with `scale: 'ordinal'`, checks that the lightness (OKLCH L) is monotone, that adjacent steps differ by at least 0.06, and that the lightest step has a contrast of at least 2:1
+4. Prints the results and writes the Markdown report `docs/palette-report.md`
+
+Failures are reported as warnings only, except for palettes marked `compliance: 'validated'`, for which the command exits with an error. The thresholds assume the Machado et al. (2009) simulation; revisit them if the simulation method is changed.
 
 ### Code Formatting
 
@@ -119,9 +142,10 @@ poetry run test
 
 This command:
 
-1. Runs the formatter (Prettier, isort, black)
-2. Runs the linter (mypy, pylint)
-3. Executes pytest with coverage reporting
+1. Runs the palette checks (`poetry run validate`)
+2. Runs the formatter (Prettier, isort, black)
+3. Runs the linter (mypy, pylint)
+4. Executes pytest with coverage reporting
 
 **IMPORTANT:** Always run `poetry run test` after making changes to Python scripts to ensure all tests pass before committing.
 
@@ -133,6 +157,8 @@ These files are automatically generated and should **NEVER** be edited manually:
 
 - `tableau/Preferences.tps`
 - `r_script/ir_color_palettes.R`
+- `exploratory/aiu-ir-palette-*.json`
+- `docs/palette-report.md`
 
 Always edit `palettes.yml` and run `poetry run build` to update these files.
 
@@ -245,9 +271,10 @@ Weekly updates assigned to @ttsukagoshi.
 
 1. Edit `palettes.yml` to add the new palette
 2. Run `poetry run build` to generate files
-3. Run `poetry run formatter` to ensure formatting
-4. Run `poetry run linter` to verify code quality
-5. Commit changes
+3. Confirm that the new palette has no `FAIL` results in `docs/palette-report.md`
+4. Run `poetry run formatter` to ensure formatting
+5. Run `poetry run linter` to verify code quality
+6. Commit changes
 
 ### Modifying Existing Palettes
 

@@ -163,7 +163,7 @@ When proposing changes to `palettes.yml`:
 
 1. Ensure all color values follow the format `#[a-f0-9]{6}` (lowercase hex)
 2. Verify that palette names and color keys are unique
-3. Verify that new or modified palettes meet the [Requirements for New Palettes](#requirements-for-new-palettes), including the contrast and color vision deficiency simulation criteria
+3. Verify that new or modified palettes meet the [Requirements for New Palettes](#requirements-for-new-palettes), including the contrast and color vision deficiency simulation criteria. Run `poetry run validate` to check them automatically; the results are printed and written to `docs/palette-report.md`
 4. Run `poetry run build` to generate the platform-specific files
 5. Run `poetry run test` to ensure all tests pass
 6. Submit your changes with a clear description of the rationale

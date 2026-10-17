@@ -18,6 +18,7 @@ def test_main(mocker):
     # Assert
     mock_subprocess.assert_has_calls(
         [
+            mocker.call(["poetry", "run", "validate"], check=True),
             mocker.call(["poetry", "run", "linter"], check=True),
             mocker.call(["poetry", "run", "pytest"], check=True),
         ],

@@ -1256,7 +1256,11 @@ class TestMain:
         mock_generate_r.assert_called_once()
         mock_generate_exploratory.assert_called_once()
         mock_subprocess.assert_has_calls(
-            [mocker.call(["poetry", "run", "formatter"], check=True)], any_order=False
+            [
+                mocker.call(["poetry", "run", "validate"], check=True),
+                mocker.call(["poetry", "run", "formatter"], check=True),
+            ],
+            any_order=False,
         )
         assert (  # For tableau, r_script, and exploratory directories
             mock_makedirs.call_count == 3
