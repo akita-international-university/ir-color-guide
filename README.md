@@ -105,12 +105,12 @@ source("path/to/this/repository/r_script/ir_color_palettes.R")
 # ggplot2 usage example: responses to a five-point Likert scale in stacked bars
 df |>
   mutate(response = factor(response, levels = names(color_values_5_scale_likert))) |>
-  ggplot(aes(x = proportion, y = question, fill = response)) +
+  ggplot(aes(x = proportion, y = question, fill = response, group = response)) + # Same stacking order for bars and labels
   geom_col(color = "white", linewidth = 0.7) + # About 2px white gaps between segments
   geom_text(
     aes(
       label = scales::percent(proportion, accuracy = 1),
-      color = if_else(response == "Neutral", "black", "white")
+      color = if_else(response %in% c("Agree", "Neutral"), "black", "white") # 4.5:1 or more against each fill
     ),
     position = position_stack(vjust = 0.5)
   ) +
