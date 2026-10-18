@@ -217,3 +217,53 @@ color_values_aiu_outbound_study_abroad_program <- c(
     "FP(SP-A)" = "#d4a6c8",
     "※IS" = "#ff9d9a"
 )
+
+color_values_aiu_categorical <- c(
+    # Type: Categorical
+    # Description: Base categorical palette of the AIU Design System, starting with the school color. Use it for variables without a domain-specific palette. Assign the colors in this fixed order and never skip or reorder them, since the order itself keeps adjacent colors distinguishable for color vision deficiencies. Group the ninth and subsequent categories into 'Other'. In charts where any two colors may be adjacent, such as scatter plots and maps, use only the first three colors.
+    # Credit: AIU Design System (chart-1 to chart-8)
+    "Green" = "#339028",
+    "Blue" = "#2863ab",
+    "Magenta" = "#a53c75",
+    "Ochre" = "#aa821e",
+    "Violet" = "#5d4099",
+    "Orange" = "#cb6620",
+    "Teal" = "#059393",
+    "Brick" = "#96372b"
+)
+
+color_values_aiu_sequential_green <- c(
+    # Type: Sequential
+    # Description: Base sequential palette of the AIU Design System, from light (small values) to dark (large values). Use it for quantities such as heat maps and choropleth maps. The lightest steps are close to the background; for ordered categories, use the five steps from 3 to 7.
+    # Credit: AIU Design System (seq-1 to seq-7)
+    "1" = "#e2f5df",
+    "2" = "#b5e3af",
+    "3" = "#73c169",
+    "4" = "#52aa47",
+    "5" = "#339028",
+    "6" = "#24691c",
+    "7" = "#154310"
+)
+
+color_values_aiu_diverging_purple_green <- c(
+    # Type: Diverging
+    # Description: Base diverging palette of the AIU Design System, with purple for the negative side, a neutral gray in the middle, and green for the positive side. Use it for values on both sides of a reference point, such as year-over-year changes or positive and negative ratings.
+    # Credit: AIU Design System (div-neg-3 to div-mid to div-pos-3)
+    "Negative 3" = "#5a2769",
+    "Negative 2" = "#9b5bae",
+    "Negative 1" = "#d8b6e2",
+    "Neutral" = "#ebeeea",
+    "Positive 1" = "#9bd693",
+    "Positive 2" = "#339028",
+    "Positive 3" = "#194e13"
+)
+
+color_values_aiu_status <- c(
+    # Type: Categorical
+    # Description: Status palette of the AIU Design System, only for series that imply good or bad, such as achieved and not achieved. Success is a blue-green so that it is not distinguished from the school color green or the danger red by hue alone. Never rely on color alone; always add labels or icons. Info is placed between Warning and Danger so that the two are not adjacent.
+    # Credit: AIU Design System (success, warning, danger, info)
+    "Success" = "#056965",
+    "Warning" = "#8a560c",
+    "Info" = "#285e9f",
+    "Danger" = "#b02b27"
+)

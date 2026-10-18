@@ -1,0 +1,14 @@
+{
+  "displayName": "AIU Diverging Purple-Green",
+  "colors": [
+    "rgba(90,39,105,1)",
+    "rgba(155,91,174,1)",
+    "rgba(216,182,226,1)",
+    "rgba(235,238,234,1)",
+    "rgba(155,214,147,1)",
+    "rgba(51,144,40,1)",
+    "rgba(25,78,19,1)"
+  ],
+  "textColors": [],
+  "id": "aiu-ir-palette-aiu_diverging_purple_green"
+}

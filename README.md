@@ -40,8 +40,19 @@ Every palette in this repository should meet the following criteria. In these cr
 Choose a palette in the following order of priority:
 
 1. A domain-specific palette defined for the variable being visualized (e.g., grades, admission types).
-2. The basic palettes of the AIU Design System, which start with the school color `#339028` (to be added in [#132](https://github.com/akita-international-university/ir-color-guide/issues/132)).
+2. The [basic palettes](#basic-palettes) of the AIU Design System, which start with the school color `#339028`.
 3. Only if neither of the above is available, a colorblind-friendly palette of the [`RColorBrewer` package](https://cran.r-project.org/web/packages/RColorBrewer/index.html) in R that meets the criteria above (see [Technical Note](#technical-note)).
+
+### Basic palettes
+
+The basic palettes of the AIU Design System are for variables without a domain-specific palette. Their colors are the values of the AIU Design System tokens for the light theme (white background).
+
+| Palette                    | Type                  | Use                                                                                                                                                                                                                                                                                                                 |
+| -------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| AIU Categorical            | Categorical, 8 colors | Categories without an inherent order. Assign the colors in the fixed order starting with the school color, and never skip or reorder them. Group the ninth and subsequent categories into "Other". In charts where any two colors may be adjacent, such as scatter plots and maps, use only the first three colors. |
+| AIU Sequential Green       | Sequential, 7 steps   | Quantities, such as heat maps and choropleth maps. The smaller the value, the closer the color is to the background. For ordered categories, use the five steps from 3 to 7.                                                                                                                                        |
+| AIU Diverging Purple-Green | Diverging, 7 steps    | Values on both sides of a reference point, such as year-over-year changes or positive and negative ratings. Green is for the positive side and purple for the negative side.                                                                                                                                        |
+| AIU Status                 | Categorical, 4 colors | Only for series that imply good or bad, such as achieved and not achieved (Success, Warning, Info, Danger). Always add labels or icons.                                                                                                                                                                             |
 
 ### Existing palettes
 
@@ -53,7 +64,7 @@ Compliance with the criteria above is checked automatically by `poetry run valid
 
 - Contrast against the background (`#ffffff`) for all palettes.
 - For categorical palettes, the OKLab distance between adjacent colors under typical color vision and simulated protanopia and deuteranopia, and the number of colors.
-- For sequential palettes, each side of diverging palettes, and categorical palettes with ordered categories, the lightness steps.
+- For sequential palettes, each side of diverging palettes, and categorical palettes with ordered categories, the lightness steps. For sequential and diverging palettes for continuous quantities (marked `scale: continuous` in `palettes.yml`), the contrast of the lightest step is not checked, since their lightest steps are meant to be close to the background.
 
 The results are published in the [palette validation report](./docs/palette-report.md). For now, failures are reported as warnings only. Once a palette has been revised to meet the criteria and marked as validated ([#138](https://github.com/akita-international-university/ir-color-guide/issues/138)), any failure of that palette is treated as an error. Any suggestions and feedback on improving the accessibility of our palettes are highly appreciated.
 
@@ -83,6 +94,31 @@ df |>
   ggplot(aes(x = year, y = value, fill = category)) +
   geom_col() +
   scale_fill_manual(values = color_values_4scale_likert) # Using a predefined palette
+```
+
+The [basic palettes](#basic-palettes) can be used in the same way. Since each palette is a named vector in R (e.g., `"Green" = "#339028"`), use `unname()` to assign the colors in order when the names do not match the levels of your data:
+
+```r
+# Categorical: assign the colors in order, starting with the school color
+df |>
+  ggplot(aes(x = year, y = value, fill = category)) +
+  geom_col() +
+  scale_fill_manual(values = unname(color_values_aiu_categorical))
+
+# Sequential: continuous quantities
+df |>
+  ggplot(aes(x = x, y = y, fill = value)) +
+  geom_tile() +
+  scale_fill_gradientn(colors = color_values_aiu_sequential_green)
+
+# Sequential: ordered categories (the five steps from 3 to 7)
+scale_fill_manual(values = unname(color_values_aiu_sequential_green[3:7]))
+
+# Diverging: set limits symmetric around the reference point (0 here)
+scale_fill_gradientn(
+  colors = color_values_aiu_diverging_purple_green,
+  limits = c(-1, 1) * max(abs(df$change))
+)
 ```
 
 If you need to refer dynamically to the latest version of the R script without downloading it manually, replace the source file path with the GitHub URL:

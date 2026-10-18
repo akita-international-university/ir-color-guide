@@ -256,5 +256,73 @@
       <!-- ※IS -->
       <color>#ff9d9a</color>
     </color-palette>
+    <color-palette name="AIU Categorical" type="regular">
+      <!-- Base categorical palette of the AIU Design System, starting with the school color. Use it for variables without a domain-specific palette. Assign the colors in this fixed order and never skip or reorder them, since the order itself keeps adjacent colors distinguishable for color vision deficiencies. Group the ninth and subsequent categories into 'Other'. In charts where any two colors may be adjacent, such as scatter plots and maps, use only the first three colors. -->
+      <!-- Credit: AIU Design System (chart-1 to chart-8) -->
+      <!-- Green -->
+      <color>#339028</color>
+      <!-- Blue -->
+      <color>#2863ab</color>
+      <!-- Magenta -->
+      <color>#a53c75</color>
+      <!-- Ochre -->
+      <color>#aa821e</color>
+      <!-- Violet -->
+      <color>#5d4099</color>
+      <!-- Orange -->
+      <color>#cb6620</color>
+      <!-- Teal -->
+      <color>#059393</color>
+      <!-- Brick -->
+      <color>#96372b</color>
+    </color-palette>
+    <color-palette name="AIU Sequential Green" type="ordered-sequential">
+      <!-- Base sequential palette of the AIU Design System, from light (small values) to dark (large values). Use it for quantities such as heat maps and choropleth maps. The lightest steps are close to the background; for ordered categories, use the five steps from 3 to 7. -->
+      <!-- Credit: AIU Design System (seq-1 to seq-7) -->
+      <!-- 1 -->
+      <color>#e2f5df</color>
+      <!-- 2 -->
+      <color>#b5e3af</color>
+      <!-- 3 -->
+      <color>#73c169</color>
+      <!-- 4 -->
+      <color>#52aa47</color>
+      <!-- 5 -->
+      <color>#339028</color>
+      <!-- 6 -->
+      <color>#24691c</color>
+      <!-- 7 -->
+      <color>#154310</color>
+    </color-palette>
+    <color-palette name="AIU Diverging Purple-Green" type="ordered-diverging">
+      <!-- Base diverging palette of the AIU Design System, with purple for the negative side, a neutral gray in the middle, and green for the positive side. Use it for values on both sides of a reference point, such as year-over-year changes or positive and negative ratings. -->
+      <!-- Credit: AIU Design System (div-neg-3 to div-mid to div-pos-3) -->
+      <!-- Negative 3 -->
+      <color>#5a2769</color>
+      <!-- Negative 2 -->
+      <color>#9b5bae</color>
+      <!-- Negative 1 -->
+      <color>#d8b6e2</color>
+      <!-- Neutral -->
+      <color>#ebeeea</color>
+      <!-- Positive 1 -->
+      <color>#9bd693</color>
+      <!-- Positive 2 -->
+      <color>#339028</color>
+      <!-- Positive 3 -->
+      <color>#194e13</color>
+    </color-palette>
+    <color-palette name="AIU Status" type="regular">
+      <!-- Status palette of the AIU Design System, only for series that imply good or bad, such as achieved and not achieved. Success is a blue-green so that it is not distinguished from the school color green or the danger red by hue alone. Never rely on color alone; always add labels or icons. Info is placed between Warning and Danger so that the two are not adjacent. -->
+      <!-- Credit: AIU Design System (success, warning, danger, info) -->
+      <!-- Success -->
+      <color>#056965</color>
+      <!-- Warning -->
+      <color>#8a560c</color>
+      <!-- Info -->
+      <color>#285e9f</color>
+      <!-- Danger -->
+      <color>#b02b27</color>
+    </color-palette>
   </preferences>
 </workbook>

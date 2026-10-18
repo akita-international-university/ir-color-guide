@@ -27,6 +27,10 @@ Results of checking each palette in [`palettes.yml`](../palettes.yml) against th
 | AIU Inbound Student Status per Semester | categorical | not set    | FAIL (warning only) |
 | AIU Inbound Student Length of Stay      | categorical | not set    | FAIL (warning only) |
 | AIU Outbound Study Abroad Program       | categorical | not set    | FAIL (warning only) |
+| AIU Categorical                         | categorical | not set    | PASS                |
+| AIU Sequential Green                    | sequential  | not set    | WARN                |
+| AIU Diverging Purple-Green              | diverging   | not set    | WARN                |
+| AIU Status                              | categorical | not set    | PASS                |
 
 ## 4-Scale Likert
 
@@ -282,3 +286,73 @@ Results of checking each palette in [`palettes.yml`](../palettes.yml) against th
 | FP        | `#b07aa1` | 3.42:1                     | 0.647   |
 | FP(SP-A)  | `#d4a6c8` | 2.08:1                     | 0.777   |
 | ※IS       | `#ff9d9a` | 1.99:1                     | 0.795   |
+
+## AIU Categorical
+
+| Check                     | Result | Details                                                                                           |
+| ------------------------- | ------ | ------------------------------------------------------------------------------------------------- |
+| Contrast                  | PASS   | Minimum 3.55:1                                                                                    |
+| Color vision deficiencies | PASS   | Adjacent minimum 9.2 at Blue (`#2863ab`) / Magenta (`#a53c75`); all pairs minimum 0.5 (reference) |
+| Typical color vision      | PASS   | Adjacent minimum 20.8 at Blue (`#2863ab`) / Magenta (`#a53c75`)                                   |
+| Number of colors          | PASS   | 8 colors                                                                                          |
+
+| Key     | Color     | Contrast against `#ffffff` | OKLCH L |
+| ------- | --------- | -------------------------- | ------- |
+| Green   | `#339028` | 4.07:1                     | 0.577   |
+| Blue    | `#2863ab` | 6.06:1                     | 0.499   |
+| Magenta | `#a53c75` | 5.99:1                     | 0.520   |
+| Ochre   | `#aa821e` | 3.55:1                     | 0.629   |
+| Violet  | `#5d4099` | 7.90:1                     | 0.450   |
+| Orange  | `#cb6620` | 3.85:1                     | 0.620   |
+| Teal    | `#059393` | 3.75:1                     | 0.601   |
+| Brick   | `#96372b` | 7.30:1                     | 0.470   |
+
+## AIU Sequential Green
+
+| Check           | Result | Details                                                                                                                        |
+| --------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| Contrast        | WARN   | Below 3:1 (use labels or a data table): 1 (`#e2f5df`) 1.14:1, 2 (`#b5e3af`) 1.44:1, 3 (`#73c169`) 2.20:1, 4 (`#52aa47`) 2.92:1 |
+| Lightness steps | PASS   | OKLCH L 0.950 → 0.870 → 0.739 → 0.661 → 0.577 → 0.460 → 0.339; lightest step not checked (continuous scale)                    |
+
+| Key | Color     | Contrast against `#ffffff` | OKLCH L |
+| --- | --------- | -------------------------- | ------- |
+| 1   | `#e2f5df` | 1.14:1                     | 0.950   |
+| 2   | `#b5e3af` | 1.44:1                     | 0.870   |
+| 3   | `#73c169` | 2.20:1                     | 0.739   |
+| 4   | `#52aa47` | 2.92:1                     | 0.661   |
+| 5   | `#339028` | 4.07:1                     | 0.577   |
+| 6   | `#24691c` | 6.75:1                     | 0.460   |
+| 7   | `#154310` | 11.40:1                    | 0.339   |
+
+## AIU Diverging Purple-Green
+
+| Check           | Result | Details                                                                                                                                    |
+| --------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Contrast        | WARN   | Below 3:1 (use labels or a data table): Negative 1 (`#d8b6e2`) 1.79:1, Neutral (`#ebeeea`) 1.17:1, Positive 1 (`#9bd693`) 1.69:1           |
+| Lightness steps | PASS   | OKLCH L from the center: first side 0.820 → 0.576 → 0.374; second side 0.819 → 0.577 → 0.375; lightest step not checked (continuous scale) |
+
+| Key        | Color     | Contrast against `#ffffff` | OKLCH L |
+| ---------- | --------- | -------------------------- | ------- |
+| Negative 3 | `#5a2769` | 10.89:1                    | 0.374   |
+| Negative 2 | `#9b5bae` | 4.67:1                     | 0.576   |
+| Negative 1 | `#d8b6e2` | 1.79:1                     | 0.820   |
+| Neutral    | `#ebeeea` | 1.17:1                     | 0.946   |
+| Positive 1 | `#9bd693` | 1.69:1                     | 0.819   |
+| Positive 2 | `#339028` | 4.07:1                     | 0.577   |
+| Positive 3 | `#194e13` | 9.81:1                     | 0.375   |
+
+## AIU Status
+
+| Check                     | Result | Details                                                                                               |
+| ------------------------- | ------ | ----------------------------------------------------------------------------------------------------- |
+| Contrast                  | PASS   | Minimum 6.15:1                                                                                        |
+| Color vision deficiencies | PASS   | Adjacent minimum 10.6 at Success (`#056965`) / Warning (`#8a560c`); all pairs minimum 1.2 (reference) |
+| Typical color vision      | PASS   | Adjacent minimum 16.5 at Success (`#056965`) / Warning (`#8a560c`)                                    |
+| Number of colors          | PASS   | 4 colors                                                                                              |
+
+| Key     | Color     | Contrast against `#ffffff` | OKLCH L |
+| ------- | --------- | -------------------------- | ------- |
+| Success | `#056965` | 6.53:1                     | 0.471   |
+| Warning | `#8a560c` | 6.15:1                     | 0.500   |
+| Info    | `#285e9f` | 6.58:1                     | 0.480   |
+| Danger  | `#b02b27` | 6.52:1                     | 0.501   |

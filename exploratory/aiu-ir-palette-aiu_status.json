@@ -1,0 +1,11 @@
+{
+  "displayName": "AIU Status",
+  "colors": [
+    "rgba(5,105,101,1)",
+    "rgba(138,86,12,1)",
+    "rgba(40,94,159,1)",
+    "rgba(176,43,39,1)"
+  ],
+  "textColors": [],
+  "id": "aiu-ir-palette-aiu_status"
+}

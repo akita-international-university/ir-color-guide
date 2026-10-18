@@ -153,6 +153,10 @@ class TestChecks:
         assert validate.check_color_count(["#000000"] * 8).level == validate.Level.PASS
         assert validate.check_color_count(["#000000"] * 9).level == validate.Level.WARN
 
+
+class TestLightnessSteps:
+    """Tests for the lightness step checks of ordered and diverging palettes."""
+
     @pytest.mark.parametrize(
         "values",
         [
@@ -182,6 +186,20 @@ class TestChecks:
         assert result.level == validate.Level.FAIL
         assert "lightest step `#f7fcf5`" in result.detail
 
+    def test_lightness_steps_light_end_not_checked(self):
+        """A light end close to the background passes on a continuous scale."""
+        values = ["#f7fcf5", "#74c476", "#006d2c"]
+        result = validate.check_lightness_steps(values, check_light_end=False)
+        assert result.level == validate.Level.PASS
+        assert "lightest step not checked (continuous scale)" in result.detail
+
+    def test_lightness_steps_continuous_still_checks_steps(self):
+        """Steps that are too close still fail on a continuous scale."""
+        values = ["#74c476", "#6dbd70", "#006d2c"]
+        result = validate.check_lightness_steps(values, check_light_end=False)
+        assert result.level == validate.Level.FAIL
+        assert "below 0.06" in result.detail
+
     def test_split_diverging_even(self):
         """Each side is ordered from the center outward."""
         assert validate.split_diverging(["a", "b", "c", "d"]) == (
@@ -207,6 +225,25 @@ class TestChecks:
         result = validate.check_diverging_steps(values)
         assert result.level == validate.Level.FAIL
         assert "first side: lightness is not monotone" in result.detail
+
+    def test_diverging_steps_light_end(self):
+        """Light ends on both sides fail unless the scale is continuous."""
+        values = [
+            "#5a2769",
+            "#9b5bae",
+            "#d8b6e2",
+            "#ebeeea",
+            "#9bd693",
+            "#339028",
+            "#194e13",
+        ]
+        result = validate.check_diverging_steps(values)
+        assert result.level == validate.Level.FAIL
+        assert "first side: lightest step `#d8b6e2`" in result.detail
+        assert "second side: lightest step `#9bd693`" in result.detail
+        result = validate.check_diverging_steps(values, check_light_end=False)
+        assert result.level == validate.Level.PASS
+        assert result.detail.endswith("lightest step not checked (continuous scale)")
 
     def test_diverging_steps_single_color(self):
         """A palette too short to have sides passes."""
@@ -247,6 +284,33 @@ class TestCheckPalette:
         """Diverging palettes get the lightness check on each side."""
         result = validate.check_palette(make_palette(LIKERT_4, "diverging"))
         assert "first side" in result.checks[1].detail
+
+    @pytest.mark.parametrize(
+        "values, palette_type",
+        [
+            (["#f7fcf5", "#74c476", "#006d2c"], "sequential"),
+            (["#c2508f", "#fbe7f2", "#f7f7f7", "#e5f5e0", "#31a354"], "diverging"),
+        ],
+    )
+    def test_continuous_scale_skips_light_end(self, values, palette_type):
+        """Sequential and diverging palettes marked as continuous skip the light end."""
+        default = validate.check_palette(make_palette(values, palette_type))
+        continuous = validate.check_palette(
+            make_palette(values, palette_type, scale="continuous")
+        )
+        assert "lightest step `" in default.checks[1].detail
+        assert "lightest step `" not in continuous.checks[1].detail
+        assert "not checked (continuous scale)" in continuous.checks[1].detail
+
+    def test_continuous_scale_does_not_affect_categorical(self):
+        """Categorical palettes get the same checks whatever the scale."""
+        palette = make_palette(["#000000", "#ffffff"], scale="continuous")
+        assert list(levels(validate.check_palette(palette))) == [
+            "Contrast",
+            "Color vision deficiencies",
+            "Typical color vision",
+            "Number of colors",
+        ]
 
     def test_result_level_and_strictness(self):
         """The palette level is the most severe check level."""
