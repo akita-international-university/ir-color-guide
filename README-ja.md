@@ -54,9 +54,22 @@ AIU Design Systemの基本パレットは、領域別のパレットがない変
 | AIU Diverging Purple-Green | 両極（7段階）   | 前年差や評価の肯定・否定など、基準点の両側にわたる値に使用します。肯定側・プラス側が緑、否定側・マイナス側が紫です。                                                                                                                                  |
 | AIU Status                 | カテゴリ（4色） | 「達成／未達」など、良し悪しを表す系列にのみ使用します（成功、警告、情報、危険）。ラベルやアイコンを必ず併記します。                                                                                                                                  |
 
+### リッカート尺度
+
+「とても思う」から「全く思わない」までの調査の回答など、リッカート尺度は、AIU Design Systemの両極の配色で塗り分けます。肯定側は緑、否定側は紫、中央は中立的な灰色です。
+
+| パレット       | 用途                                                                                                                                                                                                                                    |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 4-Scale Likert | 中立の選択肢がない4段階の尺度に使用します。                                                                                                                                                                                             |
+| 5-Scale Likert | 中央に中立の選択肢がある5段階の尺度に使用します。中立の色`#ebeeea`は、背景に近い淡い灰色（白地に対して1.17:1）で、コントラストの基準の例外とします。積み上げ棒グラフでは、区分の境目に2pxの白い隙間を入れ、各区分に値ラベルを付けます。 |
+
+日本語のラベルは、各パレットの`ja`の別名として用意しています（例：Rでは`color_values_5_scale_likert_ja`）。調査票の選択肢の文言が異なる場合は、`unname()`を使用して順番に色を割り当ててください（[R](#r)を参照）。
+
+4-Scale Likertの色は、v1.1.0より後に、RColorBrewerの「PiYG」パレットに基づく色から、AIU Design Systemの両極の配色に変更しました（[#133](https://github.com/akita-international-university/ir-color-guide/issues/133)）。既存の資料を以前の色で作り直す場合は、互換用のパレット`4-Scale Likert (PiYG, legacy)`を使用するか、`v1.1.0`などのv1.xのタグを参照してください（[R](#r)を参照）。
+
 ### 既存のパレット
 
-本リポジトリのパレットには、既存の資料の配色設定をそのまま移行したため、上記の基準を十分に満たしていないものがあります。これらのパレットは、既存の資料との互換性のために残す「互換用（legacy）」のパレットとして明示します（[#138](https://github.com/akita-international-university/ir-color-guide/issues/138)）。互換用のパレットは、新規の資料では使用しないこととします。また、互換用の各パレットから置き換え後のパレットへの移行手順を示す予定です（[#139](https://github.com/akita-international-university/ir-color-guide/issues/139)）。
+本リポジトリのパレットには、既存の資料の配色設定をそのまま移行したため、上記の基準を十分に満たしていないものがあります。これらのパレットは、既存の資料との互換性のために残す「互換用（legacy）」のパレットとして明示します（[#138](https://github.com/akita-international-university/ir-color-guide/issues/138)）。互換用のパレットは、新規の資料では使用しないこととします。例えば、4-Scale Likertの以前の色は`4-Scale Likert (PiYG, legacy)`として残しています（[リッカート尺度](#リッカート尺度)を参照）。また、互換用の各パレットから置き換え後のパレットへの移行手順を示す予定です（[#139](https://github.com/akita-international-university/ir-color-guide/issues/139)）。
 
 ### 自動チェック
 
@@ -89,12 +102,23 @@ AIU Design Systemの基本パレットは、領域別のパレットがない変
 # 作業中のファイル（例: analysis.R や report.qmd）にて
 source("path/to/this/repository/r_script/ir_color_palettes.R")
 
-# ggplot2での使用例:
+# ggplot2での使用例: 5段階のリッカート尺度の回答を積み上げ棒グラフで表示
 df |>
-  ggplot(aes(x = year, y = value, fill = category)) +
-  geom_col() +
-  scale_fill_manual(values = color_values_4scale_likert) # 事前定義されたパレットを使用
+  mutate(response = factor(response, levels = names(color_values_5_scale_likert))) |>
+  ggplot(aes(x = proportion, y = question, fill = response)) +
+  geom_col(color = "white", linewidth = 0.7) + # 区分の境目に約2pxの白い隙間を入れる
+  geom_text(
+    aes(
+      label = scales::percent(proportion, accuracy = 1),
+      color = if_else(response == "Neutral", "black", "white")
+    ),
+    position = position_stack(vjust = 0.5)
+  ) +
+  scale_fill_manual(values = color_values_5_scale_likert) + # 事前定義されたパレットを使用
+  scale_color_identity()
 ```
+
+各パレットのベクトルの名前は、データの水準名と一致している必要があります。日本語のラベルのデータには、`ja`の別名（例：`color_values_5_scale_likert_ja`）を使用してください。
 
 [基本パレット](#基本パレット)も同じ方法で使用できます。Rでは各パレットが名前付きベクトル（例：`"Green" = "#339028"`）になるため、名前がデータの水準名と一致しない場合は、`unname()`を使用して順番に色を割り当ててください：
 
@@ -136,6 +160,12 @@ source("https://raw.githubusercontent.com/akita-international-university/ir-colo
 
 > [!TIP]
 > 上記のうちどの方法を採るか分からない場合は、安定運用の観点から、取り急ぎ最後の方法（特定のバージョンを参照する方法）を使用することをお勧めします。
+
+v1.xの色（4-Scale Likertの以前の色など）で既存の資料を作り直す場合は、`v1.1.0`のタグを参照してください：
+
+```r
+source("https://raw.githubusercontent.com/akita-international-university/ir-color-guide/refs/tags/v1.1.0/r_script/ir_color_palettes.R")
+```
 
 #### Tableau
 

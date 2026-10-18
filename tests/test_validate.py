@@ -13,8 +13,9 @@ from scripts import build, validate
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
-# 4-Scale Likert as of the introduction of the checks; the expected values were
-# confirmed with the JavaScript checker of the AIU Design System.
+# 4-Scale Likert as of the introduction of the checks, now kept as the legacy palette
+# '4-Scale Likert (PiYG, legacy)'; the expected values were confirmed with the
+# JavaScript checker of the AIU Design System.
 LIKERT_4 = ["#386325", "#8dbb54", "#d17dac", "#821851"]
 
 

@@ -5,7 +5,36 @@
     <!-- This file is created automatically. Do NOT edit manually. -->
     <!-- See: https://github.com/akita-international-university/ir-color-guide -->
     <color-palette name="4-Scale Likert" type="ordered-diverging">
-      <!-- 4-Scale Likert color palette from Strongly Agree to Strongly Disagree -->
+      <!-- 4-Scale Likert color palette from Strongly Agree to Strongly Disagree, using the diverging colors of the AIU Design System: green for the positive side and purple for the negative side. Use the 5-Scale Likert palette for scales with a neutral option. -->
+      <!-- Credit: AIU Design System diverging tokens (div-*) -->
+      <!-- Strongly Agree -->
+      <color>#194e13</color>
+      <!-- Agree -->
+      <color>#339028</color>
+      <!-- Disagree -->
+      <color>#9b5bae</color>
+      <!-- Strongly Disagree -->
+      <color>#5a2769</color>
+    </color-palette>
+    <color-palette name="5-Scale Likert" type="ordered-diverging">
+      <!-- 5-Scale Likert color palette from Strongly Agree to Strongly Disagree with a neutral option in the middle, using the diverging colors of the AIU Design System: green for the positive side, a neutral gray in the middle, and purple for the negative side. The neutral color is a light gray close to the background; in stacked bar charts, separate the segments with 2px white gaps and add a value label to each segment. -->
+      <!-- Credit: AIU Design System diverging tokens (div-*) -->
+      <!-- Strongly Agree -->
+      <color>#194e13</color>
+      <!-- Agree -->
+      <color>#339028</color>
+      <!-- Neutral -->
+      <color>#ebeeea</color>
+      <!-- Disagree -->
+      <color>#9b5bae</color>
+      <!-- Strongly Disagree -->
+      <color>#5a2769</color>
+    </color-palette>
+    <color-palette
+      name="4-Scale Likert (PiYG, legacy)"
+      type="ordered-diverging"
+    >
+      <!-- Legacy colors of the 4-Scale Likert palette up to v1.x, kept only for recreating existing materials with the same colors. Do not use it in new materials; use the 4-Scale Likert palette instead. -->
       <!-- Credit: Adapted from the 'PiYG' diverging palette in RColorBrewer -->
       <!-- Strongly Agree -->
       <color>#386325</color>

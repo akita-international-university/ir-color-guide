@@ -5,7 +5,59 @@ organization:
 palettes:
   - name: '4-Scale Likert'
     type: 'diverging' # categorical, sequential, diverging
-    description: '4-Scale Likert color palette from Strongly Agree to Strongly Disagree'
+    description: >
+      4-Scale Likert color palette from Strongly Agree to Strongly Disagree, using the
+      diverging colors of the AIU Design System: green for the positive side and purple
+      for the negative side. Use the 5-Scale Likert palette for scales with a neutral option.
+    credit: 'AIU Design System diverging tokens (div-*)'
+    colors:
+      - key: 'Strongly Agree'
+        value: '#194e13'
+      - key: 'Agree'
+        value: '#339028'
+      - key: 'Disagree'
+        value: '#9b5bae'
+      - key: 'Strongly Disagree'
+        value: '#5a2769'
+    aliases:
+      - name: 'ja'
+        keys: ['とても思う', '思う', '思わない', '全く思わない']
+  - name: '5-Scale Likert'
+    type: 'diverging'
+    description: >
+      5-Scale Likert color palette from Strongly Agree to Strongly Disagree with a neutral
+      option in the middle, using the diverging colors of the AIU Design System: green for
+      the positive side, a neutral gray in the middle, and purple for the negative side.
+      The neutral color is a light gray close to the background; in stacked bar charts,
+      separate the segments with 2px white gaps and add a value label to each segment.
+    credit: 'AIU Design System diverging tokens (div-*)'
+    colors:
+      - key: 'Strongly Agree'
+        value: '#194e13'
+      - key: 'Agree'
+        value: '#339028'
+      - key: 'Neutral'
+        value: '#ebeeea'
+      - key: 'Disagree'
+        value: '#9b5bae'
+      - key: 'Strongly Disagree'
+        value: '#5a2769'
+    aliases:
+      - name: 'ja'
+        keys:
+          [
+            'とても思う',
+            '思う',
+            'どちらともいえない',
+            '思わない',
+            '全く思わない',
+          ]
+  - name: '4-Scale Likert (PiYG, legacy)'
+    type: 'diverging'
+    description: >
+      Legacy colors of the 4-Scale Likert palette up to v1.x, kept only for recreating
+      existing materials with the same colors. Do not use it in new materials; use the
+      4-Scale Likert palette instead.
     credit: >
       Adapted from the 'PiYG' diverging palette in RColorBrewer
     colors:

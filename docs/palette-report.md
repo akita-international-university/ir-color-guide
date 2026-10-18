@@ -14,7 +14,9 @@ Results of checking each palette in [`palettes.yml`](../palettes.yml) against th
 
 | Palette                                 | Type        | Compliance | Result              |
 | --------------------------------------- | ----------- | ---------- | ------------------- |
-| 4-Scale Likert                          | diverging   | not set    | WARN                |
+| 4-Scale Likert                          | diverging   | not set    | PASS                |
+| 5-Scale Likert                          | diverging   | not set    | WARN                |
+| 4-Scale Likert (PiYG, legacy)           | diverging   | not set    | WARN                |
 | AIU Grades                              | categorical | not set    | WARN                |
 | AIU Abbreviated Exam Types              | categorical | not set    | FAIL (warning only) |
 | AIU Student Status                      | categorical | not set    | WARN                |
@@ -33,6 +35,35 @@ Results of checking each palette in [`palettes.yml`](../palettes.yml) against th
 | AIU Status                              | categorical | not set    | PASS                |
 
 ## 4-Scale Likert
+
+| Check           | Result | Details                                                                      |
+| --------------- | ------ | ---------------------------------------------------------------------------- |
+| Contrast        | PASS   | Minimum 4.07:1                                                               |
+| Lightness steps | PASS   | OKLCH L from the center: first side 0.577 → 0.375; second side 0.576 → 0.374 |
+
+| Key               | Color     | Contrast against `#ffffff` | OKLCH L |
+| ----------------- | --------- | -------------------------- | ------- |
+| Strongly Agree    | `#194e13` | 9.81:1                     | 0.375   |
+| Agree             | `#339028` | 4.07:1                     | 0.577   |
+| Disagree          | `#9b5bae` | 4.67:1                     | 0.576   |
+| Strongly Disagree | `#5a2769` | 10.89:1                    | 0.374   |
+
+## 5-Scale Likert
+
+| Check           | Result | Details                                                                      |
+| --------------- | ------ | ---------------------------------------------------------------------------- |
+| Contrast        | WARN   | Below 3:1 (use labels or a data table): Neutral (`#ebeeea`) 1.17:1           |
+| Lightness steps | PASS   | OKLCH L from the center: first side 0.577 → 0.375; second side 0.576 → 0.374 |
+
+| Key               | Color     | Contrast against `#ffffff` | OKLCH L |
+| ----------------- | --------- | -------------------------- | ------- |
+| Strongly Agree    | `#194e13` | 9.81:1                     | 0.375   |
+| Agree             | `#339028` | 4.07:1                     | 0.577   |
+| Neutral           | `#ebeeea` | 1.17:1                     | 0.946   |
+| Disagree          | `#9b5bae` | 4.67:1                     | 0.576   |
+| Strongly Disagree | `#5a2769` | 10.89:1                    | 0.374   |
+
+## 4-Scale Likert (PiYG, legacy)
 
 | Check           | Result | Details                                                                                       |
 | --------------- | ------ | --------------------------------------------------------------------------------------------- |
