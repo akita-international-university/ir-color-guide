@@ -4,7 +4,51 @@
 
 color_values_4_scale_likert <- c(
     # Type: Diverging
-    # Description: 4-Scale Likert color palette from Strongly Agree to Strongly Disagree
+    # Description: 4-Scale Likert color palette from Strongly Agree to Strongly Disagree, using the diverging colors of the AIU Design System: green for the positive side and purple for the negative side. Use the 5-Scale Likert palette for scales with a neutral option.
+    # Credit: AIU Design System diverging tokens (div-*)
+    "Strongly Agree" = "#194e13",
+    "Agree" = "#339028",
+    "Disagree" = "#9b5bae",
+    "Strongly Disagree" = "#5a2769"
+)
+
+color_values_4_scale_likert_ja <- c(
+    # Type: Diverging
+    # Description: 4-Scale Likert color palette from Strongly Agree to Strongly Disagree, using the diverging colors of the AIU Design System: green for the positive side and purple for the negative side. Use the 5-Scale Likert palette for scales with a neutral option.
+    # Credit: AIU Design System diverging tokens (div-*)
+    # Alias of color_values_4_scale_likert
+    "とても思う" = "#194e13",
+    "思う" = "#339028",
+    "思わない" = "#9b5bae",
+    "全く思わない" = "#5a2769"
+)
+
+color_values_5_scale_likert <- c(
+    # Type: Diverging
+    # Description: 5-Scale Likert color palette from Strongly Agree to Strongly Disagree with a neutral option in the middle, using the diverging colors of the AIU Design System: green for the positive side, a neutral gray in the middle, and purple for the negative side. The neutral color is a light gray close to the background; in stacked bar charts, separate the segments with 2px white gaps and add a value label to each segment.
+    # Credit: AIU Design System diverging tokens (div-*)
+    "Strongly Agree" = "#194e13",
+    "Agree" = "#339028",
+    "Neutral" = "#ebeeea",
+    "Disagree" = "#9b5bae",
+    "Strongly Disagree" = "#5a2769"
+)
+
+color_values_5_scale_likert_ja <- c(
+    # Type: Diverging
+    # Description: 5-Scale Likert color palette from Strongly Agree to Strongly Disagree with a neutral option in the middle, using the diverging colors of the AIU Design System: green for the positive side, a neutral gray in the middle, and purple for the negative side. The neutral color is a light gray close to the background; in stacked bar charts, separate the segments with 2px white gaps and add a value label to each segment.
+    # Credit: AIU Design System diverging tokens (div-*)
+    # Alias of color_values_5_scale_likert
+    "とても思う" = "#194e13",
+    "思う" = "#339028",
+    "どちらともいえない" = "#ebeeea",
+    "思わない" = "#9b5bae",
+    "全く思わない" = "#5a2769"
+)
+
+color_values_4_scale_likert_piyg_legacy <- c(
+    # Type: Diverging
+    # Description: Legacy colors of the 4-Scale Likert palette up to v1.x, kept only for recreating existing materials with the same colors. Do not use it in new materials; use the 4-Scale Likert palette instead.
     # Credit: Adapted from the 'PiYG' diverging palette in RColorBrewer
     "Strongly Agree" = "#386325",
     "Agree" = "#8dbb54",
@@ -12,11 +56,11 @@ color_values_4_scale_likert <- c(
     "Strongly Disagree" = "#821851"
 )
 
-color_values_4_scale_likert_ja <- c(
+color_values_4_scale_likert_piyg_legacy_ja <- c(
     # Type: Diverging
-    # Description: 4-Scale Likert color palette from Strongly Agree to Strongly Disagree
+    # Description: Legacy colors of the 4-Scale Likert palette up to v1.x, kept only for recreating existing materials with the same colors. Do not use it in new materials; use the 4-Scale Likert palette instead.
     # Credit: Adapted from the 'PiYG' diverging palette in RColorBrewer
-    # Alias of color_values_4_scale_likert
+    # Alias of color_values_4_scale_likert_piyg_legacy
     "とても思う" = "#386325",
     "思う" = "#8dbb54",
     "思わない" = "#d17dac",

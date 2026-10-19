@@ -1,10 +1,10 @@
 {
   "displayName": "4-Scale Likert",
   "colors": [
-    "rgba(56,99,37,1)",
-    "rgba(141,187,84,1)",
-    "rgba(209,125,172,1)",
-    "rgba(130,24,81,1)"
+    "rgba(25,78,19,1)",
+    "rgba(51,144,40,1)",
+    "rgba(155,91,174,1)",
+    "rgba(90,39,105,1)"
   ],
   "textColors": [],
   "id": "aiu-ir-palette-4_scale_likert"

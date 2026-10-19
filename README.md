@@ -54,9 +54,22 @@ The basic palettes of the AIU Design System are for variables without a domain-s
 | AIU Diverging Purple-Green | Diverging, 7 steps    | Values on both sides of a reference point, such as year-over-year changes or positive and negative ratings. Green is for the positive side and purple for the negative side.                                                                                                                                        |
 | AIU Status                 | Categorical, 4 colors | Only for series that imply good or bad, such as achieved and not achieved (Success, Warning, Info, Danger). Always add labels or icons.                                                                                                                                                                             |
 
+### Likert scales
+
+Likert scales, such as survey responses from "Strongly Agree" to "Strongly Disagree", are colored with the diverging colors of the AIU Design System: green for the positive side, purple for the negative side, and a neutral gray in the middle.
+
+| Palette        | Use                                                                                                                                                                                                                                                                                                   |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 4-Scale Likert | Four-point scales without a neutral option.                                                                                                                                                                                                                                                           |
+| 5-Scale Likert | Five-point scales with a neutral option in the middle. The neutral color `#ebeeea` is a light gray close to the background (1.17:1 against white), as an exception to the contrast criterion. In stacked bar charts, separate the segments with 2px white gaps and add a value label to each segment. |
+
+Japanese labels are provided as the `ja` alias of each palette (e.g., `color_values_5_scale_likert_ja` in R). If the wording of the options in your questionnaire differs, assign the colors in order with `unname()` (see [R](#r)).
+
+The colors of 4-Scale Likert were changed from those based on the RColorBrewer "PiYG" palette to the diverging colors of the AIU Design System after v1.1.0 ([#133](https://github.com/akita-international-university/ir-color-guide/issues/133)). To recreate existing materials with the previous colors, use the legacy palette `4-Scale Likert (PiYG, legacy)`, or refer to a v1.x tag such as `v1.1.0` (see [R](#r)).
+
 ### Existing palettes
 
-Some palettes in this repository were migrated as-is from existing visualizations and do not fully meet the criteria above. Such palettes will be explicitly marked as "legacy" palettes, kept for compatibility with existing materials ([#138](https://github.com/akita-international-university/ir-color-guide/issues/138)). Legacy palettes should not be used in new materials. A migration guide from each legacy palette to its replacement will be provided ([#139](https://github.com/akita-international-university/ir-color-guide/issues/139)).
+Some palettes in this repository were migrated as-is from existing visualizations and do not fully meet the criteria above. Such palettes will be explicitly marked as "legacy" palettes, kept for compatibility with existing materials ([#138](https://github.com/akita-international-university/ir-color-guide/issues/138)). Legacy palettes should not be used in new materials. For example, the previous colors of 4-Scale Likert are kept as `4-Scale Likert (PiYG, legacy)` (see [Likert scales](#likert-scales)). A migration guide from each legacy palette to its replacement will be provided ([#139](https://github.com/akita-international-university/ir-color-guide/issues/139)).
 
 ### Automated checks
 
@@ -89,12 +102,23 @@ The simplest way to use the color palettes defined in this repository in R is to
 # In the file you are working on, e.g., analysis.R or report.qmd
 source("path/to/this/repository/r_script/ir_color_palettes.R")
 
-# ggplot2 usage example:
+# ggplot2 usage example: responses to a five-point Likert scale in stacked bars
 df |>
-  ggplot(aes(x = year, y = value, fill = category)) +
-  geom_col() +
-  scale_fill_manual(values = color_values_4scale_likert) # Using a predefined palette
+  mutate(response = factor(response, levels = names(color_values_5_scale_likert))) |>
+  ggplot(aes(x = proportion, y = question, fill = response, group = response)) + # Same stacking order for bars and labels
+  geom_col(color = "white", linewidth = 0.7) + # About 2px white gaps between segments
+  geom_text(
+    aes(
+      label = scales::percent(proportion, accuracy = 1),
+      color = if_else(response %in% c("Agree", "Neutral"), "black", "white") # 4.5:1 or more against each fill
+    ),
+    position = position_stack(vjust = 0.5)
+  ) +
+  scale_fill_manual(values = color_values_5_scale_likert) + # Using a predefined palette
+  scale_color_identity()
 ```
+
+The names of each palette vector must match the levels of your data. Use the `ja` alias (e.g., `color_values_5_scale_likert_ja`) for data with Japanese labels.
 
 The [basic palettes](#basic-palettes) can be used in the same way. Since each palette is a named vector in R (e.g., `"Green" = "#339028"`), use `unname()` to assign the colors in order when the names do not match the levels of your data:
 
@@ -136,6 +160,12 @@ source("https://raw.githubusercontent.com/akita-international-university/ir-colo
 
 > [!TIP]
 > If you are not sure which method to use to source the R script, use the last method with a specific version tag. It is generally the safest option.
+
+To recreate existing materials with the colors of v1.x, such as the previous colors of 4-Scale Likert, refer to the `v1.1.0` tag:
+
+```r
+source("https://raw.githubusercontent.com/akita-international-university/ir-color-guide/refs/tags/v1.1.0/r_script/ir_color_palettes.R")
+```
 
 #### Tableau
 
