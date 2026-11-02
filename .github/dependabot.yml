@@ -15,7 +15,7 @@ updates:
       - 'ttsukagoshi'
     target-branch: 'main'
     groups:
-      monthly-batch:
+      monthly-batch-pip:
         patterns:
           - '*'
   - package-ecosystem: 'npm'
@@ -28,7 +28,7 @@ updates:
       - 'ttsukagoshi'
     target-branch: 'main'
     groups:
-      monthly-batch:
+      monthly-batch-npm:
         patterns:
           - '*'
   - package-ecosystem: 'github-actions'
@@ -41,6 +41,6 @@ updates:
       - 'ttsukagoshi'
     target-branch: 'main'
     groups:
-      monthly-batch:
+      monthly-batch-gh-actions:
         patterns:
           - '*'
